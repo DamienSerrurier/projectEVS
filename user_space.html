@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace de Vie Social - Espace utilisateur</title>
+</head>
+
+<body>
+    <section>
+        <div>
+            <h2>Espace utilisateur</h2>
+        </div>
+
+        <input type="checkbox" name="member" id="member">
+        <label for="member">J'adhère à l'association EVS Maison Prévert</label>
+
+        <div>
+            <label for="responsibleSelect">Nombre de responsable</label>
+            <select name="responsible" id="responsibleSelect">
+                <option value="">responsable</option>
+                <option value="responsible1" selected>1 responsable</option>
+                <option value="responsible2">2 responsables</option>
+            </select>
+        </div>
+
+        <div>
+            <p>Cotisation annuelle:</p>
+            <ul>
+                <li>5/Adulte</li>
+                <li>2/Mineur</li>
+            </ul>
+        </div>
+        <form action="">
+            <fieldset form="">
+                <legend>Informations personnelles</legend>
+
+                <input type="radio" name="civility" id="choiceWoman" value="woman">
+                <label for="choiceWoman">Madame</label>
+                <input type="radio" name="civility" id="choiceMan" value="man">
+                <label for="choiceMan">Madame</label>
+
+                <div>
+                    <div>
+                        <label for="lastname">Nom</label>
+                        <input type="text" name="lastname" id="lastname">
+                    </div>
+
+                    <div>
+                        <label for="mail">Email</label>
+                        <input type="email" name="mail" id="mail">
+                    </div>
+
+                    <div>
+                        <label for="birthdate">Date de naissance</label>
+                        <input type="date" name="birthdate" id="birthdate">
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label for="firstname">Prénom</label>
+                        <input type="text" name="firstname" id="firstname">
+                    </div>
+
+                    <div>
+                        <label for="phone">Téléphone</label>
+                        <input type="tel" name="phone" id="phone">
+                    </div>
+
+                    <div>
+                        <label for="birthPlace">Lieu de naissance</label>
+                        <input type="text" name="birthPlace" id="birthPlace">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Informations habitation</legend>
+                <div>
+                    <label for="streetNumber">Numéro de rue</label>
+                    <input type="text" name="streetNumber" id="streetNumber">
+                </div>
+
+                <div>
+                    <label for="streetName">Nom de rue</label>
+                    <input type="text" name="streetName" id="streetName">
+                </div>
+
+                <div>
+                    <label for="streetComplement">Complément d'adresse</label>
+                    <input type="text" name="streetComplement" id="streetComplement">
+                </div>
+
+                <div>
+                    <label for="zipCode">Code postal</label>
+                    <input type="text" name="zipCode" id="zipCode">
+                </div>
+
+                <div>
+                    <label for="city">Ville</label>
+                    <input type="text" name="city" id="city">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Informations de situation</legend>
+                <div>
+                    <label for="profession">Profession</label>
+                    <input type="text" name="profession" id="profession">
+                </div>
+
+                <div>
+                    <label for="familySituation">Situation de famille</label>
+                    <input type="text" name="familySituation" id="familySituation">
+                </div>
+
+                <div>
+                    <label for="cafNumber">Numéro d'identifiant d'alocation familiale</label>
+                    <input type="text" name="cafNumber" id="cafNumber">
+                </div>
+            </fieldset>
+
+            <div>
+                <label for="minorSelect">Nombre de mineur</label>
+                <select name="minor" id="minorSelect">
+                    <option value="">mineur</option>
+                    <option value="minor1" selected>1 mineur</option>
+                    <option value="minor2">2 mineurs</option>
+                </select>
+            </div>
+
+            <fieldset>
+                <div>
+                    <div>
+                        <label for="lastname">Nom</label>
+                        <input type="text" name="lastname" id="lastname">
+                    </div>
+
+                    <div>
+                        <label for="birthdate">Date de naissance</label>
+                        <input type="date" name="birthdate" id="birthdate">
+                    </div>
+
+                    <div>
+                        <label for="phone">Téléphone</label>
+                        <input type="tel" name="phone" id="phone">
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label for="firstname">Prénom</label>
+                        <input type="text" name="firstname" id="firstname">
+                    </div>
+
+                    <div>
+                        <label for="birthPlace">Lieu de naissance</label>
+                        <input type="text" name="birthPlace" id="birthPlace">
+                    </div>
+
+                    <div>
+                        <label for="school">Etablissement scolaire</label>
+                        <input type="text" name="school" id="school">
+                    </div>
+                </div>
+            </fieldset>
+
+            <p>
+                Je cotise en conséquence à cet Espace de Vie Sociale Maison Prévert Francas et m’inscris aux activités
+                proposées.
+            </p>
+            <p>
+                J’ai été informé que la cotisation à l’Espace de Vie Sociale Maison Prévert Francas me permet :
+            </p>
+
+            <input type="checkbox" name="check1" id="check1">
+            <label for="check1">
+                de m’inscrire et de participer aux diverses animations proposées par la structure selon
+                les conditions prévues pour chacune d’entre elles,
+            </label>
+
+            <input type="checkbox" name="check2" id="check2">
+            <label for="check2">
+                d’être couvert dans le cadre de l’inscription et de la pratique de ces animations, par le contrat
+                d’assurances souscrit par la structure auprès de la M.A.E., dans la limite des garanties prévues et qui
+                ne me dispensent nullement d’être parallèlement assuré par une Mutuelle Scolaire/Etudiante ou en
+                Responsabilité Civile Individuelle/Familiale,
+            </label>
+
+            <input type="checkbox" name="check3" id="check3">
+            <label for="check3">
+                de participer en tant que membre du collectif des usagers de l’EVS.
+            </label>
+
+            <p>Enfin,</p>
+
+            <input type="checkbox" name="check4" id="check4">
+            <label for="check4">
+                je certifie être apte à la pratique des animations auxquelles je choisis de m’inscrire (un certicat
+                médical d’aptitude sera demandé à chaque membre pour les activités à caractère sportif),
+            </label>
+
+            <input type="checkbox" name="check5" id="check5">
+            <label for="check5">
+                je décharge les organisateurs de toute responsabilité en cas d’accident survenu avant mon arrivée aux
+                activités pour lesquelles je suis inscrit ou après mon départ de ces activités,
+            </label>
+
+            <input type="checkbox" name="check6" id="check6">
+            <label for="check6">
+                j’autorise les organisateurs à prendre toute mesure nécessaire en cas d’urgence médicale,
+            </label>
+
+            <input type="checkbox" name="check7" id="check7">
+            <label for="check7">
+                j’autorise l’Espace De Vie Sociale Maison Prévert Francas à consulter mon quotient familial,
+            </label>
+
+            <input type="checkbox" name="check8" id="check8">
+            <label for="check8">
+                j’autorise l’EVS à reproduire et à diffuser nos photographies réalisées dans le cadre de ses actions
+                sans porter atteinte à notre réputation ou à notre vie privée.
+            </label>
+
+            <input type="checkbox" name="check9" id="check9">
+            <label for="check9">
+                Vous validez l’exactitude des informations saisies dans ce formulaire.
+            </label>
+
+            <input type="checkbox" name="check10" id="check10">
+            <label for="check10">
+                Je décare avoir pris connaissance des modalités de fonctionnement de l’Espace De Vie Sociale Maison
+                Prévert Francas et activités organisées.
+            </label>
+
+            <input type="submit" name="" value="Envoyer">
+        </form>
+
+        <form action="">
+            <input type="submit" name="" value="Suppression">
+            <div>
+                <div>
+                    <div>
+                        <label for="lastname">Nom</label>
+                        <input type="text" name="lastname" id="lastname">
+                    </div>
+
+                    <div>
+                        <label for="firstname">Prénom</label>
+                        <input type="text" name="firstname" id="firstname">
+                    </div>
+
+                    <div>
+                        <label for="mail">Email</label>
+                        <input type="email" name="mail" id="mail">
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label for="phone">Téléphone</label>
+                        <input type="tel" name="phone" id="phone">
+                    </div>
+
+                    <div>
+                        <label for="passw">Création du mot de passe</label>
+                        <input type="password" name="passw" id="passw">
+                    </div>
+
+                    <div>
+                        <label for="confPassw">Confirmation mot de passe</label>
+                        <input type="password" name="confPassw" id="confPassw">
+                    </div>
+                </div>
+
+                <div>
+                    <input type="button" name="" value="Annulation">
+                    <input type="submit" name="" value="Modification">
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <section>
+        <form action="">
+            <label for="nameSchool">Nom</label>
+            <input type="text" name="nameSchool" id="nameSchool">
+
+            <label for="schoolSelect">Choix de l'école</label>
+            <select name="school" id="schoolSelect">
+                <option value="">école</option>
+                <option value=""></option>
+            </select>
+
+            <label for="">Document à transmettre</label>
+            <input type="file" name="" value="Charger">
+            <input type="submit" name="" value="Création">
+        </form>
+
+        <p>Liste des documents que vous avez transmis</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Date</th>
+                    <th>Suppression</th>
+                </tr>
+            </thead>
+            <tbody>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <div>
+            <h2>Espace réservation</h2>
+        </div>
+
+        <article>
+
+        </article>
+    </section>
+</body>
+
+</html>

@@ -21,8 +21,7 @@
           </ul>
         </div>
       </div>
-  </div>
-  </nav>
+    </nav>
   </div>
 
   <div class="d-xl-none d-sm-block">

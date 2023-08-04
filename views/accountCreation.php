@@ -5,10 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <title>Espace de Vie Social - Création de compte utilisateur</title>
 </head>
 
 <body>
+    <?php
+    require_once 'partials/navbar.php';
+    ?>
+
     <form action="">
         <div class="border py-3 mb-lg-5">
             <h2 class="text-center">Création compte utilisateur</h2>
@@ -21,8 +26,7 @@
                 </div>
 
                 <div class="col-xl-7 my-3">
-                    <input class="form-control form-control-lg" placeholder="" aria-label="Renseignez votre Nom"
-                        type="text" name="lastname" id="lastname">
+                    <input class="form-control form-control-lg" placeholder="" aria-label="Renseignez votre Nom" type="text" name="lastname" id="lastname">
                 </div>
             </div>
 
@@ -32,8 +36,7 @@
                 </div>
 
                 <div class="col-xl-7 my-3">
-                    <input class="form-control form-control-lg" placeholder="" aria-label="Renseignez votre Prénom"
-                        type="text" name="firstname" id="firstname">
+                    <input class="form-control form-control-lg" placeholder="" aria-label="Renseignez votre Prénom" type="text" name="firstname" id="firstname">
                 </div>
             </div>
 
@@ -43,8 +46,7 @@
                 </div>
 
                 <div class="col-xl-7 my-3">
-                    <input class="form-control form-control-lg" placeholder=""
-                        aria-label="Renseignez votre adresse mail" type="email" name="mail" id="mail">
+                    <input class="form-control form-control-lg" placeholder="" aria-label="Renseignez votre adresse mail" type="email" name="mail" id="mail">
                 </div>
             </div>
 
@@ -54,8 +56,7 @@
                 </div>
 
                 <div class="col-xl-7 my-3">
-                    <input class="form-control form-control-lg" placeholder=""
-                        aria-label="Renseignez votre mot de passe" type="password" name="passw" id="passw">
+                    <input class="form-control form-control-lg" placeholder="" aria-label="Renseignez votre mot de passe" type="password" name="passw" id="passw">
                 </div>
             </div>
 
@@ -65,8 +66,7 @@
                 </div>
 
                 <div class="col-xl-7 my-3">
-                    <input class="form-control form-control-lg" placeholder="" aria-label="Confirmez votre mot de passe"
-                        type="password" name="confPassw" id="confPassw">
+                    <input class="form-control form-control-lg" placeholder="" aria-label="Confirmez votre mot de passe" type="password" name="confPassw" id="confPassw">
                 </div>
             </div>
         </div>
@@ -86,9 +86,12 @@
         </div>
     </form>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
+    <?php
+    require_once 'partials/footer.html';
+    ?>
+
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

@@ -4,11 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <title>Espace de Vie Social - Espace administrateur</title>
 </head>
 
 <body>
+    <?php
+    require_once 'partials/navbar.php';
+    ?>
+
     <div class="border py-3 mb-lg-5">
         <h2 class="text-center">Espace administrateur</h2>
     </div>
@@ -47,8 +52,7 @@
                     <div class="w-75 justify-items-center">
                         <img class="img-fluid" src="" alt="">
                         <div class="row justify-content-center">
-                            <input class="col-6 btn btn-danger text-uppercase" type="submit" name=""
-                                value="Supprimer l'image">
+                            <input class="col-6 btn btn-danger text-uppercase" type="submit" name="" value="Supprimer l'image">
                             <label class="form-label-lg fs-6" for="avatar">Avatar</label>
                             <input class="form-control form-control-lg my-3" type="file" name="avatar" id="avatar">
                         </div>
@@ -58,23 +62,19 @@
                     <div class="col-sm-10 col-md-4 col-xl-12 p-0">
                         <div class="text-center mt-3">
                             <label class="col-form-label-lg fs-6" for="lastname">Nom</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez votre Nom" type="text" name="lastname" id="lastname">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre Nom" type="text" name="lastname" id="lastname">
                         </div>
                         <div class="text-center mt-3">
                             <label class="col-form-label-lg fs-6" for="firstname">Prénom</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez votre Prénom" type="text" name="firstname" id="firstname">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre Prénom" type="text" name="firstname" id="firstname">
                         </div>
                         <div class="text-center mt-3">
                             <label class="col-form-label-lg fs-6" for="mail">Email</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez votre adresse mail" type="email" name="mail" id="mail">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre adresse mail" type="email" name="mail" id="mail">
                         </div>
                         <div class="text-center mt-3">
                             <label class="col-form-label-lg fs-6" for="phone">Téléphone</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez votre adresse mail" type="tel" name="phone" id="phone">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre adresse mail" type="tel" name="phone" id="phone">
                         </div>
                     </div>
                 </div>
@@ -83,42 +83,34 @@
             <div class="row mt-3">
                 <div class="col-sm-10 col-xl-6 mt-3">
                     <label class="form-label-lg fs-6" for="passw">Création du mot de passe</label>
-                    <input class="form-control form-control-lg my-2" placeholder=""
-                        aria-label="Renseignez votre mot de passe" type="password" name="passw" id="passw">
+                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre mot de passe" type="password" name="passw" id="passw">
                 </div>
                 <div class="col-sm-10 col-xl-6 mt-3">
                     <label class="form-label-lg fs-6" for="confPassw">Confirmation mot de passe</label>
-                    <input class="form-control form-control-lg my-2" placeholder=""
-                        aria-label="Confirmez votre mot de passe" type="password" name="confPassw" id="confPassw">
+                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Confirmez votre mot de passe" type="password" name="confPassw" id="confPassw">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-sm-10 col-xl-2 mt-3">
                     <label class="form-label-lg fs-6" for="streetNumber">Numéro de rue</label>
-                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Votre numéro de rue"
-                        type="text" name="streetNumber" id="streetNumber">
+                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Votre numéro de rue" type="text" name="streetNumber" id="streetNumber">
                 </div>
                 <div class="col-sm-10 col-xl-10 mt-3">
                     <label class="form-label-lg fs-6" for="streetName">Nom de rue</label>
-                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Votre nom de rue"
-                        type="text" name="streetName" id="streetName">
+                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Votre nom de rue" type="text" name="streetName" id="streetName">
                 </div>
                 <div class="col-sm-10 col-xl-7 mt-3">
                     <label class="form-label-lg fs-6" for="streetComplement">Complément d'adresse</label>
-                    <input class="form-control form-control-lg my-2" placeholder=""
-                        aria-label="Votre complément d'adresse" type="text" name="streetComplement"
-                        id="streetComplement">
+                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Votre complément d'adresse" type="text" name="streetComplement" id="streetComplement">
                 </div>
                 <div class="col-sm-10 col-xl-3 mt-3">
                     <label class="form-label-lg fs-6" for="zipCode">Code postal</label>
-                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Votre code postal"
-                        type="text" name="zipCode" id="zipCode">
+                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Votre code postal" type="text" name="zipCode" id="zipCode">
                 </div>
                 <div class="col-sm-10 col-xl-2 mt-3">
                     <label class="form-label-lg fs-6" for="city">Ville</label>
-                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Votre ville" type="text"
-                        name="city" id="city">
+                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Votre ville" type="text" name="city" id="city">
                 </div>
             </div>
         </div>
@@ -134,8 +126,7 @@
                 <option value=""></option>
             </select>
             <label class="form-label-lg fs-6" for="roleName">Nom du rôle</label>
-            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Un rôle" type="text"
-                name="roleName" id="roleName">
+            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Un rôle" type="text" name="roleName" id="roleName">
         </div>
 
         <h3 class="text-center">Gestion des catégories activités</h3>
@@ -148,8 +139,7 @@
                 <option value=""></option>
             </select>
             <label class="form-label-lg fs-6" for="categoryName">Nom de la catégorie</label>
-            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Une catégorie" type="text"
-                name="categoryName" id="categoryName">
+            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Une catégorie" type="text" name="categoryName" id="categoryName">
         </div>
 
         <h3 class="text-center">Gestion des activités</h3>
@@ -171,14 +161,12 @@
             <div class="row">
                 <div class="col-sm-10 col-md-4 col-xl-4 mt-3">
                     <label class="form-label-lg fs-6" for="activityTitle">Titre de l'activité</label>
-                    <input class="form-control form-control-lg my-2" type="text" name="activityTitle"
-                        id="activityTitle">
+                    <input class="form-control form-control-lg my-2" type="text" name="activityTitle" id="activityTitle">
                 </div>
                 <div class="col-sm-10 col-md-4 col-xl-4 mt-3">
                     <label class="form-label-lg fs-6" for="moreInformations">Information complémentaire. Ex:
                         Lundi/Mardi...</label>
-                    <input class="form-control form-control-lg my-2" type="text" name="moreInformations"
-                        id="moreInformations">
+                    <input class="form-control form-control-lg my-2" type="text" name="moreInformations" id="moreInformations">
                 </div>
                 <div class="col-sm-10 col-md-4 col-xl-4 mt-3">
                     <label class="form-label-lg fs-6" for="categorySelect">Choix de la catégorie</label>
@@ -201,8 +189,7 @@
                     <div class="col-sm-10 col-md-4 col-xl-6 mt-3 ms-xl-4">
                         <label class="form-label-lg fs-6" for="activityDescription">Description de
                             l'activité</label>
-                        <textarea class="form-control my-2" style="height: 14rem;" name="" id="activityDescription"
-                            cols="30" rows="5"></textarea>
+                        <textarea class="form-control my-2" style="height: 14rem;" name="" id="activityDescription" cols="30" rows="5"></textarea>
                     </div>
                     <div class="col-sm-10 col-md-4 col-xl-3 mt-3 align-self-end">
                         <label class="form-label-lg fs-6" for="startDate">Date du début</label>
@@ -223,8 +210,7 @@
             <div class="row">
                 <div class="col-sm-10 col-md-4 col-xl-5 mt-3">
                     <label class="form-label-lg fs-6" for="activityPicture">Image de l'activité</label>
-                    <input class="col-sm-10 col-md-4 col-xl-4 form-control form-control-lg my-2" type="file"
-                        name="activityPicture" id="activityPicture">
+                    <input class="col-sm-10 col-md-4 col-xl-4 form-control form-control-lg my-2" type="file" name="activityPicture" id="activityPicture">
                     <input class="btn btn-success" type="submit" name="" value="Charger l'image">
                 </div>
 
@@ -247,8 +233,7 @@
                 <option value=""></option>
             </select>
             <label class="form-label-lg fs-6" for="typeStructureName">Nom du type de structure</label>
-            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Une catégorie" type="text"
-                name="typeStructureName" id="typeStructureName">
+            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Une catégorie" type="text" name="typeStructureName" id="typeStructureName">
         </div>
 
         <h3 class="text-center">Gestion des structures</h3>
@@ -263,8 +248,7 @@
                     </div>
                     <div class="row m-0">
                         <label class="form-label-lg fs-6" for="structureLogo">Logo de la structure</label>
-                        <input class="col-sm-10 col-md-4 col-xl-4 form-control form-control-lg my-2" type="file"
-                            name="structureLogo" id="structureLogo">
+                        <input class="col-sm-10 col-md-4 col-xl-4 form-control form-control-lg my-2" type="file" name="structureLogo" id="structureLogo">
                         <input class="btn btn-success" type="submit" name="" value="Charger l'image">
                     </div>
                 </div>
@@ -287,47 +271,35 @@
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="structureName">Nom de la structure</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez votre Nom" type="text" name="structureName" id="structureName">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre Nom" type="text" name="structureName" id="structureName">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="structurePhone">Téléphone</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez votre adresse mail" type="tel" name="structurePhone"
-                                id="structurePhone">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre adresse mail" type="tel" name="structurePhone" id="structurePhone">
                         </div>
                     </div>
 
                     <div class="row justify-content-end">
                         <div class="col-sm-10 col-md-4 col-xl-3 mt-3">
                             <label class="form-label-lg fs-6" for="structureStreetNumber">Numéro de rue</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Votre numéro de rue" type="text" name="structureStreetNumber"
-                                id="structureStreetNumber">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Votre numéro de rue" type="text" name="structureStreetNumber" id="structureStreetNumber">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-9 mt-3">
                             <label class="form-label-lg fs-6" for="structureStreetName">Nom de rue</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Votre nom de rue" type="text" name="structureStreetName"
-                                id="structureStreetName">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Votre nom de rue" type="text" name="structureStreetName" id="structureStreetName">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="structureStreetComplement">Complément
                                 d'adresse</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Votre complément d'adresse" type="text" name="structureStreetComplement"
-                                id="structureStreetComplement">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Votre complément d'adresse" type="text" name="structureStreetComplement" id="structureStreetComplement">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-3 mt-3">
                             <label class="form-label-lg fs-6" for="structureZipCode">Code postal</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Votre code postal" type="text" name="structureZipCode"
-                                id="structureZipCode">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Votre code postal" type="text" name="structureZipCode" id="structureZipCode">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-2 mt-3">
                             <label class="form-label-lg fs-6" for="structureCity">Ville</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Votre ville"
-                                type="text" name="structureCity" id="structureCity">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Votre ville" type="text" name="structureCity" id="structureCity">
                         </div>
                     </div>
                 </div>
@@ -365,7 +337,12 @@
 
     </form>
 
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <?php
+    require_once 'partials/footer.html';
+    ?>
+
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    
 </body>
 
 </html>

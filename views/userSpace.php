@@ -4,11 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <title>Espace de Vie Social - Espace utilisateur</title>
 </head>
 
 <body>
+    <?php
+    require_once 'partials/navbar.php';
+    ?>
+
     <section>
         <div class="border py-3 mb-lg-5">
             <h2 class="text-center">Espace utilisateur</h2>
@@ -54,37 +59,27 @@
                     <div class="row">
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="memberLastname">Nom</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez un nom" type="text" name="memberLastname" id="memberLastname">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom" type="text" name="memberLastname" id="memberLastname">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="memberFirstname">Prénom</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez un prénom" type="text" name="memberFirstname"
-                                id="memberFirstname">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un prénom" type="text" name="memberFirstname" id="memberFirstname">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="memberMail">Adresse mail</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez un émail" type="email" name="memberMail" id="memberMail">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un émail" type="email" name="memberMail" id="memberMail">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="memberPphone">Téléphone</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez un numéro de téléphone" type="tel" name="memberPphone"
-                                id="memberPphone">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un numéro de téléphone" type="tel" name="memberPphone" id="memberPphone">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="memberBirthdate">Date de naissance</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez une date de naissance" type="date" name="memberBirthdate"
-                                id="memberBirthdate">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez une date de naissance" type="date" name="memberBirthdate" id="memberBirthdate">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="memberBirthPlace">Lieu de naissance</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez un nom" type="text" name="memberBirthPlace"
-                                id="memberBirthPlace">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom" type="text" name="memberBirthPlace" id="memberBirthPlace">
                         </div>
                     </div>
                 </fieldset>
@@ -95,33 +90,24 @@
                     <div class="row justify-content-end">
                         <div class="col-sm-10 col-md-4 col-xl-3 mt-3">
                             <label class="form-label-lg fs-6" for="memberStreetNumber">Numéro de rue</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez un numéro de rue" type="text" name="memberStreetNumber"
-                                id="memberStreetNumber">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un numéro de rue" type="text" name="memberStreetNumber" id="memberStreetNumber">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-9 mt-3">
                             <label class="form-label-lg fs-6" for="memberStreetName">Nom de rue</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez un nom de rue" type="text" name="memberStreetName"
-                                id="memberStreetName">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom de rue" type="text" name="memberStreetName" id="memberStreetName">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-7 mt-3">
                             <label class="form-label-lg fs-6" for="memberStreetComplement">Complément
                                 d'adresse</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez un complément d'adresse" type="text"
-                                name="memberStreetComplement" id="memberStreetComplement">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un complément d'adresse" type="text" name="memberStreetComplement" id="memberStreetComplement">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-3 mt-3">
                             <label class="form-label-lg fs-6" for="memberZipCode">Code postal</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez un code postal" type="text" name="memberZipCode"
-                                id="memberZipCode">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un code postal" type="text" name="memberZipCode" id="memberZipCode">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-2 mt-3">
                             <label class="form-label-lg fs-6" for="memberCity">Ville</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez une ville" type="text" name="memberCity" id="memberCity">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez une ville" type="text" name="memberCity" id="memberCity">
                         </div>
                     </div>
                 </fieldset>
@@ -132,14 +118,11 @@
                     <div class="row">
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="profession">Profession</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Une profession"
-                                type="text" name="profession" id="profession">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Une profession" type="text" name="profession" id="profession">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="familySituation">Situation de famille</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="une situation de famille" type="text" name="familySituation"
-                                id="familySituation">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="une situation de famille" type="text" name="familySituation" id="familySituation">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="cafNumber">Numéro d'identifiant d'allocation
@@ -165,39 +148,27 @@
                     <div class="row">
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="childLastname">Nom</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez un nom d'enfant" type="text" name="childLastname"
-                                id="childLastname">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom d'enfant" type="text" name="childLastname" id="childLastname">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="childFirstname">Prénom</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez un prénom d'enfant" type="text" name="childFirstname"
-                                id="childFirstname">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un prénom d'enfant" type="text" name="childFirstname" id="childFirstname">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="childBirthdate">Date de naissance</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez la date de naissance d'un enfant" type="date"
-                                name="childBirthdate" id="childBirthdate">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez la date de naissance d'un enfant" type="date" name="childBirthdate" id="childBirthdate">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="childBirthPlace">Lieu de naissance</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez un lieu de naissance d'un enfant" type="text"
-                                name="childBirthPlace" id="childBirthPlace">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un lieu de naissance d'un enfant" type="text" name="childBirthPlace" id="childBirthPlace">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="childPhone">Téléphone</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez un numéro de téléphone d'un enfant" type="tel" name="childPhone"
-                                id="childPhone">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un numéro de téléphone d'un enfant" type="tel" name="childPhone" id="childPhone">
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="childSchool">Ecole</label>
-                            <input class="form-control form-control-lg my-2" placeholder=""
-                                aria-label="Renseignez un nom d'école de l'enfant" type="text" name="childSchool"
-                                id="childSchool">
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom d'école de l'enfant" type="text" name="childSchool" id="childSchool">
                         </div>
                     </div>
                 </fieldset>
@@ -311,33 +282,27 @@
                 <div class="row">
                     <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                         <label class="form-label-lg fs-6" for="astname">Nom</label>
-                        <input class="form-control form-control-lg my-2" placeholder=""
-                            aria-label="Renseignez votre nom" type="text" name="astname" id="astname">
+                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre nom" type="text" name="astname" id="astname">
                     </div>
                     <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                         <label class="form-label-lg fs-6" for="firstname">Prénom</label>
-                        <input class="form-control form-control-lg my-2" placeholder=""
-                            aria-label="Renseignez votre prénom" type="text" name="firstname" id="firstname">
+                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre prénom" type="text" name="firstname" id="firstname">
                     </div>
                     <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                         <label class="form-label-lg fs-6" for="mail">Adresse mail</label>
-                        <input class="form-control form-control-lg my-2" placeholder=""
-                            aria-label="Renseignez votre émail" type="email" name="mail" id="mail">
+                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre émail" type="email" name="mail" id="mail">
                     </div>
                     <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                         <label class="form-label-lg fs-6" for="phone">Téléphone</label>
-                        <input class="form-control form-control-lg my-2" placeholder=""
-                            aria-label="Renseignez votre numéro de téléphone" type="tel" name="phone" id="phone">
+                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre numéro de téléphone" type="tel" name="phone" id="phone">
                     </div>
                     <div class="col-sm-10 col-xl-6 mt-3">
                         <label class="form-label-lg fs-6" for="passw">Création du mot de passe</label>
-                        <input class="form-control form-control-lg my-2" placeholder=""
-                            aria-label="Renseignez votre mot de passe" type="password" name="passw" id="passw">
+                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre mot de passe" type="password" name="passw" id="passw">
                     </div>
                     <div class="col-sm-10 col-xl-6 mt-3">
                         <label class="form-label-lg fs-6" for="confPassw">Confirmation mot de passe</label>
-                        <input class="form-control form-control-lg my-2" placeholder=""
-                            aria-label="Confirmez votre mot de passe" type="password" name="confPassw" id="confPassw">
+                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Confirmez votre mot de passe" type="password" name="confPassw" id="confPassw">
                     </div>
                 </div>
                 <div>
@@ -362,7 +327,7 @@
                         <label class="form-label-lg fs-6" for="nameSchool">Nom de l'école</label>
                         <input class="form-control form-control-lg my-2" type="text" name="nameSchool" id="nameSchool">
                     </div>
-    
+
                     <div class="col-sm-10 col-md-4 col-xl-3">
                         <label class="form-label-lg fs-6" for="schoolSelect">Choix de l'école</label>
                         <select class="form-select form-select-lg my-2 fs-6" name="school" id="schoolSelect">
@@ -376,7 +341,7 @@
                 <input class="form-control form-control-lg my-2" type="file" name="" value="Charger">
                 <input class="btn btn-success text-uppercase" type="submit" name="" value="Création">
                 <p>Liste des documents que vous avez transmis</p>
-        
+
                 <table>
                     <thead>
                         <tr>
@@ -404,6 +369,13 @@
 
         </article>
     </section>
+
+    <?php
+    require_once 'partials/footer.html';
+    ?>
+
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    
 </body>
 
 </html>

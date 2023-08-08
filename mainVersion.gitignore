@@ -1,0 +1,8 @@
+Fichier permettant d'ignorer des fichiers ou dossiers
+**/vendor/**
+test/
+conception/
+composer.json
+composer.lock
+dbConnect.conf
+loggy.log

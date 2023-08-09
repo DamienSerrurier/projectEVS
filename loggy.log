@@ -1,0 +1,1 @@
+Error Problème d'accès à la base de données PDO::__construct(): Argument #1 ($dsn) must be a valid data source URI dans la méthode [baseConnection] 2023-08-08 13:07:04

@@ -1,5 +1,9 @@
 <?php
 
+namespace ProjectEvs;
+
+use function PHPUnit\Framework\isEmpty;
+
 class Person {
 
     //Propriétés
@@ -30,7 +34,21 @@ class Person {
     }
 
     public function setLastname(string $lastname) {
-        $this->lastname = $lastname;
+        
+        if (!empty($lastname)) {
+
+            $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
+            if (preg_match($pattern, $lastname)) {
+                $this->lastname = $lastname;
+                return $this->lastname;
+            }
+            else {
+                return $errorMessage = "La valeur attendue n'est pas la bonne";
+            }
+        }
+        else {
+            return $errorMessage = "Veuillez renseigner ce champ";
+        }
     }
 
     public function getFirstname() : string {

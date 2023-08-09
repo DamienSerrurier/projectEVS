@@ -1,5 +1,7 @@
 <?php
 
+namespace ProjectEvs;
+
 class Category {
 
     //Propriétés

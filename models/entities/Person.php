@@ -2,8 +2,6 @@
 
 namespace ProjectEvs;
 
-use function PHPUnit\Framework\isEmpty;
-
 class Person {
 
     //Propriétés
@@ -11,12 +9,12 @@ class Person {
     protected string $lastname;
     protected string $firstname;
     protected string $phone;
-    protected int $id_civility;
+    protected Civility $civility;
     private Avatar $avatar;
     protected string $email;
     private string $password;
     protected Address $address;
-    private int $id_role;
+    private Role $role;
 
     //Constructeur
 
@@ -67,12 +65,12 @@ class Person {
         $this->phone = $phone;
     }
 
-    public function getId_civility() : int {
-        return $this->id_civility;
+    public function getCivility() : Civility {
+        return $this->civility;
     }
 
-    public function setId_civility(int $id_civility) {
-        $this->id_civility = $id_civility;
+    public function setCivility(Civility $civility) {
+        $this->civility = $civility;
     }
 
     public function getAvatar() : Avatar {
@@ -107,11 +105,11 @@ class Person {
         $this->address = $address;
     }
 
-    public function getId_role() : int {
-        return $this->id_role;
+    public function getRole() : Role {
+        return $this->role;
     }
 
-    public function setId_role(int $id_role) {
-        $this->id_role = $id_role;
+    public function setRole(Role $role) {
+        $this->role = $role;
     }
 }

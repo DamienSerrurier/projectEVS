@@ -9,7 +9,7 @@ class Structure {
     private string $name;
     private string $logo;
     private string $phone;
-    private int $id_type_structure;
+    private TypeStructure $typeSructure;
     private Address $address;
 
     //Constructeur
@@ -47,12 +47,12 @@ class Structure {
         $this->phone = $phone;
     }
 
-    public function getId_type_structure() : int {
-        return $this->id_type_structure;
+    public function getTypeStructure() : TypeStructure {
+        return $this->typeSructure;
     }
 
-    public function setId_type_structure(int $id_type_structure) {
-        $this->id_type_structure = $id_type_structure;
+    public function setTypeStructure(TypeStructure $typeStructure) {
+        $this->typeSructure = $typeStructure;
     }
 
     public function getAddress() : Address {

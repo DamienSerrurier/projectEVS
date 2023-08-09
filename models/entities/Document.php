@@ -8,7 +8,7 @@ class Document {
     private int $id;
     private string $name;
     private string $link;
-    private int $id_structure;
+    private Structure $structure;
 
     //Constructeur
 
@@ -37,11 +37,11 @@ class Document {
         $this->link = $link;
     }
 
-    public function getId_structure() : int {
-        return $this->id_structure;
+    public function getStructure() : Structure {
+        return $this->structure;
     }
 
-    public function setId_structure(int $id_structure) {
-        $this->id_structure = $id_structure;
+    public function setStructure(Structure $structure) {
+        $this->structure = $structure;
     }
 }

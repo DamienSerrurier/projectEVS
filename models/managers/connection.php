@@ -5,7 +5,7 @@ require_once 'utility/logger/Loggy.php';
 
 function baseConnection() {
     try {
-        $pdo = new PDO('uri:file:///c:\Logiciels\laragon\www\projectEvs/dbConnect.conf');
+        $pdo = new PDO('uri:file:///c:\Users\damie\OneDrive\Documents/dbConnect.conf');
         return $pdo;
 
     } catch (PDOException $e) {

@@ -13,7 +13,7 @@ class Activity {
     private string $hour_end;
     private string $description;
     private string $picture;
-    private int $id_category;
+    private Category $category;
 
     //Constructeur
 
@@ -82,11 +82,11 @@ class Activity {
         $this->picture = $picture;
     }
 
-    public function getId_category() : int {
-        return $this->id_category;
+    public function getCategory() : Category {
+        return $this->category;
     }
 
-    public function setId_category(int $id_category) {
-        $this->id_category = $id_category;
+    public function setCategory(Category $category) {
+        $this->category = $category;
     }
 }

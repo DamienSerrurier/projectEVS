@@ -1,1 +1,0 @@
-{"version":1,"defects":{"PersonTest::testSetLastname":7,"PersonTest::testSetLastnameIsNotEmpty":7},"times":{"PersonTest::testSetLastname":0.008,"PersonTest::testSetLastnameIsNotEmpty":0.002}}

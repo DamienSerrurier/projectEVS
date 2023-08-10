@@ -1,5 +1,8 @@
 <?php
 
+namespace ProjectEvs;
+use Exception;
+
 class ExceptionPerso extends Exception {
 
     public function __construct(string $message) {

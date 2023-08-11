@@ -2,11 +2,9 @@
 
 namespace ProjectEvs;
 
-use ProjectEvs\ExceptionPerso;
-
-use function PHPUnit\Framework\isInstanceOf;
-
 require_once __DIR__ . '/../../utility/exceptions/ExceptionPerso.php';
+
+use ProjectEvs\ExceptionPerso;
 
 class Person implements RegexTester {
 

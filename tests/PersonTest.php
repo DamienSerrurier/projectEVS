@@ -7,9 +7,9 @@ require_once '../../models/entities/Avatar.php';
 require_once '../../models/entities/Address.php';
 require_once '../../models/entities/Role.php';
 
+use ProjectEvs\ExceptionPerso;
 use ProjectEvs\Address;
 use ProjectEvs\Avatar;
-use ProjectEvs\ExceptionPerso;
 use ProjectEvs\Person;
 use ProjectEvs\Civility;
 use ProjectEvs\Role;

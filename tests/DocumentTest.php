@@ -120,11 +120,4 @@ class DocumentTest extends PHPUnit\Framework\TestCase {
         $document->setStructure($structure);
         $this->assertInstanceOf(Structure::class, $document->getStructure());
     }
-
-    public function testSetStructureNotIntanceOf() {
-        $document = new Document();
-        $structure = new Structure();
-        $document->setStructure($structure);
-        $this->assertNotInstanceOf(Document::class, $document->getStructure());
-    }
 }

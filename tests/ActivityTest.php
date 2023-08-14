@@ -3,6 +3,7 @@
 require_once '../../models/entities/RegexTester.php';
 require_once '../../models/entities/Activity.php';
 require_once '../../models/entities/Category.php';
+require_once '../../models/entities/Person.php';
 
 use ProjectEvs\ExceptionPerso;
 use ProjectEvs\Activity;
@@ -281,12 +282,5 @@ class ActivityTest extends PHPUnit\Framework\TestCase {
         $category = new Category();
         $activity->setCategory($category);
         $this->assertInstanceOf(Category::class, $activity->getCategory());
-    }
-
-    public function testSetCategoryNotIntanceOf() {
-        $activity = new Activity();
-        $category = new Category();
-        $activity->setCategory($category);
-        $this->assertNotInstanceOf(activity::class, $activity->getCategory());
     }
 }

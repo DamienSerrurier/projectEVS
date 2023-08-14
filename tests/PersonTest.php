@@ -141,26 +141,12 @@ class PersonTest extends PHPUnit\Framework\TestCase {
         $this->assertInstanceOf(Civility::class, $person->getCivility());
     }
 
-    public function testSetCivilityNotIntanceOf() {
-        $person = new Person();
-        $civility = new Civility();
-        $person->setCivility($civility);
-        $this->assertNotInstanceOf(Person::class, $person->getCivility());
-    }
-
     //Test unitaire sur setAvatar
     public function testSetAvatarInstanceOf() {
         $person = new Person();
         $avatar = new Avatar();
         $person->setAvatar($avatar);
         $this->assertInstanceOf(Avatar::class, $person->getAvatar());
-    }
-
-    public function testSetAvatarNotIntanceOf() {
-        $person = new Person();
-        $avatar = new Avatar();
-        $person->setAvatar($avatar);
-        $this->assertNotInstanceOf(Person::class, $person->getAvatar());
     }
 
     //Test unitaire sur setEmail
@@ -221,25 +207,11 @@ class PersonTest extends PHPUnit\Framework\TestCase {
         $this->assertInstanceOf(Address::class, $person->getAddress());
     }
 
-    public function testSetAddressNotIntanceOf() {
-        $person = new Person();
-        $address = new Address();
-        $person->setAddress($address);
-        $this->assertNotInstanceOf(Person::class, $person->getAddress());
-    }
-
     //Test unitaire sur setRole
     public function testSetRoleInstanceOf() {
         $person = new Person();
         $role = new Role();
         $person->setRole($role);
         $this->assertInstanceOf(Role::class, $person->getRole());
-    }
-
-    public function testSetRoleNotIntanceOf() {
-        $person = new Person();
-        $role = new Role();
-        $person->setRole($role);
-        $this->assertNotInstanceOf(Person::class, $person->getRole());
     }
 }

@@ -21,10 +21,10 @@ class PersonTest extends PHPUnit\Framework\TestCase {
     public function testSetIdWithFilter() {
         $person = new Person();
         $id = 1;
+        $badNumber = 0;
+        $this->assertGreaterThan($badNumber, $id);
         $person->setId($id);
-        if ($id > 0) {
-            $this->assertSame(filter_var($person->getid(), FILTER_VALIDATE_INT), $person->getid());
-        }
+        $this->assertSame(filter_var($person->getid(), FILTER_VALIDATE_INT), $person->getid());
     }
 
     public function testSetIdNotMatchingWithFilter() {

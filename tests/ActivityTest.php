@@ -15,10 +15,10 @@ class ActivityTest extends PHPUnit\Framework\TestCase {
     public function testSetIdWithFilter() {
         $activity = new Activity();
         $id = 1;
+        $badNumber = 0;
+        $this->assertGreaterThan($badNumber, $id);
         $activity->setId($id);
-        if ($id > 0) {
-            $this->assertSame(filter_var($activity->getid(), FILTER_VALIDATE_INT), $activity->getid());
-        }
+        $this->assertSame(filter_var($activity->getid(), FILTER_VALIDATE_INT), $activity->getid());
     }
 
     public function testSetIdNotMatchingWithFilter() {

@@ -2,11 +2,13 @@
 
 namespace ProjectEvs;
 
-class Civility {
+require_once '../../utility/exceptions/ExceptionPerso.php';
+
+class Civility implements RegexTester {
 
     //Propriétés
     private int $id;
-    private string $picture;
+    private string $name;
 
     //Constructeur
 
@@ -16,15 +18,40 @@ class Civility {
     }
 
     public function setId(int $id) {
-        $this->id = $id;
+
+        if($id > 0) {
+
+            if (filter_var($id, FILTER_VALIDATE_INT)) {
+                return $this->id = $id;
+            } else {
+                throw new ExceptionPerso("Arrêtez de jouer avec mes post");
+            }
+        }
+        else {
+            throw new ExceptionPerso('La valeur doit être positif et supérieur à 0');
+        }
     }
 
-    public function getPicture() : string {
-        return $this->picture;
+    public function getName() : string {
+        return $this->name;
     }
 
-    public function setPicture(string $picture) {
-        $this->picture = $picture;
+    public function setName(string $name) {
+
+        if (!empty($name)) {
+            $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
+
+            if ($this->testInput($pattern, $name)) {
+                return $this->name = $name;
+            } else {
+                throw new ExceptionPerso("Le nom de la civilité n'est pas valide");
+            }
+        } else {
+            throw new ExceptionPerso("Veuillez renseigner ce champ");
+        }
     }
 
+    public function testInput($pattern, $input) {
+        return preg_match($pattern, $input);
+    }
 }

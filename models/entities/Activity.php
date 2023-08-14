@@ -2,15 +2,21 @@
 
 namespace ProjectEvs;
 
-class Activity {
+require_once '../../utility/exceptions/ExceptionPerso.php';
+
+use DateTime;
+use Exception;
+use ProjectEvs\ExceptionPerso;
+
+class Activity implements RegexTester {
 
     //Propriétés
     private int $id;
-    private string $additional_information;
-    private string $date_start;
-    private string $date_end;
-    private string $hour_start;
-    private string $hour_end;
+    private string $additionalInformation;
+    private string $startDate;
+    private string $endDate;
+    private string $startHour;
+    private string $endHour;
     private string $description;
     private string $picture;
     private Category $category;
@@ -23,47 +29,124 @@ class Activity {
     }
 
     public function setId(int $id) {
-        $this->id = $id;
+
+        if($id > 0) {
+
+            if (filter_var($id, FILTER_VALIDATE_INT)) {
+                $this->id = $id;
+                return $this->id;
+            } else {
+                throw new ExceptionPerso("Arrêtez de jouer avec mes post");
+            }
+        }
+        else {
+            throw new ExceptionPerso('La valeur doit être positif et supérieur à 0');
+        }
     }
 
-    public function getAdditional_information() : string {
-        return $this->additional_information;
+    public function getAdditionalInformation() : string {
+        return $this->additionalInformation;
     }
 
-    public function setAdditional_information(string $additional_information) {
-        $this->additional_information = $additional_information;
+    public function setAdditionalInformation(string $additionalInformation) {
+        $pattern = '/^[a-zA-Z- éèêôâàîïùûç\/]+$/';
+
+        if ($this->testInput($pattern, $additionalInformation)) {
+            return $this->additionalInformation = $additionalInformation;
+        } else {
+            throw new ExceptionPerso("L'information additionnelle n'est pas valide");
+        }
     }
 
-    public function getDate_start() : string {
-        return $this->date_start;
+    public function getStartDate() : string {
+        return $this->startDate;
     }
 
-    public function setDate_start(string $date_start) {
-        $this->date_start = $date_start;
+    public function setStartDate(string $startDate) {
+        $format = 'd/m/Y';
+        $dateFormat = DateTime::createFromFormat($format, $startDate);
+        
+        if ($dateFormat && $dateFormat->format($format) == $startDate) {
+            list($day, $month, $year) = explode('/', $startDate);
+            
+            if (checkdate($month, $day, $year)) {
+                $today = date('m/d/Y');
+                $timestampToday = strtotime($today);
+                $timestampstartDate = strtotime($startDate);
+    
+                if ($timestampToday <= $timestampstartDate) {
+                    return $this->startDate = $startDate;
+                }
+                else {
+                    throw new ExceptionPerso(
+                        "La date du début doit être supérieur ou égale à celle d'aujoud'hui"
+                    );
+                }
+            }
+            else {
+                throw new ExceptionPerso("Le format de la date n'est pas valide");
+            }
+        }
+        else {
+            throw new ExceptionPerso("La date doit être au format comme: jour/mois/année");
+        }
     }
 
-    public function getDate_end() : string {
-        return $this->date_end;
+    public function getEndDate() : string {
+        return $this->endDate;
     }
 
-    public function setDate_end(string $date_end) {
-        $this->date_end = $date_end;
+    public function setEndDate(string $endDate) {
+        $format = 'd/m/Y';
+        $dateFormat = DateTime::createFromFormat($format, $endDate);
+
+        if ($dateFormat && $dateFormat->format($format) == $endDate) {
+        list($day, $month, $year) = explode('/', $endDate);
+
+            if (checkdate($month, $day, $year)) {
+                return $this->endDate = $endDate; 
+            }
+            else {
+                throw new ExceptionPerso("Le format de la date n'est pas valide");
+            }
+        }
+        else {
+            throw new ExceptionPerso("La date doit être au format comme: jour/mois/année");
+        }
     }
 
-    public function getHour_start() : string {
-        return $this->hour_start;
+    public function getStartHour() : string {
+        return $this->startHour;
     }
 
-    public function setHour_start(string $hour_start) {
-        $this->hour_start = $hour_start;
+    public function setStartHour(string $startHour) {
+        date_default_timezone_set('Europe/Paris');
+        $format = 'H\h\:i';
+        $hourFormat = DateTime::createFromFormat($format, $startHour);
+        
+        if ($hourFormat && $hourFormat->format($format) == $startHour) {
+            return $this->startHour = $startHour;
+        }
+        else {
+            throw new ExceptionPerso("le format de l'heure n'est pas valide comme: 10h:30");
+        }
     }
 
-    public function getHour_end() : string {
-        return $this->hour_end;
+    public function getEndHour() : string {
+        return $this->endHour;
     }
 
-    public function setHour_end(string $hour_end) {
-        $this->hour_end = $hour_end;
+    public function setEndHour(string $endHour) {
+        date_default_timezone_set('Europe/Paris');
+        $format = 'H\h\:i';
+        $hourFormat = DateTime::createFromFormat($format, $endHour);
+        
+        if ($hourFormat && $hourFormat->format($format) == $endHour) {
+            return $this->endHour = $endHour;
+        }
+        else {
+            throw new ExceptionPerso("le format de l'heure n'est pas valide comme: 10h:30");
+        }
     }
 
     public function getDescription() : string {
@@ -79,7 +162,41 @@ class Activity {
     }
 
     public function setPicture(string $picture) {
-        $this->picture = $picture;
+        $error = $_FILES['userfile']['error'];
+        
+        if ($error == 0) {
+            $path = '../../assets/test/';
+            $expectedType = ['image/png', 'image/jpeg'];
+            $mineType = mime_content_type($path . $picture);
+    
+            if (in_array($mineType, $expectedType)) {
+                $maxWidth = 1000;
+                $maxHeight = 1000;
+                list($width, $height) = getimagesize($path . $picture);
+    
+                if ($maxWidth >= $width || $maxHeight >= $height) {
+                    $maxSize = 10000;
+                    $fileSize = filesize($path . $picture);
+    
+                    if ($maxSize >= $fileSize) {
+                        $this->picture = $picture;
+                    }
+                    else {
+                        throw new ExceptionPerso("Votre fichier est trop lourd, la taille maximale est de 10ko");
+                    }
+                }
+                else {
+                    throw new ExceptionPerso("Veuillez réduire la taille de l'image à 1000x1000");
+                }
+            }
+            else {
+                throw new ExceptionPerso("Veuillez choisir un fichier image (png, jpeg / jpg ou GIF)");
+            }
+            
+        }
+        else {
+            throw new ExceptionPerso("Votre fichier n'a pu être envoyé, veuillez réessayer");
+        }
     }
 
     public function getCategory() : Category {
@@ -87,6 +204,32 @@ class Activity {
     }
 
     public function setCategory(Category $category) {
-        $this->category = $category;
+
+        if ($category instanceof Category) {
+            return $this->category = $category;
+        }
+        else {
+            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Category");
+        }
+    }
+
+    public function testInput($pattern, $input) {
+        return preg_match($pattern, $input);
+    }
+
+    public function compareDates(string $startDate, string $endDate) {
+        $startDatePart = explode('/', $startDate);
+        $formateStartDate = $startDatePart[1] . '/' . $startDatePart[0] . '/' . $startDatePart[2];
+        $timestampStartDate = strtotime($formateStartDate);
+        $endDatePart = explode('/', $endDate);
+        $formateEndDate = $endDatePart[1] . '/' . $endDatePart[0] . '/' . $endDatePart[2];
+        $timestampEndDate = strtotime($formateEndDate);
+
+        if ($timestampStartDate < $timestampEndDate) {
+            return $this->endDate = $endDate;
+        }
+        else {
+            throw new ExceptionPerso("La date du début doit être supérieur à la date de départ");
+        }
     }
 }

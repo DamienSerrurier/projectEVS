@@ -5,7 +5,6 @@ namespace ProjectEvs;
 require_once '../../utility/exceptions/ExceptionPerso.php';
 
 use DateTime;
-use Exception;
 use ProjectEvs\ExceptionPerso;
 
 class Activity implements RegexTester {
@@ -33,8 +32,7 @@ class Activity implements RegexTester {
         if($id > 0) {
 
             if (filter_var($id, FILTER_VALIDATE_INT)) {
-                $this->id = $id;
-                return $this->id;
+                return $this->id = $id;
             } else {
                 throw new ExceptionPerso("Arrêtez de jouer avec mes post");
             }

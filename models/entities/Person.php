@@ -32,8 +32,7 @@ class Person implements RegexTester {
         if($id > 0) {
 
             if (filter_var($id, FILTER_VALIDATE_INT)) {
-                $this->id = $id;
-                return $this->id;
+                return $this->id = $id;
             } else {
                 throw new ExceptionPerso("Arrêtez de jouer avec mes post");
             }
@@ -55,8 +54,7 @@ class Person implements RegexTester {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
             if ($this->testInput($pattern, $lastname)) {
-                $this->lastname = $lastname;
-                return $this->lastname;
+                return $this->lastname = $lastname;
             } else {
                 throw new ExceptionPerso("Le nom n'est pas valide");
             }
@@ -74,8 +72,7 @@ class Person implements RegexTester {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
             if ($this->testInput($pattern, $firstname)) {
-                $this->firstname = $firstname;
-                return $this->firstname;
+                return $this->firstname = $firstname;
             } else {
                 throw new ExceptionPerso("Le prénom n'est pas valide");
             }
@@ -92,8 +89,7 @@ class Person implements RegexTester {
         $pattern = '/^[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}$/';
 
         if ($this->testInput($pattern, $phone)) {
-            $this->phone = $phone;
-            return $this->phone;
+            return $this->phone = $phone;
         } else {
             throw new ExceptionPerso("Le numéro de téléphone n'est pas valide");
         }
@@ -136,8 +132,7 @@ class Person implements RegexTester {
         if (!empty($email)) {
 
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $this->email = $email;
-                return $this->email;
+                return $this->email = $email;
             } else {
                 throw new ExceptionPerso("L'adresse mail n'est pas valide");
             }
@@ -157,8 +152,7 @@ class Person implements RegexTester {
 
             if ($this->testInput($pattern, $password)) {
                 $password = password_hash($password, PASSWORD_BCRYPT);
-                $this->password = $password;
-                return $this->password;
+                return $this->password = $password;
             } else {
                 throw new ExceptionPerso(
                     "Veuillez renseigner un mot de passe de 8 caractères contenant au moins : <br>

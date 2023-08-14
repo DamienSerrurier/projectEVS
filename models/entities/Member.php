@@ -2,16 +2,21 @@
 
 namespace ProjectEvs;
 
+require_once '../../utility/exceptions/ExceptionPerso.php';
+
+use DateTime;
+use ProjectEvs\ExceptionPerso;
+
 class Member extends Person {
 
     //Propriétés
     private string $birthdate;
-    private string $place_of_birth;
+    private string $placeOfBirth;
     private Member $memberPair;
     private string $profession;
-    private string $family_situation;
-    private string $caf_number;
-    private string $registration_date;
+    private string $familySituation;
+    private string $cafNumber;
+    private string $registrationDate;
 
     //Constructeur
     
@@ -21,15 +26,50 @@ class Member extends Person {
     }
 
     public function setBirthdate(string $birthdate) {
-        $this->birthdate = $birthdate;
+        $format = 'd/m/Y';
+        $dateFormat = DateTime::createFromFormat($format, $birthdate);
+        
+        if ($dateFormat && $dateFormat->format($format) == $birthdate) {
+            list($day, $month, $year) = explode('/', $birthdate);
+            
+            if (checkdate($month, $day, $year)) {
+                $today = date('m/d/Y');
+                $timestampToday = strtotime($today);
+                $timestampbirthdate = strtotime($birthdate);
+    
+                if ($timestampToday > $timestampbirthdate) {
+                    return $this->birthdate = $birthdate;
+                }
+                else {
+                    throw new ExceptionPerso("La date de naissance n'est bonne");
+                }
+            }
+            else {
+                throw new ExceptionPerso("Le format de la date de naissance n'est pas valide");
+            }
+        }
+        else {
+            throw new ExceptionPerso("La date de naissance doit être au format comme: jour/mois/année");
+        }
     }
 
-    public function getPlace_of_birth() : string {
-        return $this->place_of_birth;
+    public function getPlaceOfBirth() : string {
+        return $this->placeOfBirth;
     }
 
-    public function setPlace_of_birth(string $place_of_birth) {
-        $this->place_of_birth = $place_of_birth;
+    public function setPlaceOfBirth(string $placeOfBirth) {
+
+        if (!empty($placeOfBirth)) {
+            $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
+
+            if ($this->testInput($pattern, $placeOfBirth)) {
+                return $this->placeOfBirth = $placeOfBirth;
+            } else {
+                throw new ExceptionPerso("Le nom de la ville n'est pas valide");
+            }
+        } else {
+            throw new ExceptionPerso("Veuillez renseigner ce champ");
+        }
     }
 
     public function getMemberPair() : Member {
@@ -37,7 +77,13 @@ class Member extends Person {
     }
 
     public function setMemberPair(Member $memberPair) {
-        $this->memberPair = $memberPair;
+
+        if ($memberPair instanceof Member) {
+            return $this->memberPair = $memberPair;
+        }
+        else {
+            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Member");
+        }
     }
 
     public function getProfession() : string {
@@ -45,30 +91,53 @@ class Member extends Person {
     }
 
     public function setProfession(string $profession) {
-        $this->profession = $profession;
+        $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
+
+        if ($this->testInput($pattern, $profession)) {
+            return $this->profession = $profession;
+        } else {
+            throw new ExceptionPerso("Le nom de la profession n'est pas valide");
+        }
     }
 
-    public function getFamily_situation() : string {
-        return $this->family_situation;
+    public function getFamilySituation() : string {
+        return $this->familySituation;
     }
 
-    public function setFamily_situation(string $family_situation) {
-        $this->family_situation = $family_situation;
+    public function setFamilySituation(string $familySituation) {
+        $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
+
+        if ($this->testInput($pattern, $familySituation)) {
+            return $this->familySituation = $familySituation;
+        } else {
+            throw new ExceptionPerso("Le nom de la situation de famille n'est pas valide");
+        }
     }
 
-    public function getCaf_number() : string {
-        return $this->caf_number;
+    public function getCafNumber() : string {
+        return $this->cafNumber;
     }
 
-    public function setCaf_number(string $caf_number) {
-        $this->caf_number = $caf_number;
+    public function setCafNumber(string $cafNumber) {
+
+        if (!empty($cafNumber)) {
+            $pattern = '/^\d{7}\s\d{2}$/';
+
+            if ($this->testInput($pattern, $cafNumber)) {
+                return $this->cafNumber = $cafNumber;
+            } else {
+                throw new ExceptionPerso("Le numéro d'allocation familiale n'est pas valide");
+            }
+        } else {
+            throw new ExceptionPerso("Veuillez renseigner ce champ");
+        }
     }
 
-    public function getRegistration_date() : string {
-        return $this->registration_date;
+    public function getRegistrationDate() : string {
+        return $this->registrationDate;
     }
 
-    public function setRegistration_date(string $registration_date) {
-        $this->registration_date = $registration_date;
+    public function setRegistrationDate(string $registrationDate) {
+        $this->registrationDate = $registrationDate;
     }
 }

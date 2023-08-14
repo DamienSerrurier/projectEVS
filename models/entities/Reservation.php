@@ -19,7 +19,13 @@ class Reservation {
     }
 
     public function setActivity(Activity $activity) {
-        $this->activity = $activity;
+
+        if ($activity instanceof Activity) {
+            return $this->activity = $activity;
+        }
+        else {
+            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Activity");
+        }
     }
 
     public function getPerson() : Person {
@@ -27,7 +33,13 @@ class Reservation {
     }
 
     public function setPerson(Person $person) {
-        $this->person = $person;
+
+        if ($person instanceof Person) {
+            return $this->person = $person;
+        }
+        else {
+            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Person");
+        }
     }
 
     public function getBooking_date() : string {
@@ -53,5 +65,4 @@ class Reservation {
     public function setNumber_of_reservation(int $number_of_reservation) {
         $this->number_of_reservation = $number_of_reservation;
     }
- 
 }

@@ -8,7 +8,6 @@ use ProjectEvs\ExceptionPerso;
 use ProjectEvs\Activity;
 use ProjectEvs\Category;
 
-
 class ActivityTest extends PHPUnit\Framework\TestCase {
 
     //Test unitaire sur setId
@@ -87,6 +86,15 @@ class ActivityTest extends PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual($today, $activity->getStartDate());
     }
 
+    public function testSetStartDateBeforeToday() {
+        $this->expectException(ExceptionPerso::class);
+        $activity = new Activity();
+        $today = '11/08/2024';
+        $date = '13/08/2023';
+        $activity->setStartDate($date);
+        $this->assertLessThan($today, $activity->getStartDate());
+    }
+
     //Test unitaire sur setEndDate
     public function testSetEndDateWithCheckdate() {
         $activity = new Activity();
@@ -116,6 +124,22 @@ class ActivityTest extends PHPUnit\Framework\TestCase {
         $endDate = '18/08/2024';
         $activity->setEndDate($endDate);
         $this->assertGreaterThan(
+            $activity->getStartDate(),
+            $activity->compareDates(
+                $activity->getStartDate(),
+                $activity->getEndDate()
+            )
+        );
+    }
+
+    public function testSetEndDateBeforeStartDate() {
+        $this->expectException(ExceptionPerso::class);
+        $activity = new Activity();
+        $startDate = '12/08/2024';
+        $activity->setStartDate($startDate);
+        $endDate = '13/08/2023';
+        $activity->setEndDate($endDate);
+        $this->assertLessThan(
             $activity->getStartDate(),
             $activity->compareDates(
                 $activity->getStartDate(),

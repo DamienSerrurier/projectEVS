@@ -77,7 +77,7 @@ class Activity implements RegexTester {
                 }
                 else {
                     throw new ExceptionPerso(
-                        "La date du début doit être supérieur ou égale à celle d'aujoud'hui"
+                        "La date du début doit être supérieure ou égale à celle d'aujoud'hui"
                     );
                 }
             }

@@ -2,7 +2,9 @@
 
 namespace ProjectEvs;
 
-class Document {
+require_once '../../utility/exceptions/ExceptionPerso.php';
+
+class Document implements RegexTester {
 
     //Propriétés
     private int $id;
@@ -18,23 +20,61 @@ class Document {
     }
 
     public function setId(int $id) {
-        $this->id = $id;
+
+        if($id > 0) {
+
+            if (filter_var($id, FILTER_VALIDATE_INT)) {
+                return $this->id = $id;
+            } else {
+                throw new ExceptionPerso("Arrêtez de jouer avec mes post");
+            }
+        }
+        else {
+            throw new ExceptionPerso('La valeur doit être positif et supérieur à 0');
+        }
     }
 
-    public function getName() : int {
+    public function getName() : string {
         return $this->name;
     }
 
-    public function setName(int $name) {
-        $this->name = $name;
+    public function setName(string $name) {
+
+         if (!empty($name)) {
+            $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
+
+            if ($this->testInput($pattern, $name)) {
+                return $this->name = $name;
+            } else {
+                throw new ExceptionPerso("Le nom du document n'est pas valide");
+            }
+        } else {
+            throw new ExceptionPerso("Veuillez renseigner ce champ");
+        }
     }
 
-    public function getLink() : int {
+    public function getLink() : string {
         return $this->link;
     }
 
-    public function setLink(int $link) {
-        $this->link = $link;
+    public function setLink(string $link) {
+        $error = $_FILES['userfile']['error'];
+        
+        if ($error == 0) {
+            $path = '../../assets/test/';
+            $expectedType = ['text/plain', 'application/pdf'];
+            $mineType = mime_content_type($path . $link);
+    
+            if (in_array($mineType, $expectedType)) {
+                $this->link = $link;
+            }
+            else {
+                throw new ExceptionPerso("Veuillez choisir un fichier text (txt, pdf)");
+            }
+        }
+        else {
+            throw new ExceptionPerso("Votre fichier n'a pu être envoyé, veuillez réessayer");
+        }
     }
 
     public function getStructure() : Structure {
@@ -42,6 +82,16 @@ class Document {
     }
 
     public function setStructure(Structure $structure) {
-        $this->structure = $structure;
+
+        if ($structure instanceof Structure) {
+            return $this->structure = $structure;
+        }
+        else {
+            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Structure");
+        }
+    }
+
+    public function testInput($pattern, $input) {
+        return preg_match($pattern, $input);
     }
 }

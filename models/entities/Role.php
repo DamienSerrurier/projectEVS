@@ -2,7 +2,9 @@
 
 namespace ProjectEvs;
 
-class Role {
+require_once '../../utility/exceptions/ExceptionPerso.php';
+
+class Role implements RegexTester {
 
     //Propriétés
     private int $id;
@@ -16,7 +18,18 @@ class Role {
     }
 
     public function setId(int $id) {
-        $this->id = $id;
+
+        if($id > 0) {
+
+            if (filter_var($id, FILTER_VALIDATE_INT)) {
+                return $this->id = $id;
+            } else {
+                throw new ExceptionPerso("Arrêtez de jouer avec mes post");
+            }
+        }
+        else {
+            throw new ExceptionPerso('La valeur doit être positif et supérieur à 0');
+        }
     }
 
     public function getName() : string {
@@ -24,6 +37,21 @@ class Role {
     }
 
     public function setName(string $name) {
-        $this->name = $name;
+
+        if (!empty($name)) {
+            $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
+
+            if ($this->testInput($pattern, $name)) {
+                return $this->name = $name;
+            } else {
+                throw new ExceptionPerso("Le nom du Role n'est pas valide");
+            }
+        } else {
+            throw new ExceptionPerso("Veuillez renseigner ce champ");
+        }
+    }
+
+    public function testInput($pattern, $input) {
+        return preg_match($pattern, $input);
     }
 }

@@ -66,7 +66,15 @@ class Document implements RegexTester {
             $mineType = mime_content_type($path . $link);
     
             if (in_array($mineType, $expectedType)) {
-                $this->link = $link;
+                $pathUpload = '../../assets/img/uploadPicture/';
+                $fileName = pathinfo($_FILES['userfile']['name']);
+                $fileExtension = $fileName['extension'];
+                $newUploadFileName = uniqid($fileName['filename'], true);
+                $fileNameWithTargetDirectory = $pathUpload . $newUploadFileName . '.' . $fileExtension;
+                
+                if (move_uploaded_file($path, $fileNameWithTargetDirectory)) {
+                    $this->link = $link;
+                }
             }
             else {
                 throw new ExceptionPerso("Veuillez choisir un fichier text (txt, pdf)");

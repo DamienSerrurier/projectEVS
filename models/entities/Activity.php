@@ -177,14 +177,13 @@ class Activity implements RegexTester {
                     $fileSize = filesize($path . $picture);
                     
                     if ($maxSize >= $fileSize) {
-                        $pathUpload = 'C:\\Logiciels\\laragon\\www\\projectEvs\\assets\\img\\uploadPicture\\';
+                        $pathUpload = '../../assets/img/uploadPicture/';
                         $fileName = pathinfo($_FILES['userfile']['name']);
                         $fileExtension = $fileName['extension'];
                         $newUploadFileName = uniqid($fileName['filename'], true);
                         $fileNameWithTargetDirectory = $pathUpload . $newUploadFileName . '.' . $fileExtension;
                         
                         if (move_uploaded_file($path, $fileNameWithTargetDirectory)) {
-                            var_dump('ok');
                             $this->picture = $picture;
                         }
                     }

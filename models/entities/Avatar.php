@@ -54,7 +54,15 @@ class Avatar {
                     $fileSize = filesize($path . $picture);
     
                     if ($maxSize >= $fileSize) {
-                        $this->picture = $picture;
+                        $pathUpload = '../../assets/img/uploadPicture/';
+                        $fileName = pathinfo($_FILES['userfile']['name']);
+                        $fileExtension = $fileName['extension'];
+                        $newUploadFileName = uniqid($fileName['filename'], true);
+                        $fileNameWithTargetDirectory = $pathUpload . $newUploadFileName . '.' . $fileExtension;
+                        
+                        if (move_uploaded_file($path, $fileNameWithTargetDirectory)) {
+                            $this->picture = $picture;
+                        }
                     }
                     else {
                         throw new ExceptionPerso("Votre fichier est trop lourd, la taille maximale est de 10ko");

@@ -125,7 +125,7 @@ class Structure implements RegexTester {
             return $this->typeStructure = $typeStructure;
         }
         else {
-            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Avatar");
+            throw new ExceptionPerso("Ceci n'est pas une instance de la classe TypeStructure");
         }
     }
 
@@ -139,7 +139,7 @@ class Structure implements RegexTester {
             return $this->address = $address;
         }
         else {
-            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Avatar");
+            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Address");
         }
     }
 

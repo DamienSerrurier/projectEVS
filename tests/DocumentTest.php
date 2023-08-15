@@ -103,7 +103,7 @@ class DocumentTest extends PHPUnit\Framework\TestCase {
         $expectedMimeContentType = ['text/plain', 'application/pdf'];
         $mimeType = mime_content_type($path . $file);
         $document->setLink($file);
-        $this->assertEquals(in_array($mimeType, $expectedMimeContentType), $mimeType);
+        $this->assertTrue(in_array($mimeType, $expectedMimeContentType));
     }
 
     public function testSetLinkBadMimeType() {

@@ -103,7 +103,7 @@ class StructureTest extends PHPUnit\Framework\TestCase {
         $expectedMimeContentType = ['image/png', 'image/jpeg'];
         $mimeType = mime_content_type($path . $file);
         $structure->setLogo($file);
-        $this->assertEquals(in_array($mimeType, $expectedMimeContentType), $mimeType);
+        $this->assertTrue(in_array($mimeType, $expectedMimeContentType));
     }
 
     public function testSetLogoBadMimeType() {

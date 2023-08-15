@@ -67,7 +67,7 @@ class AvatarTest extends PHPUnit\Framework\TestCase {
         $expectedMimeContentType = ['image/png', 'image/jpeg'];
         $mimeType = mime_content_type($path . $file);
         $avatar->setPicture($file);
-        $this->assertEquals(in_array($mimeType, $expectedMimeContentType), $mimeType);
+        $this->assertTrue(in_array($mimeType, $expectedMimeContentType));
     }
 
     public function testSetPictureBadMimeType() {

@@ -2,12 +2,14 @@
 
 namespace ProjectEvs;
 
+require_once '../../utility/exceptions/ExceptionPerso.php';
+
 class Upload {
 
     //Propriétés
     private Person $person;
     private Document $document;
-    private string $upload_date;
+    private string $uploadDate;
 
     //Constructeur
 
@@ -39,11 +41,11 @@ class Upload {
             throw new ExceptionPerso("Ceci n'est pas une instance de la classe Document");
         }
     }
-    public function getUpload_date() : string {
-        return $this->upload_date;
+    public function getUploadDate() : string {
+        return $this->uploadDate;
     }
 
-    public function setUpload_date(string $upload_date) {
-        $this->upload_date = $upload_date;
+    public function setUploadDate(string $uploadDate) {
+        $this->uploadDate = $uploadDate;
     }
 }

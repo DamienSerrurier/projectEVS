@@ -163,6 +163,7 @@ CREATE TABLE IF NOT EXISTS reservation (
 CREATE TABLE IF NOT EXISTS supervisor (
     id SERIAL PRIMARY KEY,
     school VARCHAR(100) NOT NULL,
+    school VARCHAR(50) NOT NULL,
     id_structure INTEGER,
     id_member_not_responsible INTEGER NOT NULL,
     id_member_is_responsible INTEGER NOT NULL,

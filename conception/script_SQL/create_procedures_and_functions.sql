@@ -794,6 +794,7 @@ $$;
 --Procédure permettant de rattacher un responsable avec un mineur et de rattacher son école si elle enregistré
 CREATE OR REPLACE PROCEDURE attachResponsibleToMinor(
     supervisorSchool VARCHAR(100),
+    supervisorSchoolCity VARCHAR(50),
     idStructure INTEGER,
     insertMemberminor INTEGER,
     insertMemberAdult INTEGER
@@ -803,12 +804,14 @@ AS $$
 BEGIN
     INSERT INTO supervisor (
         school,
+        schoolCity,
         id_structure,
         id_member_not_responsible,
         id_member_is_responsible
     )
     VALUES (
         supervisorSchool,
+        supervisorSchoolCity,
         idStructure,
         insertMemberminor,
         insertMemberAdult
@@ -818,12 +821,14 @@ $$;
 
 CALL attachResponsibleToMinor(
     'Ecole Jules Ferry',
+    'Nancy',
     NULL,
     insertMemberminor('Jaffar', 'Adrien', '06 26 02 81 74', '2005/08/13', 'Nancy'),
     insertMemberAdult(5, 'Jaffar', 'kamal', '08 52 21 07 45', '8', 'rue Marie Currie', '', '54130', 'Saint-Max', '1974/03/15', 'Nancy', NULL, 'jaffar@Kamal.fr', 'Comptable', 'Célibataire', '5128746H', 2)
 );
 CALL attachResponsibleToMinor(
     'Ecole Maternelle Jean Zay',
+    'Frouard',
     NULL,
     insertMemberminor('Jaffar', 'Carole', '07 12 94 49 72', '2008/10/23', 'Nancy'),
     insertMemberAdult(5, 'Jaffar', 'kamal', '08 52 21 07 45', '8', 'rue Marie Currie', '', '54130', 'Saint-Max', '1974/03/15', 'Nancy', NULL, 'jaffar@Kamal.fr', 'Comptable', 'Célibataire', '5128746H', 2)

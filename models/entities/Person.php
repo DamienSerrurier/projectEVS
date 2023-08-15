@@ -2,7 +2,7 @@
 
 namespace ProjectEvs;
 
-require_once __DIR__ . '/../../utility/exceptions/ExceptionPerso.php';
+require_once '../../utility/exceptions/ExceptionPerso.php';
 
 use ProjectEvs\ExceptionPerso;
 

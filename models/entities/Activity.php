@@ -163,7 +163,7 @@ class Activity implements RegexTester {
         $error = $_FILES['userfile']['error'];
         
         if ($error == 0) {
-            $path = '../../assets/test/';
+            $path = $_FILES['userfile']['tmp_name'];
             $expectedType = ['image/png', 'image/jpeg'];
             $mineType = mime_content_type($path . $picture);
     
@@ -175,9 +175,18 @@ class Activity implements RegexTester {
                 if ($maxWidth >= $width || $maxHeight >= $height) {
                     $maxSize = 10000;
                     $fileSize = filesize($path . $picture);
-    
+                    
                     if ($maxSize >= $fileSize) {
-                        $this->picture = $picture;
+                        $pathUpload = 'C:\\Logiciels\\laragon\\www\\projectEvs\\assets\\img\\uploadPicture\\';
+                        $fileName = pathinfo($_FILES['userfile']['name']);
+                        $fileExtension = $fileName['extension'];
+                        $newUploadFileName = uniqid($fileName['filename'], true);
+                        $fileNameWithTargetDirectory = $pathUpload . $newUploadFileName . '.' . $fileExtension;
+                        
+                        if (move_uploaded_file($path, $fileNameWithTargetDirectory)) {
+                            var_dump('ok');
+                            $this->picture = $picture;
+                        }
                     }
                     else {
                         throw new ExceptionPerso("Votre fichier est trop lourd, la taille maximale est de 10ko");
@@ -230,4 +239,8 @@ class Activity implements RegexTester {
             throw new ExceptionPerso("La date du début doit être supérieur à la date de départ");
         }
     }
+
+    public function moveUploadedFile() {
+
+    } 
 }

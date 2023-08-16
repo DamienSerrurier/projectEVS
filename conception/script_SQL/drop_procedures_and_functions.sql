@@ -1,4 +1,5 @@
 DROP PROCEDURE attachResponsibleToMinor,
+               insertUser,
                insertActivity,
                insertAvatar,
                insertCategory,
@@ -9,28 +10,9 @@ DROP PROCEDURE attachResponsibleToMinor,
                insertStructure,
                insertTypeStructure,
                reservation,
+               updateUser,
+               updateRoleUser,
                updateAdministrator;
-
-DROP PROCEDURE insertUser(
-    IN personlastname character varying,
-    IN personfirstname character varying,
-    IN personphone character varying,
-    IN idcivility integer,
-    IN personemail character varying,
-    IN personpassword character varying,
-    IN idaddress integer
-);
-
-DROP PROCEDURE insertUser(
-    IN personlastname character varying,
-    IN personfirstname character varying,
-    IN personphone character varying,
-    IN idcivility integer,
-    IN personemail character varying,
-    IN personpassword character varying,
-    IN idaddress integer,
-    IN idrole integer
-);
 
 DROP FUNCTION insertUpdatePerson,
               insertUpdateMemberData,

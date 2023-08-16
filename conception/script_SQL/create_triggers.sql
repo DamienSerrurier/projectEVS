@@ -6,19 +6,29 @@ AS $$
 DECLARE
 structureId INTEGER;
 structureName VARCHAR(100);
-supervisorSchoolCity VARCHAR(50);
+structureIdAddress INTEGER;
+cityName VARCHAR(50);
+idCity INTEGER;
 BEGIN 
-    SELECT id, name
-    INTO structureId, structureName
+    SELECT id, name, id_address
+    INTO structureId, structureName, structureIdAddress
     FROM structure
     WHERE name = NEW.school;
 
-    SELECT schoolCity
-    INTO supervisorSchoolCity
+    RAISE NOTICE 'structureName vaut %', structureName;
+    SELECT id_city
+    INTO idCity
     FROM address
-    WHERE schoolCity = NEW.schoolCity;
+    WHERE id = structureIdAddress;
 
-    IF structureName = NEW.school AND supervisorSchoolCity = NEW.schoolCity THEN
+    SELECT name
+    INTO cityName
+    FROM city
+    WHERE id = idCity;
+    RAISE NOTICE 'cityName vaut %', cityName;
+
+
+    IF structureName = NEW.school AND cityName = UPPER(NEW.school_city) THEN
         NEW.id_structure = structureId;
     END IF;
     RETURN NEW;

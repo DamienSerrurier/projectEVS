@@ -3,7 +3,6 @@ INSERT INTO civility (name)
 VALUES ('Madame'),
        ('Monsieur');
 
-
 --Procédure permettant de créer un role
 CREATE OR REPLACE PROCEDURE insertRole(roleName VARCHAR(50))
 LANGUAGE plpgsql
@@ -24,98 +23,139 @@ CALL insertRole('Adhérent');
 CREATE OR REPLACE PROCEDURE insertUser(
     personLastname VARCHAR(50),
     personFirstname VARCHAR(50),
-    personPhone VARCHAR(20),
-    idCivility INTEGER,
     personEmail VARCHAR(255),
-    personPassword VARCHAR(70),
-    idAddress INTEGER
+    personPassword VARCHAR(70)
 )
 LANGUAGE plpgsql
 AS $$
 DECLARE
 idConnection INTEGER;
-civilityId INTEGER;
 BEGIN
     INSERT INTO connection (email, password)
     VALUES (personEmail, personPassword) RETURNING id INTO idConnection;
 
-    SELECT id INTO civilityId
-    FROM civility
-    WHERE id = idCivility;
-
     INSERT INTO person (
         lastname,
         firstname,
-        phone,
-        id_civility,
-        id_connection,
-        id_address
+        id_connection
     )
     VALUES (
         personLastname,
         personFirstname,
-        personPhone,
-        civilityId,
-        idConnection,
-        idAddress
+        idConnection
     );
 END;
 $$;
 
 --Appel de la procédure insertUser pour insertion d'un utilisateur
-CALL insertUser('Durant', 'Patrick', '06 17 25 85 08', NULL, 'durand@patrick.fr', '123', NULL);
-CALL insertUser('Grand-Berger', 'George', '', NULL, 'grand-berger@george.com', '123', NULL);
-CALL insertUser('Vilain', 'Jérome', '07 43 29 71 04', NULL, 'vilain@jerome.net', '123', NULL);
+CALL insertUser('Durant', 'Patrick', 'durand@patrick.fr', '123');
+CALL insertUser('Grand-Berger', 'George', 'grand-berger@george.com', '123');
+CALL insertUser('Vilain', 'Jérome', 'vilain@jerome.net', '123');
+CALL insertUser('Choukri', 'Najia', 'evs.frouard@francas54.org', '123aze');
+CALL insertUser('Dupond', 'Guy', 'dupond@gui.fr', '123');
+CALL insertUser('Jaffar', 'Kamal', 'jaffar@Kamal.fr', '123');
 
---Procédure permettant de créer un utilisateur spéciale
-CREATE OR REPLACE PROCEDURE insertUser(
+--Procédure permettant de modifier un utilisateur
+CREATE OR REPLACE PROCEDURE updateUser(
+    personId INTEGER,
     personLastname VARCHAR(50),
     personFirstname VARCHAR(50),
     personPhone VARCHAR(20),
-    idCivility INTEGER,
     personEmail VARCHAR(255),
-    personPassword VARCHAR(70),
-    idAddress INTEGER,
-    idRole INTEGER
+    personPassword VARCHAR(70)
 )
 LANGUAGE plpgsql
 AS $$
 DECLARE
 idConnection INTEGER;
-civilityId INTEGER;
 BEGIN
-    INSERT INTO connection (email, password)
-    VALUES (personEmail, personPassword) RETURNING id INTO idConnection;
+    SELECT id_connection INTO idConnection
+    FROM person
+    WHERE id = personId;
 
-    SELECT id INTO civilityId
-    FROM civility
-    WHERE id = idCivility;
+    UPDATE person SET lastname = personLastname,
+                      firstname = personFirstname,
+                      phone = personPhone
+    WHERE id = personId;
 
-    INSERT INTO person (
-        lastname,
-        firstname,
-        phone,
-        id_civility,
-        id_connection,
-        id_address,
-        id_role
-    )
-    VALUES (
-        personLastname,
-        personFirstname,
-        personPhone,
-        civilityId,
-        idConnection,
-        idAddress,
-        idRole
-    );
+    UPDATE connection SET email = personEmail,
+                          password = personPassword
+    WHERE id = idConnection;
 END;
 $$;
 
+--Appel de la procédure updateUser pour la modification d'un utilisateur
+CALL updateUser(2, 'Grand-Berger', 'George', '06 73 28 36 40', 'grand-berger@george.com', '123');
+CALL updateUser(4, 'Choukri', 'Najia', '06 98 23 14 58', 'evs.frouard@francas54.org', '123aze');
+CALL updateUser(5, 'Dupond', 'Guy', '07 29 46 82 31', 'dupond@gui.fr', '123');
+CALL updateUser(6, 'Jaffar', 'Kamal', '08 52 21 07 45', 'jaffar@Kamal.fr', '123');
+
+-- --Procédure permettant de créer un utilisateur spéciale
+-- CREATE OR REPLACE PROCEDURE insertUser(
+--     personLastname VARCHAR(50),
+--     personFirstname VARCHAR(50),
+--     personPhone VARCHAR(20),
+--     idCivility INTEGER,
+--     personEmail VARCHAR(255),
+--     personPassword VARCHAR(70),
+--     idAddress INTEGER,
+--     idRole INTEGER
+-- )
+-- LANGUAGE plpgsql
+-- AS $$
+-- DECLARE
+-- idConnection INTEGER;
+-- civilityId INTEGER;
+-- BEGIN
+--     INSERT INTO connection (email, password)
+--     VALUES (personEmail, personPassword) RETURNING id INTO idConnection;
+
+--     SELECT id INTO civilityId
+--     FROM civility
+--     WHERE id = idCivility;
+
+--     INSERT INTO person (
+--         lastname,
+--         firstname,
+--         phone,
+--         id_civility,
+--         id_connection,
+--         id_address,
+--         id_role
+--     )
+--     VALUES (
+--         personLastname,
+--         personFirstname,
+--         personPhone,
+--         civilityId,
+--         idConnection,
+--         idAddress,
+--         idRole
+--     );
+-- END;
+-- $$;
+
+--Procédure permettant de modifier le rôle d'un utilisateur
+CREATE OR REPLACE PROCEDURE updateRoleUser(personId INTEGER, idRole INTEGER)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+idConnection INTEGER;
+BEGIN
+    UPDATE person SET id_role = idRole      
+    WHERE id = personId;
+END;
+$$;
+
+--Appel de la procédure updateRoleUser pour la modification du rôle d'un utilisateur
+CALL updateRoleUser(4, 1);
+CALL updateRoleUser(5, 3);
+CALL updateRoleUser(6, 4);
+
 --Appel de la procédure insertUser surchargé pour insertion d'un utilisateur spéciale
-CALL insertUser('Choukri', 'Najia', '06 98 23 14 58', NULL, 'evs.frouard@francas54.org', '123aze', NULL, 1);
-CALL insertUser('Dupond', 'Guy', '07 29 46 82 31', NULL, 'dupond@gui.fr', '123', NULL, 3);
-CALL insertUser('Jaffar', 'Kamal', '08 52 21 07 45', NULL, 'jaffar@Kamal.fr', '123', NULL, 4);
+-- CALL insertUser('Choukri', 'Najia', '06 98 23 14 58', NULL, 'evs.frouard@francas54.org', '123aze', NULL, 1);
+-- CALL insertUser('Dupond', 'Guy', '07 29 46 82 31', NULL, 'dupond@gui.fr', '123', NULL, 3);
+-- CALL insertUser('Jaffar', 'Kamal', '08 52 21 07 45', NULL, 'jaffar@Kamal.fr', '123', NULL, 4);
 
 --Fonction permettant d'inserer une adresse et récupérer son identifiant
 CREATE OR REPLACE FUNCTION insertAddress(
@@ -631,10 +671,10 @@ BEGIN
         END IF;
     ELSE
         UPDATE _member SET birthdate = memberBirthdate,
-                               place_of_birth = memberPlaceBirth,
-                               id_person = personId,
-                               id_pair = memberIdPair,
-                               id_member_data = idMemberData
+                           place_of_birth = memberPlaceBirth,
+                           id_person = personId,
+                           id_pair = memberIdPair,
+                           id_member_data = idMemberData
         WHERE id_person = personId RETURNING id INTO idMember;
     END IF;
 
@@ -804,7 +844,7 @@ AS $$
 BEGIN
     INSERT INTO supervisor (
         school,
-        schoolCity,
+        school_city,
         id_structure,
         id_member_not_responsible,
         id_member_is_responsible

@@ -15,7 +15,6 @@ BEGIN
     FROM structure
     WHERE name = NEW.school;
 
-    RAISE NOTICE 'structureName vaut %', structureName;
     SELECT id_city
     INTO idCity
     FROM address
@@ -25,8 +24,6 @@ BEGIN
     INTO cityName
     FROM city
     WHERE id = idCity;
-    RAISE NOTICE 'cityName vaut %', cityName;
-
 
     IF structureName = NEW.school AND cityName = UPPER(NEW.school_city) THEN
         NEW.id_structure = structureId;

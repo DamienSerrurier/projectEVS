@@ -329,6 +329,8 @@
                     <td></td>
                 </tbody>
             </table>
+            
+            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
 
             <input class="btn btn-success" type="submit" name="" value="Création">
 

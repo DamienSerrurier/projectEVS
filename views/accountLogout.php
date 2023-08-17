@@ -24,6 +24,7 @@
                 <p class="text-center">Êtes-vous sûr de vouloir vous déconnecter ?</p>
                 <div class="d-flex justify-content-around px-1">
                     <form action="accountLogout" method="post">
+                        <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
                         <button class="btn btn-success text-uppercase" type="submit" name="logout">Oui</button>
                     </form>
                     <a href="userSpace">
@@ -32,7 +33,7 @@
                 </div>
             </div>
         </fieldset>
-        
+
     </div>
 
     <div>
@@ -43,7 +44,7 @@
     ?>
 
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
-    
+
 </body>
 
 </html>

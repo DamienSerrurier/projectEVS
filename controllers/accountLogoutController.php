@@ -1,13 +1,23 @@
 <?php
 
-session_start();
+require_once 'app/function.php';
 
-if (isset($_POST['logout'])) {
-    var_dump('ok');
-    session_unset();
-    session_destroy();
-    session_regenerate_id(true);
-    header('Location: home');
+sessionStartWithGenerateToken();
+
+if (isset($_POST['token'])) {
+
+    if ($_POST['token'] != $_SESSION['token']) {
+        die("Jeton CSRF invalide");
+    }
+    else {
+        if (isset($_POST['logout'])) {
+            var_dump('ok');
+            session_unset();
+            session_destroy();
+            session_regenerate_id(true);
+            header('Location: home');
+        }
+    }
 }
 
 require_once 'views/accountLogout.php';

@@ -40,6 +40,9 @@
                 </div>
             </div>
         </div>
+        
+        <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+
         <div class="container p-4 col-xl-5 d-none d-sm-block">
             <div class="row justify-content-between">
                 <input class="col-md-4 col-xl-4 p-2 text-uppercase my-3" type="button" name="" value="Retour">
@@ -60,7 +63,6 @@
     ?>
 
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
-
 
 </body>
 

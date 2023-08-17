@@ -357,6 +357,8 @@
                     </tbody>
                 </table>
             </div>
+            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+
         </form>
     </section>
 
@@ -375,7 +377,7 @@
     ?>
 
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
-    
+
 </body>
 
 </html>

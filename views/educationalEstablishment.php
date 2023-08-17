@@ -28,6 +28,8 @@
         <li><a href=""></a></li>
     </ul>
 
+    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+
     <input type="button" name="" value="Retour">
 
     <?php

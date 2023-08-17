@@ -2,7 +2,7 @@
 
 namespace ProjectEvs;
 
-require_once '../../utility/exceptions/ExceptionPerso.php';
+require_once 'utility/exceptions/ExceptionPerso.php';
 
 class Role implements RegexTester {
 

@@ -2,8 +2,9 @@
 
 namespace ProjectEvs;
 
-require_once '../../utility/exceptions/ExceptionPerso.php';
+require_once 'utility/exceptions/ExceptionPerso.php';
 
+use Exception;
 use ProjectEvs\ExceptionPerso;
 
 class Person implements RegexTester {
@@ -177,7 +178,7 @@ class Person implements RegexTester {
             return $this->address = $address;
         }
         else {
-            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Avatar");
+            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Address");
         }
     }
 
@@ -191,11 +192,21 @@ class Person implements RegexTester {
             return $this->role = $role;
         }
         else {
-            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Avatar");
+            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Role");
         }
     }
 
     public function testInput($pattern, $input) {
         return preg_match($pattern, $input);
+    }
+
+    public function setHachedPassword(string $hachedPassword) {
+
+        if (!empty($hachedPassword)) {
+            return $this->password = $hachedPassword;
+        }
+        else {
+            throw new ExceptionPerso("Veuillez renseigner ce champ");
+        }
     }
 }

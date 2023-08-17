@@ -14,17 +14,28 @@
     require_once 'partials/navbar.php';
     ?>
 
-    <div>
-        <h2>Déconnexion compte</h2>
+    <div class="border py-3 mb-lg-5">
+        <h2 class="text-center">Déconnexion compte</h2>
     </div>
-    <div>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio.</p>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+    <div class="container p-4 col-xl-5">
+        <fieldset class="border border-dark border-2 rounded-3 bg-light py-5">
+            <legend class="text-center">Deconnexion compte Utilisateur</legend>
+            <div class="row justify-content-center align-items-center px-3">
+                <p class="text-center">Êtes-vous sûr de vouloir vous déconnecter ?</p>
+                <div class="d-flex justify-content-around px-1">
+                    <form action="accountLogout" method="post">
+                        <button class="btn btn-success text-uppercase" type="submit" name="logout">Oui</button>
+                    </form>
+                    <a href="userSpace">
+                        <button class="btn btn-secondary text-uppercase">Non</button>
+                    </a>
+                </div>
+            </div>
+        </fieldset>
+        
     </div>
 
     <div>
-        <button>Non</button>
-        <button>Oui</button>
     </div>
 
     <?php

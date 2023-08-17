@@ -4,7 +4,6 @@ namespace ProjectEvs;
 
 require_once 'utility/exceptions/ExceptionPerso.php';
 
-use Exception;
 use ProjectEvs\ExceptionPerso;
 
 class Person implements RegexTester {
@@ -13,7 +12,7 @@ class Person implements RegexTester {
     protected int $id;
     protected string $lastname;
     protected string $firstname;
-    protected string $phone;
+    protected ?string $phone;
     protected Civility $civility;
     private Avatar $avatar;
     protected string $email;
@@ -35,17 +34,15 @@ class Person implements RegexTester {
             if (filter_var($id, FILTER_VALIDATE_INT)) {
                 return $this->id = $id;
             } else {
-                throw new ExceptionPerso("Arrêtez de jouer avec mes post");
+                throw new ExceptionPerso("Arrêtez de jouer avec mes posts");
             }
         }
         else {
             throw new ExceptionPerso('La valeur doit être positif et supérieur à 0');
         }
-
     }
 
     public function getLastname(): string {
-
         return $this->lastname;
     }
 
@@ -82,12 +79,16 @@ class Person implements RegexTester {
         }
     }
 
-    public function getPhone(): string {
+    public function getPhone(): ?string {
         return $this->phone;
     }
 
-    public function setPhone(string $phone) {
+    public function setPhone(?string $phone) {
         $pattern = '/^[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}$/';
+        
+        if (is_null($phone) || $phone === '') {
+            return $this->phone = '';
+        }
 
         if ($this->testInput($pattern, $phone)) {
             return $this->phone = $phone;
@@ -156,11 +157,11 @@ class Person implements RegexTester {
                 return $this->password = $password;
             } else {
                 throw new ExceptionPerso(
-                    "Veuillez renseigner un mot de passe de 8 caractères contenant au moins : <br>
-                    - une lettre majuscule <br>
-                    - une lettre minuscule <br>
-                    - un chiffre <br>
-                    - un caractère spécial';"
+                    "Veuillez renseigner un mot de passe de 8 caractères contenant au moins : \n
+                    - une lettre majuscule \n
+                    - une lettre minuscule \n
+                    - un chiffre \n
+                    - un caractère spécial"
                 );
             }
         } else {

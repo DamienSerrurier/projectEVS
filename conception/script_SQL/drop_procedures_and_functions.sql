@@ -23,4 +23,6 @@ DROP FUNCTION insertUpdatePerson,
               displayOneMemberPair,
               displayOneMember,
               displayChildrenOfMember,
-              displayAllMemberById;
+              displayAllMemberById,
+              displayOneUserByEmail,
+              displayOneUserById;

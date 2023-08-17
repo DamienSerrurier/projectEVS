@@ -14,24 +14,44 @@
     require_once 'partials/navbar.php';
     ?>
 
-    <form action="">
-        <div>
-            <h2>Connexion compte utilisateur</h2>
+    <form action="accountConnection" method="post">
+        <div class="border py-3 mb-lg-5">
+            <h2 class="text-center">Connexion compte utilisateur</h2>
         </div>
 
-        <div>
-            <label for="mail">Email</label>
-            <input type="email" name="mail" id="mail">
+        <div class="container p-4 col-xl-5">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-sm-10 col-md-4 col-xl-5 text-xl-end text-center">
+                    <label class="col-form-label-xl-end" for="mail">Adresse de méssagerie</label>
+                </div>
+                <div class="col-sm-10 col-md-4 col-xl-6 m-xl-3 my-xl-4 mb-3">
+                    <input class=" form-control form-control-lg" placeholder="" aria-label="Renseignez votre adresse électronique" type="email" name="mail" id="mail">
+                    <p class="text-danger m-0"><?= isset($infoMessages['mail']) && !empty($infoMessages['mail']) ? htmlspecialchars($infoMessages['mail']) : '' ?></p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center align-items-center">
+                <div class="col-sm-10 col-md-4 col-xl-5 text-xl-end text-center">
+                    <label class="col-form-label-xl-end" for="passw">Mot de passe</label>
+                </div>
+                <div class="col-sm-10 col-md-4 col-xl-6 m-xl-3 my-xl-4 mb-3">
+                    <input class="form-control form-control-lg" placeholder="" aria-label="Renseignez votre mot de passe" type="password" name="passw" id="passw">
+                    <p class="text-danger m-0"><?= isset($infoMessages['passw']) && !empty($infoMessages['passw']) ? htmlspecialchars($infoMessages['passw']) : '' ?></p>
+                </div>
+            </div>
+        </div>
+        <div class="container p-4 col-xl-5 d-none d-sm-block">
+            <div class="row justify-content-between">
+                <input class="col-md-4 col-xl-4 p-2 text-uppercase my-3" type="button" name="" value="Retour">
+                <input class="col-md-4 col-xl-4 p-2 text-uppercase my-3" type="submit" name="userConnection" value="Connexion">
+            </div>
         </div>
 
-        <div>
-            <label for="passw">Mot de passe</label>
-            <input type="password" name="passw" id="passw">
-        </div>
-
-        <div>
-            <input type="button" name="" value="Retour">
-            <input type="submit" name="" value="Création">
+        <div class="container col-6 p-4 d-block d-sm-none">
+            <div class="row">
+                <input class="col-sm-7 p-2 text-uppercase my-3 mt-0" type="submit" name="userConnection" value="Connexion">
+                <input class="col-sm-7 p-2 text-uppercase my-3" type="button" name="" value="Retour">
+            </div>
         </div>
     </form>
 

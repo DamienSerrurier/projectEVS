@@ -1,3 +1,42 @@
+CREATE OR REPLACE FUNCTION displayOneUserByEmail(userEmail VARCHAR(255))
+RETURNS TABLE (
+    id INTEGER,
+    email VARCHAR(255),
+    password VARCHAR(70),
+    id_role INTEGER,
+    name VARCHAR(50)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT person.id, connection.email, connection.password, person.id_role, role.name
+    FROM person
+    JOIN connection ON person.id_connection = connection.id
+    JOIN role ON person.id_role = role.id
+    WHERE connection.email = userEmail;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION displayOneUserById(personId INTEGER)
+RETURNS TABLE (
+    lastname VARCHAR(50),
+    firstname VARCHAR(50),
+    phone VARCHAR(20),
+    email VARCHAR(255),
+    password VARCHAR(70)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT person.lastname, person.firstname, person.phone, connection.email, connection.password
+    FROM person
+    JOIN connection ON person.id_connection = connection.id
+    WHERE person.id = personId;
+END;
+$$;
+
 CREATE OR REPLACE VIEW displayAllUsers
 AS
 SELECT person.id, lastname, firstname, phone, role.name, id_avatar, id_address

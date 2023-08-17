@@ -11,12 +11,36 @@
               </li>
             </div>
             <div class="row">
-              <li class="nav-item col-xl-7">
-                <a class="nav-link" href="accountCreation">Création compte</a>
-              </li>
-              <li class="nav-item col-xl-5">
-                <a class="nav-link" href="accountConnection">Connexion</a>
-              </li>
+              <?php
+              if (isset($_SESSION['user'])) :
+              ?>
+                <li class="nav-item col-xl-7">
+                  <a class="nav-link" href="userSpace">Espace utilisateur</a>
+                </li>
+              <?php
+              else :
+              ?>
+                <li class="nav-item col-xl-7">
+                  <a class="nav-link" href="accountCreation">Création compte</a>
+                </li>
+              <?php
+              endif;
+              ?>
+              <?php
+              if (isset($_SESSION['user'])) :
+              ?>
+                <li class="nav-item col-xl-5">
+                  <a class="nav-link" href="accountLogout">Déconnexion</a>
+                </li>
+              <?php
+              else :
+              ?>
+                <li class="nav-item col-xl-5">
+                  <a class="nav-link" href="accountConnection">Connexion</a>
+                </li>
+              <?php
+              endif;
+              ?>
             </div>
           </ul>
         </div>
@@ -36,12 +60,36 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="home">Accueil</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="accountCreation">Création compte</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="accountConnection">Connexion</a>
-            </li>
+            <?php
+            if (isset($_SESSION['user'])) :
+            ?>
+              <li class="nav-item">
+                <a class="nav-link" href="userSpace">Espace utilisateur</a>
+              </li>
+            <?php
+            else :
+            ?>
+              <li class="nav-item">
+                <a class="nav-link" href="accountCreation">Création compte</a>
+              </li>
+            <?php
+            endif;
+            ?>
+            <?php
+            if (isset($_SESSION['user'])) :
+            ?>
+              <li class="nav-item">
+                <a class="nav-link" href="accountLogout">Déconnexion</a>
+              </li>
+            <?php
+            else :
+            ?>
+              <li class="nav-item">
+                <a class="nav-link" href="accountConnection">Connexion</a>
+              </li>
+            <?php
+            endif;
+            ?>
           </ul>
         </div>
       </div>

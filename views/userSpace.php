@@ -21,6 +21,7 @@
 
         <form action="">
             <div class="container p-4">
+            <p class="text-danger m-0"><?= isset($infoMessages['id']) && !empty($infoMessages['id']) ? htmlspecialchars($infoMessages['id']) : '' ?></p>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="member" id="member">
                     <label class="form-label-lg fs-6" for="member">J'adhère à l'association EVS Maison Prévert</label>
@@ -276,42 +277,54 @@
 
         <hr>
 
-        <form action="">
+        <form action="userSpace" method="post">
             <div class="container p-4">
                 <input class="btn btn-danger text-uppercase" type="submit" name="" value="Suppression">
                 <div class="row">
                     <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                         <label class="form-label-lg fs-6" for="astname">Nom</label>
-                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre nom" type="text" name="astname" id="astname">
+                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre nom" type="text" name="lastname" id="lastname" value="<?= !empty($resultQuery->getLastname()) ? htmlspecialchars($resultQuery->getLastname()) : '' ?>">
+                        <p class="text-danger m-0"><?= isset($infoMessages['lastname']) && !empty($infoMessages['lastname']) ? htmlspecialchars($infoMessages['lastname']) : '' ?></p>
                     </div>
+
                     <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                         <label class="form-label-lg fs-6" for="firstname">Prénom</label>
-                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre prénom" type="text" name="firstname" id="firstname">
+                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre prénom" type="text" name="firstname" id="firstname" value="<?= !empty($resultQuery->getFirstname()) ? htmlspecialchars($resultQuery->getFirstname()) : '' ?>">
+                        <p class="text-danger m-0"><?= isset($infoMessages['firstname']) && !empty($infoMessages['firstname']) ? htmlspecialchars($infoMessages['firstname']) : '' ?></p>
                     </div>
+
                     <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                         <label class="form-label-lg fs-6" for="mail">Adresse mail</label>
-                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre émail" type="email" name="mail" id="mail">
+                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre émail" type="email" name="mail" id="mail" value="<?= !empty($resultQuery->getEmail()) ? htmlspecialchars($resultQuery->getEmail()) : '' ?>">
+                        <p class="text-danger m-0"><?= isset($infoMessages['mail']) && !empty($infoMessages['mail']) ? htmlspecialchars($infoMessages['mail']) : '' ?></p>
                     </div>
+
                     <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                         <label class="form-label-lg fs-6" for="phone">Téléphone</label>
-                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre numéro de téléphone" type="tel" name="phone" id="phone">
+                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre numéro de téléphone" type="tel" name="phone" id="phone" value="<?= !empty($resultQuery->getPhone()) ? htmlspecialchars($resultQuery->getPhone()) : '' ?>">
+                        <p class="text-danger m-0"><?= isset($infoMessages['phone']) && !empty($infoMessages['phone']) ? htmlspecialchars($infoMessages['phone']) : '' ?></p>
                     </div>
+
                     <div class="col-sm-10 col-xl-6 mt-3">
-                        <label class="form-label-lg fs-6" for="passw">Création du mot de passe</label>
+                        <label class="form-label-lg fs-6" for="passw">Modification du mot de passe</label>
                         <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez votre mot de passe" type="password" name="passw" id="passw">
+                        <p class="text-danger m-0"><?= isset($infoMessages['passw']) && !empty($infoMessages['passw']) ? nl2br(htmlspecialchars($infoMessages['passw'])) : '' ?></p>
                     </div>
+
                     <div class="col-sm-10 col-xl-6 mt-3">
                         <label class="form-label-lg fs-6" for="confPassw">Confirmation mot de passe</label>
                         <input class="form-control form-control-lg my-2" placeholder="" aria-label="Confirmez votre mot de passe" type="password" name="confPassw" id="confPassw">
+                        <p class="text-danger m-0"><?= isset($infoMessages['confPassw']) && !empty($infoMessages['confPassw']) ? htmlspecialchars($infoMessages['confPassw']) : '' ?></p>
                     </div>
                 </div>
                 <div>
                     <div>
                         <input class="btn btn-secondary text-uppercase" type="button" name="" value="Annulation">
-                        <input class="btn btn-warning text-uppercase" type="submit" name="" value="Modification">
+                        <input class="btn btn-warning text-uppercase" type="submit" name="userUpdate" value="Modification">
                     </div>
                 </div>
             </div>
+            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
         </form>
     </section>
 
@@ -357,8 +370,6 @@
                     </tbody>
                 </table>
             </div>
-            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
-
         </form>
     </section>
 

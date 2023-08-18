@@ -4,12 +4,24 @@ require_once 'utility/exceptions/ExceptionPerso.php';
 require_once 'models/entities/RegexTester.php';
 require_once 'models/managers/userSpaceManager.php';
 require_once 'models/entities/Person.php';
+require_once 'models/entities/Member.php';
+require_once 'models/entities/Civility.php';
 require_once 'app/function.php';
 
 use ProjectEvs\ExceptionPerso;
 use ProjectEvs\Person;
+use ProjectEvs\Member;
 
-sessionStartWithGenerateToken();
+sessionStartWithGenerateToken('token');
+
+try {
+    $resultCivility = UserSpaceManager::getAllCivility();
+}
+catch (ExceptionPersoDAO $e) {
+    $warningMessage = $e->getMessage();
+} 
+
+
 
 if (isset($_SESSION['user']['id'])) {
 
@@ -27,7 +39,6 @@ if (isset($_POST['token'])) {
         die("Jeton CSRF invalide");
     }
     else {
-        var_dump('ok');
         if (isset($_POST['userUpdate'])) {
 
             $id = isset($_SESSION['user']['id']) ? htmlspecialchars($_SESSION['user']['id']) : '';
@@ -41,6 +52,7 @@ if (isset($_POST['token'])) {
             $person = new Person();
             $infoMessages = [];
             $arrayParametters = [];
+
             try {
                 $arrayParametters['id'] =  $person->setId($id);
             } 
@@ -71,7 +83,6 @@ if (isset($_POST['token'])) {
             
             try {
                 $arrayParametters['phone'] =  $person->setPhone($phone);
-                var_dump($arrayParametters['phone']);
             }
             catch (ExceptionPerso $e) {
                 $infoMessages['phone'] = $e->getMessage();
@@ -89,11 +100,126 @@ if (isset($_POST['token'])) {
             else {
                 $infoMessages['confPassw'] = "Le mot de passe et de confirmation doivent être indentique";
             }
-            var_dump($arrayParametters);
+
             try {
                 if (empty($infoMessages)) {
-                    UserSpaceManager::updateUser($arrayParametters);
-                    header('Location: userSpace');
+
+                    if (UserSpaceManager::updateUser($arrayParametters)) {
+                        $_SESSION['success'] = "Votre profile utilisateur a bien été modifié";
+                        session_write_close();
+                        header('Location: userSpace?idUser=' . $cleanId);
+                    }
+                }
+            }
+            catch (ExceptionPersoDAO $e) {
+                $warningMessage = $e->getMessage();
+            }
+        }
+
+        if (isset($_POST['userDelete'])) {
+
+            $id = isset($_SESSION['user']['id']) ? htmlspecialchars($_SESSION['user']['id']) : '';
+
+            $person = new Person();
+            $person->setId($id);
+            $cleanId = $person->getid();
+
+            try {
+                if (UserSpaceManager::deleteUser($cleanId)) {
+                    session_unset();
+                    session_destroy();
+                    session_regenerate_id(true);
+                    session_write_close();
+                    header('Location: home');
+                }
+            }
+            catch (ExceptionPersoDAO $e) {
+                $warningMessage = $e->getMessage();
+            }
+        }
+
+        
+    }
+}
+
+sessionStartWithGenerateToken('token1');
+
+if (isset($_POST['token1'])) {
+    
+    if ($_POST['token1'] != $_SESSION['token1']) {
+        die("Jeton CSRF invalide");
+    }
+    else {
+        if (isset($_POST['memberCreate'])) {
+
+            $id = isset($_SESSION['user']['id']) ? htmlspecialchars($_SESSION['user']['id']) : '';
+            $memberCivility = isset($_POST['memberCivility']) && !empty($_POST['memberCivility']) ? htmlspecialchars(trim($_POST['memberCivility'])) : '';
+            $memberLastname = isset($_POST['memberLastname']) && !empty($_POST['memberLastname']) ? htmlspecialchars(trim($_POST['memberLastname'])) : '';
+            $memberFirstname = isset($_POST['memberFirstname']) && !empty($_POST['memberFirstname']) ? htmlspecialchars(trim($_POST['memberFirstname'])) : '';
+            $memberMail = isset($_POST['memberMail']) && !empty($_POST['memberMail']) ? htmlspecialchars(trim($_POST['memberMail'])) : null;
+            $memberPhone = isset($_POST['memberPhone']) && !empty($_POST['memberPhone']) ? htmlspecialchars(trim($_POST['memberPhone'])) : null;
+            $memberBirthdate = isset($_POST['memberBirthdate']) && !empty($_POST['memberBirthdate']) ? htmlspecialchars(trim($_POST['memberBirthdate'])) : '';
+            $memberBirthPlace = isset($_POST['memberBirthPlace']) && !empty($_POST['memberBirthPlace']) ? htmlspecialchars(trim($_POST['memberBirthPlace'])) : '';
+
+            $confPassw = isset($_POST['confPassw']) && !empty($_POST['confPassw']) ? htmlspecialchars(trim($_POST['confPassw'])) : '';
+
+            $member = new Member();
+            $infoMessages = [];
+            $arrayParametters = [];
+
+            try {
+                $arrayParametters['id'] =  $member->setId($id);
+            } 
+            catch (ExceptionPerso $e) {
+                $infoMessages['id'] = $e->getMessage();
+            }
+            
+            try {
+                $arrayParametters['memberLastname'] =  $member->setLastname($memberLastname);
+            } 
+            catch (ExceptionPerso $e) {
+                $infoMessages['memberLastname'] = $e->getMessage();
+            }
+            
+            try {
+                $arrayParametters['memberFirstname'] =  $member->setFirstname($memberFirstname);
+            } 
+            catch (ExceptionPerso $e) {
+                $infoMessages['memberFirstname'] = $e->getMessage();
+            }
+            
+            try {
+                $arrayParametters['memberMail'] =  $member->setEmail($memberMail);
+            } 
+            catch (ExceptionPerso $e) {
+                $infoMessages['memberMail'] = $e->getMessage();
+            }
+            
+            try {
+                $arrayParametters['memberPhone'] =  $member->setPhone($memberPhone);
+            }
+            catch (ExceptionPerso $e) {
+                $infoMessages['memberPhone'] = $e->getMessage();
+            }
+
+            try {
+                $arrayParametters['memberBirthdate'] =  $member->setBirthdate($memberBirthdate);
+            }
+            catch (ExceptionPerso $e) {
+                $infoMessages['memberBirthdate'] = $e->getMessage();
+            }
+
+            try {
+                $arrayParametters['memberBirthPlace'] =  $member->setBirthdate($memberBirthPlace);
+            }
+            catch (ExceptionPerso $e) {
+                $infoMessages['memberBirthPlace'] = $e->getMessage();
+            }
+
+            try {
+                if (empty($infoMessages)) {
+
+                    var_dump($arrayParametters);
                 }
             }
             catch (ExceptionPersoDAO $e) {
@@ -102,4 +228,5 @@ if (isset($_POST['token'])) {
         }
     }
 }
+
 require_once 'views/userSpace.php';

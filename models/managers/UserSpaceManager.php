@@ -1,5 +1,7 @@
 <?php
 
+require_once 'models/entities/Civility.php'; 
+
 use ProjectEvs\Person;
 
 require_once 'models/managers/connection.php';
@@ -54,6 +56,41 @@ class UserSpaceManager {
             return $stmt->execute();
 
         } catch (PDOException $e) {
+            Loggy::warning("Un problème serveur est survenu" . $e);
+            throw new ExceptionPersoDAO("Un problème serveur est survenu");
+        }
+    }
+
+    public static function deleteUser(int $id) {
+        try {
+            $pdo = baseConnection();
+            $query = "CALL deleteOneUser(:id);";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            return $stmt->execute();
+
+        } catch (PDOException $e) {
+            Loggy::warning("Un problème serveur est survenu" . $e);
+            throw new ExceptionPersoDAO("Un problème serveur est survenu");
+        }
+    }
+
+    public static function getAllCivility() {
+        try {
+            $pdo = baseConnection();
+            $query = "SELECT * FROM displayAllCivility;";
+            $stmt = $pdo->query($query);
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'ProjectEvs\Civility');
+            $result = $stmt->fetchAll();
+         
+            if (!empty($result)) {
+                return $result;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (PDOException $e) {
             Loggy::warning("Un problème serveur est survenu" . $e);
             throw new ExceptionPersoDAO("Un problème serveur est survenu");
         }

@@ -2,7 +2,9 @@
 
 namespace ProjectEvs;
 
-require_once '../../utility/exceptions/ExceptionPerso.php';
+require_once 'utility/exceptions/ExceptionPerso.php';
+
+use ProjectEvs\ExceptionPerso;
 
 class Civility implements RegexTester {
 

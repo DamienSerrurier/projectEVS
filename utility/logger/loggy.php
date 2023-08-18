@@ -9,6 +9,7 @@ class Loggy {
             return $degree->name;
         }
 
+        date_default_timezone_set('Europe/Paris');
         $degree = getDegree($level);
         $date = date('Y-m-d H:i:s');
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3);

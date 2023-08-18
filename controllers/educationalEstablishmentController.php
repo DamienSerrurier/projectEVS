@@ -2,7 +2,7 @@
 
 require_once 'app/function.php';
 
-sessionStartWithGenerateToken();
+sessionStartWithGenerateToken('token');
 
 if (isset($_POST['token'])) {
 

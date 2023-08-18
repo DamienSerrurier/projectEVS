@@ -11,7 +11,7 @@ use ProjectEvs\ExceptionPerso;
 use ProjectEvs\Person;
 use ProjectEvs\Role;
 
-sessionStartWithGenerateToken();
+sessionStartWithGenerateToken('token');
 
 if (isset($_POST['token'])) {
 

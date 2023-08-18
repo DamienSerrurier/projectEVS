@@ -2,7 +2,7 @@
 
 require_once 'app/function.php';
 
-sessionStartWithGenerateToken();
+sessionStartWithGenerateToken('token');
 
 if (isset($_POST['token'])) {
 
@@ -11,7 +11,6 @@ if (isset($_POST['token'])) {
     }
     else {
         if (isset($_POST['logout'])) {
-            var_dump('ok');
             session_unset();
             session_destroy();
             session_regenerate_id(true);

@@ -10,7 +10,7 @@ require_once 'app/function.php';
 use ProjectEvs\ExceptionPerso;
 use ProjectEvs\Person;
 
-sessionStartWithGenerateToken();
+sessionStartWithGenerateToken('token');
 
 if (isset($_POST['token'])) {
 

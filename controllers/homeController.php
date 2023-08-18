@@ -3,6 +3,6 @@
 require_once 'models/managers/connection.php';
 require_once 'app/function.php';
 
-sessionStartWithGenerateToken();
+sessionStartWithGenerateToken('token');
 
 require_once 'views/home.php';

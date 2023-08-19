@@ -60,85 +60,83 @@ class ActivityTest extends PHPUnit\Framework\TestCase {
     //Test unitaire sur setStartDate
     public function testSetStartDateWithCheckdate() {
         $activity = new Activity();
-        $date = '12/08/2024';
+        $date = '2030-10-01';
+        $expectedDate = '2030/10/01';
         $activity->setStartDate($date);
-        $this->assertEquals($date, $activity->getStartDate());
+        $this->assertEquals($expectedDate, $activity->getStartDate());
     }
-
+    
     public function testSetStartDateWithExpectedException() {
         $this->expectException(ExceptionPerso::class);
         $activity = new Activity();
-        $date = '29/024/2900';
+        $date = '2900-02-29';
         $activity->setStartDate($date);
     }
-
+    
     public function testSetStartDateWithWrongFormat() {
         $this->expectException(ExceptionPerso::class);
         $activity = new Activity();
-        $date = '04-11-2013';
+        $date = '04-11-2013'; // Format incorrect
         $activity->setStartDate($date);
     }
-
+    
     public function testSetStartDateNotBeforeToday() {
         $activity = new Activity();
-        $today = '11/08/2024';
-        $date = '12/08/2024';
+        $today = new DateTime();
+        $date = '2024-08-12';
         $activity->setStartDate($date);
-        $this->assertGreaterThanOrEqual($today, $activity->getStartDate());
+        $this->assertGreaterThanOrEqual($today, new DateTime($activity->getStartDate()));
     }
-
+    
     public function testSetStartDateBeforeToday() {
         $this->expectException(ExceptionPerso::class);
         $activity = new Activity();
-        $today = '11/08/2024';
-        $date = '13/08/2023';
+        $today = new DateTime();
+        $date = '2023-08-13';
         $activity->setStartDate($date);
-        $this->assertLessThan($today, $activity->getStartDate());
-    }
+    }    
 
     //Test unitaire sur setEndDate
     public function testSetEndDateWithCheckdate() {
         $activity = new Activity();
-        $date = '12/08/2024';
+        $date = '2024-08-12';
+        $expectedDate = '2024/08/12';
         $activity->setEndDate($date);
-        $this->assertEquals($date, $activity->getEndDate());
+        $this->assertEquals($expectedDate, $activity->getEndDate());
     }
-
+    
     public function testSetEndDateWithExpectedException() {
         $this->expectException(ExceptionPerso::class);
         $activity = new Activity();
-        $date = '29/024/2900';
+        $date = '2900-02-29';
         $activity->setEndDate($date);
     }
-
+    
     public function testSetEndDateWithWrongFormat() {
         $this->expectException(ExceptionPerso::class);
         $activity = new Activity();
-        $date = '04-11-2013';
+        $date = '04-11-2013'; // Format incorrect
         $activity->setEndDate($date);
     }
-
+    
     public function testSetEndDateNotBeforeStartDate() {
         $activity = new Activity();
-        $startDate = '12/08/2024';
+        $startDate = '2024-08-12';
         $activity->setStartDate($startDate);
-        $endDate = '18/08/2024';
+        $endDate = '2024-08-18';
         $activity->setEndDate($endDate);
         $this->assertGreaterThan(
-            $activity->getStartDate(),
-            $activity->compareDates(
-                $activity->getStartDate(),
-                $activity->getEndDate()
-            )
+            new DateTime($activity->getStartDate()),
+            new DateTime($activity->getEndDate())
         );
     }
-
+    
     public function testSetEndDateBeforeStartDate() {
         $this->expectException(ExceptionPerso::class);
         $activity = new Activity();
-        $startDate = '12/08/2024';
+        $startDate = '2024-08-12';
         $activity->setStartDate($startDate);
-        $endDate = '13/08/2023';
+        $endDate = '2023-08-13';
         $activity->setEndDate($endDate);
         $this->assertLessThan(
             $activity->getStartDate(),
@@ -148,7 +146,7 @@ class ActivityTest extends PHPUnit\Framework\TestCase {
             )
         );
     }
-
+    
     //Test unitaire sur setStartHour
     public function testSetStartHourWithValideFormat() {
         $activity = new Activity();

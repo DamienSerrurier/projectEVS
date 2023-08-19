@@ -11,41 +11,42 @@ class MemberTest extends PHPUnit\Framework\TestCase {
     //Test unitaire sur setBirthdate
     public function testSetBirthdateWithCheckdate() {
         $member = new Member();
-        $date = '12/03/1999';
+        $date = '1999-03-12';
+        $expectedDate = '1999/03/12';
         $member->setBirthdate($date);
-        $this->assertEquals($date, $member->getBirthdate());
+        $this->assertEquals($expectedDate, $member->getBirthdate());
     }
-
+    
     public function testSetBirthdateWithExpectedException() {
         $this->expectException(ExceptionPerso::class);
         $member = new Member();
-        $date = '29/024/2900';
+        $date = '2900-02-29';
         $member->setBirthdate($date);
     }
-
+    
     public function testSetBirthdateWithWrongFormat() {
         $this->expectException(ExceptionPerso::class);
         $member = new Member();
-        $date = '04-11-2013';
+        $date = '04-11-2013'; // Format incorrect
         $member->setBirthdate($date);
     }
-
+    
     public function testSetBirthdateNotAfterToday() {
         $member = new Member();
-        $today = '14/08/2022';
-        $date = '12/03/1999';
+        $today = new DateTime();
+        $date = '1999-03-12';
         $member->setBirthdate($date);
-        $this->assertLessThan($today, $member->getBirthdate());
+        $this->assertLessThan($today, new DateTime($member->getBirthdate()));
     }
-
+    
     public function testSetBirthdateAfterToday() {
         $this->expectException(ExceptionPerso::class);
         $member = new Member();
-        $today = '14/08/2022';
-        $date = '12/07/2030';
+        $today = new DateTime();
+        $date = '2030-07-12';
         $member->setBirthdate($date);
-        $this->assertGreaterThan($today, $member->getBirthdate());
-    }
+        $this->assertGreaterThan($today, new DateTime($member->getBirthdate()));
+    }    
 
     //Test unitaire sur setplaceOfBirth
     public function testsetPlaceOfBirthWithRegex() {

@@ -2,8 +2,9 @@
 
 namespace ProjectEvs;
 
-require_once 'utility/exceptions/ExceptionPerso.php';
-
+require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
+ . 'utility' . DIRECTORY_SEPARATOR . 'exceptions' . DIRECTORY_SEPARATOR . 'ExceptionPerso.php';
+ 
 use ProjectEvs\ExceptionPerso;
 
 class Person implements RegexTester {
@@ -86,7 +87,7 @@ class Person implements RegexTester {
     public function setPhone(?string $phone) {
         $pattern = '/^[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}$/';
         
-        if (is_null($phone) || $phone === '') {
+        if ($phone == '') {
             return $this->phone = '';
         }
 

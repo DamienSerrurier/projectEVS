@@ -2,7 +2,8 @@
 
 namespace ProjectEvs;
 
-require_once '../../utility/exceptions/ExceptionPerso.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
+ . 'utility' . DIRECTORY_SEPARATOR . 'exceptions' . DIRECTORY_SEPARATOR . 'ExceptionPerso.php';
 
 use DateTime;
 use ProjectEvs\ExceptionPerso;
@@ -61,32 +62,45 @@ class Activity implements RegexTester {
     }
 
     public function setStartDate(string $startDate) {
-        $format = 'd/m/Y';
-        $dateFormat = DateTime::createFromFormat($format, $startDate);
-        
-        if ($dateFormat && $dateFormat->format($format) == $startDate) {
-            list($day, $month, $year) = explode('/', $startDate);
-            
-            if (checkdate($month, $day, $year)) {
-                $today = date('m/d/Y');
-                $timestampToday = strtotime($today);
-                $timestampstartDate = strtotime($startDate);
+
+        if ($startDate == '') {
+            return $this->startDate = '';
+        }
+        else {
+            $format = 'Y-m-d';
     
-                if ($timestampToday <= $timestampstartDate) {
-                    return $this->startDate = $startDate;
+            if (date_create_from_format($format, $startDate)) {
+               list($year, $month, $day) = explode('-', $startDate);
+                $startDate = $year . '/' . $month . '/' . $day;
+                $format = 'Y/m/d';
+                $dateFormat = DateTime::createFromFormat($format, $startDate);
+    
+                if ($dateFormat && $dateFormat->format($format) == $startDate) {
+                    list($year, $month, $day) = explode('/', $startDate);
+                    
+                    if (checkdate($month, $day, $year)) {
+                        $today = new DateTime();
+                      
+                        if ($today <= $dateFormat) {
+                            return $this->startDate = $startDate;
+                        }
+                        else {
+                            throw new ExceptionPerso(
+                                "La date du début doit être supérieure ou égale à celle d'aujoud'hui"
+                            );
+                        }
+                    }
+                    else {
+                        throw new ExceptionPerso("Le format de la date n'est pas valide");
+                    }
                 }
                 else {
-                    throw new ExceptionPerso(
-                        "La date du début doit être supérieure ou égale à celle d'aujoud'hui"
-                    );
+                    throw new ExceptionPerso("La date doit être au format comme: jour/mois/année");
                 }
             }
             else {
-                throw new ExceptionPerso("Le format de la date n'est pas valide");
+                throw new ExceptionPerso("Veuillez renseigner une date correcte");
             }
-        }
-        else {
-            throw new ExceptionPerso("La date doit être au format comme: jour/mois/année");
         }
     }
 
@@ -95,21 +109,36 @@ class Activity implements RegexTester {
     }
 
     public function setEndDate(string $endDate) {
-        $format = 'd/m/Y';
-        $dateFormat = DateTime::createFromFormat($format, $endDate);
 
-        if ($dateFormat && $dateFormat->format($format) == $endDate) {
-        list($day, $month, $year) = explode('/', $endDate);
-
-            if (checkdate($month, $day, $year)) {
-                return $this->endDate = $endDate; 
-            }
-            else {
-                throw new ExceptionPerso("Le format de la date n'est pas valide");
-            }
+        if ($endDate == '') {
+            return $this->endDate = '';
         }
         else {
-            throw new ExceptionPerso("La date doit être au format comme: jour/mois/année");
+            $format = 'Y-m-d';
+    
+            if (date_create_from_format($format, $endDate)) {
+               list($year, $month, $day) = explode('-', $endDate);
+                $endDate = $year . '/' . $month . '/' . $day;
+                $format = 'Y/m/d';
+                $dateFormat = DateTime::createFromFormat($format, $endDate);
+    
+                if ($dateFormat && $dateFormat->format($format) == $endDate) {
+                    list($year, $month, $day) = explode('/', $endDate);
+                    
+                    if (checkdate($month, $day, $year)) {                      
+                        return $this->endDate = $endDate;    
+                    }
+                    else {
+                        throw new ExceptionPerso("Le format de la date n'est pas valide");
+                    }
+                }
+                else {
+                    throw new ExceptionPerso("La date doit être au format comme: jour/mois/année");
+                }
+            }
+            else {
+                throw new ExceptionPerso("Veuillez renseigner une date correcte");
+            }
         }
     }
 
@@ -224,18 +253,14 @@ class Activity implements RegexTester {
     }
 
     public function compareDates(string $startDate, string $endDate) {
-        $startDatePart = explode('/', $startDate);
-        $formateStartDate = $startDatePart[1] . '/' . $startDatePart[0] . '/' . $startDatePart[2];
-        $timestampStartDate = strtotime($formateStartDate);
-        $endDatePart = explode('/', $endDate);
-        $formateEndDate = $endDatePart[1] . '/' . $endDatePart[0] . '/' . $endDatePart[2];
-        $timestampEndDate = strtotime($formateEndDate);
+        $timestampStartDate = strtotime($startDate);
+        $timestampEndDate = strtotime($endDate);
 
         if ($timestampStartDate < $timestampEndDate) {
             return $this->endDate = $endDate;
         }
         else {
-            throw new ExceptionPerso("La date du début doit être supérieur à la date de départ");
+            throw new ExceptionPerso("La date de fin doit être supérieur à la date de départ");
         }
     }
 

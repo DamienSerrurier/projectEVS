@@ -2,7 +2,8 @@
 
 namespace ProjectEvs;
 
-require_once 'utility/exceptions/ExceptionPerso.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
+ . 'utility' . DIRECTORY_SEPARATOR . 'exceptions' . DIRECTORY_SEPARATOR . 'ExceptionPerso.php';
 
 use DateTime;
 use ProjectEvs\ExceptionPerso;
@@ -21,35 +22,59 @@ class Member extends Person {
     //Constructeur
     
     //Getters et Setters
+    public function getEmail(): string {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email) {
+
+        if ($email == '') {
+            return $this->email = '';
+        }
+
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return $this->email = $email;
+        } else {
+            throw new ExceptionPerso("L'adresse mail n'est pas valide");
+        }
+    }
+
     public function getBirthdate() : string {
         return $this->birthdate;
     }
 
     public function setBirthdate(string $birthdate) {
-        $format = 'd/m/Y';
-        $dateFormat = DateTime::createFromFormat($format, $birthdate);
-        
-        if ($dateFormat && $dateFormat->format($format) == $birthdate) {
-            list($day, $month, $year) = explode('/', $birthdate);
-            
-            if (checkdate($month, $day, $year)) {
-                $today = date('m/d/Y');
-                $timestampToday = strtotime($today);
-                $timestampbirthdate = strtotime($birthdate);
-    
-                if ($timestampToday > $timestampbirthdate) {
-                    return $this->birthdate = $birthdate;
+        $format = 'Y-m-d';
+
+        if (date_create_from_format($format, $birthdate)) {
+           list($year, $month, $day) = explode('-', $birthdate);
+            $birthdate = $year . '/' . $month . '/' . $day;
+            $format = 'Y/m/d';
+            $dateFormat = DateTime::createFromFormat($format, $birthdate);
+
+            if ($dateFormat && $dateFormat->format($format) == $birthdate) {
+                list($year, $month, $day) = explode('/', $birthdate);
+                
+                if (checkdate($month, $day, $year)) {
+                    $today = new DateTime();
+                  
+                    if ($today > $dateFormat) {
+                        return $this->birthdate = $birthdate;
+                    }
+                    else {
+                        throw new ExceptionPerso("La date de naissance n'est pas bonne");
+                    }
                 }
                 else {
-                    throw new ExceptionPerso("La date de naissance n'est bonne");
+                    throw new ExceptionPerso("Le format de la date de naissance n'est pas valide");
                 }
             }
             else {
-                throw new ExceptionPerso("Le format de la date de naissance n'est pas valide");
+                throw new ExceptionPerso("La date de naissance doit être au format comme: jour/mois/année");
             }
         }
         else {
-            throw new ExceptionPerso("La date de naissance doit être au format comme: jour/mois/année");
+            throw new ExceptionPerso("Veuillez renseigner votre date de naissance");
         }
     }
 

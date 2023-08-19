@@ -2,8 +2,10 @@
 
 namespace ProjectEvs;
 
-require_once 'utility/exceptions/ExceptionPerso.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
+ . 'utility' . DIRECTORY_SEPARATOR . 'exceptions' . DIRECTORY_SEPARATOR . 'ExceptionPerso.php';
 
+use Exception;
 use ProjectEvs\ExceptionPerso;
 
 class Civility implements RegexTester {
@@ -20,6 +22,10 @@ class Civility implements RegexTester {
     }
 
     public function setId(int $id) {
+        
+        if ($id == 0) {
+            throw new ExceptionPerso("Veuillez faire un choix de civilité");
+        }
 
         if($id > 0) {
 

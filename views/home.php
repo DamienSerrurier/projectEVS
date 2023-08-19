@@ -19,6 +19,14 @@
             <div class="border py-3">
                 <h2 class="text-center">Présentation</h2>
             </div>
+            <?php
+            if (isset($_SESSION['success'])) :
+            ?>
+                <p class="text-success"><?= $_SESSION['success'] ?></p>
+            <?php
+                unset($_SESSION['success']);
+            endif;
+            ?>
         </article>
     </section>
 

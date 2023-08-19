@@ -19,10 +19,20 @@
             <h2 class="text-center">Espace utilisateur</h2>
         </div>
 
-        <form action="">
+        <?php
+        if (isset($_SESSION['success'])) :
+        ?>
+            <p class="text-success"><?= $_SESSION['success'] ?></p>
+        <?php
+            unset($_SESSION['success']);
+        endif;
+        ?>
+
+        <form action="userSpace" method="post">
             <div class="container p-4">
-            <p class="text-danger m-0"><?= isset($infoMessages['id']) && !empty($infoMessages['id']) ? htmlspecialchars($infoMessages['id']) : '' ?></p>
                 <div class="form-check">
+                    <p class="text-danger m-0"><?= isset($infoMessages['id']) && !empty($infoMessages['id']) ? htmlspecialchars($infoMessages['id']) : '' ?></p>
+
                     <input class="form-check-input" type="checkbox" name="member" id="member">
                     <label class="form-label-lg fs-6" for="member">J'adhère à l'association EVS Maison Prévert</label>
                 </div>
@@ -32,8 +42,8 @@
                         <label class="form-label-lg fs-6" for="responsibleSelect">Nombre de responsable</label>
                         <select class="form-select form-select-lg my-2 fs-6" name="responsible" id="responsibleSelect">
                             <option value="">responsable</option>
-                            <option value="responsible1" selected>1 responsable</option>
-                            <option value="responsible2">2 responsables</option>
+                            <option value="" selected>1 responsable</option>
+                            <option value="">2 responsables</option>
                         </select>
                     </div>
 
@@ -50,37 +60,49 @@
 
                 <fieldset class="border p-4 mt-5" form="">
                     <legend class="col-form-label-lg">Informations personnelles</legend>
+                    <p class="text-danger m-0"><?= isset($infoMessages['memberCivility']) && !empty($infoMessages['memberCivility']) ? htmlspecialchars($infoMessages['memberCivility']) : '' ?></p>
 
-                    <input class="form-check-input" type="radio" name="civility" id="choiceWoman" value="woman">
-                    <label class="form-label-lg fs-6" for="choiceWoman">Madame</label>
-
-                    <input class="form-check-input" type="radio" name="civility" id="choiceMan" value="man">
-                    <label class="form-label-lg fs-6" for="choiceMan">Monsieur</label>
+                    <?php
+                    if (!empty($resultCivility)) :
+                        foreach ($resultCivility as $value) :
+                    ?>
+                            <input class="form-check-input" type="radio" name="memberCivility" id="choice <?= htmlspecialchars($value->getId()) ?>" value="<?= htmlspecialchars($value->getId())  ?>">
+                            <label class="form-label-lg fs-6" for="choice <?= htmlspecialchars($value->getId()) ?>"><?= htmlspecialchars($value->getName()) ?></label>
+                    <?php
+                        endforeach;
+                    endif;
+                    ?>
 
                     <div class="row">
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="memberLastname">Nom</label>
                             <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom" type="text" name="memberLastname" id="memberLastname">
+                            <p class="text-danger m-0"><?= isset($infoMessages['memberLastname']) && !empty($infoMessages['memberLastname']) ? htmlspecialchars($infoMessages['memberLastname']) : '' ?></p>
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="memberFirstname">Prénom</label>
                             <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un prénom" type="text" name="memberFirstname" id="memberFirstname">
+                            <p class="text-danger m-0"><?= isset($infoMessages['memberFirstname']) && !empty($infoMessages['memberFirstname']) ? htmlspecialchars($infoMessages['memberFirstname']) : '' ?></p>
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="memberMail">Adresse mail</label>
                             <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un émail" type="email" name="memberMail" id="memberMail">
+                            <p class="text-danger m-0"><?= isset($infoMessages['memberMail']) && !empty($infoMessages['memberMail']) ? htmlspecialchars($infoMessages['memberMail']) : '' ?></p>
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
-                            <label class="form-label-lg fs-6" for="memberPphone">Téléphone</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un numéro de téléphone" type="tel" name="memberPphone" id="memberPphone">
+                            <label class="form-label-lg fs-6" for="memberPhone">Téléphone</label>
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un numéro de téléphone" type="tel" name="memberPhone" id="memberPhone">
+                            <p class="text-danger m-0"><?= isset($infoMessages['memberPhone']) && !empty($infoMessages['memberPhone']) ? htmlspecialchars($infoMessages['memberPhone']) : '' ?></p>
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="memberBirthdate">Date de naissance</label>
                             <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez une date de naissance" type="date" name="memberBirthdate" id="memberBirthdate">
+                            <p class="text-danger m-0"><?= isset($infoMessages['memberBirthdate']) && !empty($infoMessages['memberBirthdate']) ? htmlspecialchars($infoMessages['memberBirthdate']) : '' ?></p>
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="memberBirthPlace">Lieu de naissance</label>
                             <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom" type="text" name="memberBirthPlace" id="memberBirthPlace">
+                            <p class="text-danger m-0"><?= isset($infoMessages['memberBirthPlace']) && !empty($infoMessages['memberBirthPlace']) ? htmlspecialchars($infoMessages['memberBirthPlace']) : '' ?></p>
                         </div>
                     </div>
                 </fieldset>
@@ -271,7 +293,8 @@
                     </label>
                 </div>
 
-                <input class="btn btn-success text-uppercase" type="submit" name="" value="Envoyer">
+                <input type="hidden" name="token1" value="<?= $_SESSION['token1'] ?>">
+                <input class="btn btn-success text-uppercase" type="submit" name="memberCreate" value="Envoyer">
             </div>
         </form>
 
@@ -279,7 +302,7 @@
 
         <form action="userSpace" method="post">
             <div class="container p-4">
-                <input class="btn btn-danger text-uppercase" type="submit" name="" value="Suppression">
+                <input class="btn btn-danger text-uppercase" type="submit" name="userDelete" value="Suppression">
                 <div class="row">
                     <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                         <label class="form-label-lg fs-6" for="astname">Nom</label>
@@ -319,12 +342,12 @@
                 </div>
                 <div>
                     <div>
+                        <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
                         <input class="btn btn-secondary text-uppercase" type="button" name="" value="Annulation">
                         <input class="btn btn-warning text-uppercase" type="submit" name="userUpdate" value="Modification">
                     </div>
                 </div>
             </div>
-            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
         </form>
     </section>
 

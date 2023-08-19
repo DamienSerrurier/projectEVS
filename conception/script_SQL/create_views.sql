@@ -1,3 +1,8 @@
+CREATE OR REPLACE VIEW displayAllCivility
+AS
+SELECT civility.id, civility.name
+FROM civility;
+
 CREATE OR REPLACE FUNCTION displayOneUserByEmail(userEmail VARCHAR(255))
 RETURNS TABLE (
     id INTEGER,

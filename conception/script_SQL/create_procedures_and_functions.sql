@@ -135,6 +135,26 @@ CALL updateUser(6, 'Jaffar', 'Kamal', '08 52 21 07 45', 'jaffar@Kamal.fr', '123'
 -- END;
 -- $$;
 
+--Procédure permettant de supprimer un utilisateur par son identifiant
+CREATE OR REPLACE PROCEDURE deleteOneUser(personId INTEGER)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+idConnection INTEGER;
+BEGIN
+    SELECT id_connection INTO idConnection
+    FROM person 
+    WHERE id = personId;
+
+    DELETE FROM person
+    WHERE id = personId;
+
+    DELETE FROM connection
+    WHERE id = idConnection;
+END;
+$$;
+
+
 --Procédure permettant de modifier le rôle d'un utilisateur
 CREATE OR REPLACE PROCEDURE updateRoleUser(personId INTEGER, idRole INTEGER)
 LANGUAGE plpgsql

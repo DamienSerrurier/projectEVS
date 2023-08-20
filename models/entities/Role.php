@@ -23,7 +23,7 @@ class Role implements RegexTester {
         if($id > 0) {
 
             if (filter_var($id, FILTER_VALIDATE_INT)) {
-                return $this->id = $id;
+                $this->id = $id;
             } else {
                 throw new ExceptionPerso("Arrêtez de jouer avec mes post");
             }
@@ -43,7 +43,7 @@ class Role implements RegexTester {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
             if ($this->testInput($pattern, $name)) {
-                return $this->name = $name;
+                $this->name = $name;
             } else {
                 throw new ExceptionPerso("Le nom du Role n'est pas valide");
             }

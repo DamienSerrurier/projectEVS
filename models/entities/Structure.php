@@ -26,7 +26,7 @@ class Structure implements RegexTester {
         if($id > 0) {
 
             if (filter_var($id, FILTER_VALIDATE_INT)) {
-                return $this->id = $id;
+                $this->id = $id;
             } else {
                 throw new ExceptionPerso("Arrêtez de jouer avec mes post");
             }
@@ -46,7 +46,7 @@ class Structure implements RegexTester {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
             if ($this->testInput($pattern, $name)) {
-                return $this->name = $name;
+                $this->name = $name;
             } else {
                 throw new ExceptionPerso("Le nom de la structure n'est pas valide");
             }
@@ -97,8 +97,7 @@ class Structure implements RegexTester {
             }
             else {
                 throw new ExceptionPerso("Veuillez choisir un fichier image (png, jpeg / jpg ou GIF)");
-            }
-            
+            }   
         }
         else {
             throw new ExceptionPerso("Votre fichier n'a pu être envoyé, veuillez réessayer");
@@ -114,7 +113,7 @@ class Structure implements RegexTester {
             $pattern = '/^[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}$/';
 
             if ($this->testInput($pattern, $phone)) {
-                return $this->phone = $phone;
+                $this->phone = $phone;
             } else {
                 throw new ExceptionPerso("Le numéro de téléphone n'est pas valide");
             }
@@ -130,7 +129,7 @@ class Structure implements RegexTester {
     public function setTypeStructure(TypeStructure $typeStructure) {
 
         if ($typeStructure instanceof TypeStructure) {
-            return $this->typeStructure = $typeStructure;
+            $this->typeStructure = $typeStructure;
         }
         else {
             throw new ExceptionPerso("Ceci n'est pas une instance de la classe TypeStructure");
@@ -144,7 +143,7 @@ class Structure implements RegexTester {
     public function setAddress(Address $address) {
 
         if ($address instanceof Address) {
-            return $this->address = $address;
+            $this->address = $address;
         }
         else {
             throw new ExceptionPerso("Ceci n'est pas une instance de la classe Address");

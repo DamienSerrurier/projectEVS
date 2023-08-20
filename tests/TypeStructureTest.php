@@ -31,7 +31,8 @@ class TypeStructureTest extends PHPUnit\Framework\TestCase {
         $typeStructure = new TypeStructure();
         $Wording = 'djsjd-ejjdéèUY';
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
-        $this->assertMatchesRegularExpression($pattern, $typeStructure->setWording($Wording));
+        $typeStructure->setWording($Wording);
+        $this->assertMatchesRegularExpression($pattern, $typeStructure->getWording());
     }
 
     public function testSetWordingWithNumber() {
@@ -58,6 +59,7 @@ class TypeStructureTest extends PHPUnit\Framework\TestCase {
     public function testSetWordingIsNotEmpty() {
         $typeStructure = new TypeStructure();
         $Wording = 'sjsèéêdY';
-        $this->assertNotEmpty($typeStructure->setWording($Wording, ''));
+        $typeStructure->setWording($Wording);
+        $this->assertNotEmpty($typeStructure->getWording(), '');
     }
 }

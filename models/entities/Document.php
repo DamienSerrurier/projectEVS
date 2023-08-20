@@ -24,7 +24,7 @@ class Document implements RegexTester {
         if($id > 0) {
 
             if (filter_var($id, FILTER_VALIDATE_INT)) {
-                return $this->id = $id;
+                $this->id = $id;
             } else {
                 throw new ExceptionPerso("Arrêtez de jouer avec mes post");
             }
@@ -44,7 +44,7 @@ class Document implements RegexTester {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
             if ($this->testInput($pattern, $name)) {
-                return $this->name = $name;
+                $this->name = $name;
             } else {
                 throw new ExceptionPerso("Le nom du document n'est pas valide");
             }
@@ -92,7 +92,7 @@ class Document implements RegexTester {
     public function setStructure(Structure $structure) {
 
         if ($structure instanceof Structure) {
-            return $this->structure = $structure;
+            $this->structure = $structure;
         }
         else {
             throw new ExceptionPerso("Ceci n'est pas une instance de la classe Structure");

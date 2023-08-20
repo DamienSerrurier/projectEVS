@@ -53,7 +53,8 @@ class MemberTest extends PHPUnit\Framework\TestCase {
         $member = new Member();
         $placeOfBirth = 'djsjd-ejjdéèUY';
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
-        $this->assertMatchesRegularExpression($pattern, $member->setPlaceOfBirth($placeOfBirth));
+        $member->setPlaceOfBirth($placeOfBirth);
+        $this->assertMatchesRegularExpression($pattern, $member->getPlaceOfBirth());
     }
 
     public function testsetPlaceOfBirthWithNumber() {
@@ -80,7 +81,8 @@ class MemberTest extends PHPUnit\Framework\TestCase {
     public function testsetPlaceOfBirthIsNotEmpty() {
         $member = new Member();
         $placeOfBirth = 'sjsèéêdY';
-        $this->assertNotEmpty($member->setPlaceOfBirth($placeOfBirth, ''));
+        $member->setPlaceOfBirth($placeOfBirth);
+        $this->assertNotEmpty($member->getPlaceOfBirth(), '');
     }
 
     //Test unitaire sur setMemberPair
@@ -95,7 +97,8 @@ class MemberTest extends PHPUnit\Framework\TestCase {
         $member = new Member();
         $profession = 'djsjd-ejjdéèUY';
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
-        $this->assertMatchesRegularExpression($pattern, $member->setProfession($profession));
+        $member->setProfession($profession);
+        $this->assertMatchesRegularExpression($pattern, $member->getProfession());
     }
 
     public function testsetProfessionWithNumber() {
@@ -124,7 +127,8 @@ class MemberTest extends PHPUnit\Framework\TestCase {
         $member = new Member();
         $familySituation = 'djsjd-ejjdéèUY';
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
-        $this->assertMatchesRegularExpression($pattern, $member->setFamilySituation($familySituation));
+        $member->setFamilySituation($familySituation);
+        $this->assertMatchesRegularExpression($pattern, $member->getFamilySituation());
     }
 
     public function testsetFamilySituationWithNumber() {
@@ -153,7 +157,8 @@ class MemberTest extends PHPUnit\Framework\TestCase {
         $member = new Member();
         $cafNumber = '7310438 12';
         $pattern = '/^\d{7}\s\d{2}$/';
-        $this->assertMatchesRegularExpression($pattern, $member->setCafNumber($cafNumber));
+        $member->setCafNumber($cafNumber);
+        $this->assertMatchesRegularExpression($pattern, $member->getCafNumber());
     }
 
     public function testsetCafNumberWithNumber() {
@@ -180,6 +185,7 @@ class MemberTest extends PHPUnit\Framework\TestCase {
     public function testsetCafNumberIsNotEmpty() {
         $member = new Member();
         $name = '7310438 12';
-        $this->assertNotEmpty($member->setCafNumber($name, ''));
+        $member->setCafNumber($name);
+        $this->assertNotEmpty($member->getCafNumber(), '');
     }
 }

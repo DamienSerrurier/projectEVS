@@ -32,7 +32,8 @@ class StructureTest extends PHPUnit\Framework\TestCase {
         $structure = new Structure();
         $name = 'djsjd-ejjdéèUY';
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
-        $this->assertMatchesRegularExpression($pattern, $structure->setName($name));
+        $structure->setName($name);
+        $this->assertMatchesRegularExpression($pattern, $structure->getName());
     }
 
     public function testSetNameWithNumber() {
@@ -59,7 +60,8 @@ class StructureTest extends PHPUnit\Framework\TestCase {
     public function testSetNameIsNotEmpty() {
         $structure = new Structure();
         $name = 'sjsèéêdY';
-        $this->assertNotEmpty($structure->setName($name, ''));
+        $structure->setName($name);
+        $this->assertNotEmpty($structure->getName(), '');
     }
 
     //Test unitaire sur setLogo
@@ -164,7 +166,8 @@ class StructureTest extends PHPUnit\Framework\TestCase {
         $structure = new Structure();
         $phone = '05 56 23 07 51';
         $pattern = '/^[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}$/';
-        $this->assertMatchesRegularExpression($pattern, $structure->setPhone($phone));
+        $structure->setPhone($phone);
+        $this->assertMatchesRegularExpression($pattern, $structure->getPhone());
     }
 
     public function testSetPhoneWithNumber() {
@@ -191,7 +194,8 @@ class StructureTest extends PHPUnit\Framework\TestCase {
     public function testSetPhoneIsNotEmpty() {
         $structure = new Structure();
         $name = '05 56 23 07 51';
-        $this->assertNotEmpty($structure->setPhone($name, ''));
+        $structure->setPhone($name);
+        $this->assertNotEmpty($structure->getPhone(), '');
     }
 
     //Test unitaire sur setTypeStructure

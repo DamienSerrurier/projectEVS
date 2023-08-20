@@ -32,7 +32,8 @@ class CategoryTest extends PHPUnit\Framework\TestCase {
         $category = new Category();
         $name = 'djsjd-ejjdéèUY';
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
-        $this->assertMatchesRegularExpression($pattern, $category->setName($name));
+        $category->setName($name);
+        $this->assertMatchesRegularExpression($pattern, $category->getName());
     }
 
     public function testSetNameWithNumber() {
@@ -59,6 +60,7 @@ class CategoryTest extends PHPUnit\Framework\TestCase {
     public function testSetNameIsNotEmpty() {
         $category = new Category();
         $name = 'sjsèéêdY';
-        $this->assertNotEmpty($category->setName($name, ''));
+        $category->setName($name);
+        $this->assertNotEmpty($category->getName(), '');
     }
 }

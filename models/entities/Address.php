@@ -28,7 +28,7 @@ class Address implements RegexTester {
         if($id > 0) {
 
             if (filter_var($id, FILTER_VALIDATE_INT)) {
-                return $this->id = $id;
+                $this->id = $id;
             } else {
                 throw new ExceptionPerso("Arrêtez de jouer avec mes post");
             }
@@ -46,7 +46,7 @@ class Address implements RegexTester {
         $pattern = '/^\d+\s?[a-zA-Z\s]*$/';
 
         if ($this->testInput($pattern, $streetNumber)) {
-            return $this->streetNumber = $streetNumber;
+            $this->streetNumber = $streetNumber;
         } else {
             throw new ExceptionPerso("Le numéro de rue n'est pas valide");
         }
@@ -62,7 +62,7 @@ class Address implements RegexTester {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
             if ($this->testInput($pattern, $streetName)) {
-                return $this->streetName = $streetName;
+                $this->streetName = $streetName;
             } else {
                 throw new ExceptionPerso("Le nom de la rue n'est pas valide");
             }
@@ -79,7 +79,7 @@ class Address implements RegexTester {
         $pattern = '/^[\w\s-]*$/';
 
         if ($this->testInput($pattern, $streetComplement)) {
-            return $this->streetComplement = $streetComplement;
+            $this->streetComplement = $streetComplement;
         } else {
             throw new ExceptionPerso("Le nom du complément d'adresse n'est pas valide");
         }
@@ -95,7 +95,7 @@ class Address implements RegexTester {
             $pattern = '/^\d{5}$/';
 
             if ($this->testInput($pattern, $code)) {
-                return $this->code = $code;
+                $this->code = $code;
             } else {
                 throw new ExceptionPerso(
                     "Le code postal n'est pas valide, il doit étre composé de 5 chiffres"
@@ -116,7 +116,7 @@ class Address implements RegexTester {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
             if ($this->testInput($pattern, $name)) {
-                return $this->name = $name;
+                $this->name = $name;
             } else {
                 throw new ExceptionPerso("Le nom de la ville n'est pas valide");
             }

@@ -32,7 +32,8 @@ class AddressTest extends PHPUnit\Framework\TestCase {
         $address = new Address();
         $streetNumber = '22 Ter';
         $pattern = '/^\d+\s?[a-zA-Z\s]*$/';
-        $this->assertMatchesRegularExpression($pattern, $address->setStreetNumber($streetNumber));
+        $address->setStreetNumber($streetNumber);
+        $this->assertMatchesRegularExpression($pattern, $address->getStreetNumber());
     }
 
     public function testSetStreetNumberWithSpecialCharacter() {
@@ -54,7 +55,8 @@ class AddressTest extends PHPUnit\Framework\TestCase {
         $address = new Address();
         $streetName = 'djsjd-ejjdéèUY';
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
-        $this->assertMatchesRegularExpression($pattern, $address->setStreetName($streetName));
+        $address->setStreetName($streetName);
+        $this->assertMatchesRegularExpression($pattern, $address->getStreetName());
     }
 
     public function testsetStreetNameWithNumber() {
@@ -81,7 +83,8 @@ class AddressTest extends PHPUnit\Framework\TestCase {
     public function testsetStreetNameIsNotEmpty() {
         $address = new Address();
         $streetName = 'sjsèéêdY';
-        $this->assertNotEmpty($address->setStreetName($streetName, ''));
+        $address->setStreetName($streetName);
+        $this->assertNotEmpty($address->getStreetName(), '');
     }
 
     //Test unitaire sur setStreetComplement
@@ -89,7 +92,8 @@ class AddressTest extends PHPUnit\Framework\TestCase {
         $address = new Address();
         $streetComplement = 'appatement porte 822G';
         $pattern = '/^[\w\s-]*$/';
-        $this->assertMatchesRegularExpression($pattern, $address->setStreetComplement($streetComplement));
+        $address->setStreetComplement($streetComplement);
+        $this->assertMatchesRegularExpression($pattern, $address->getStreetComplement());
     }
 
     public function testsetStreetComplementWithSpecialCharacter() {
@@ -111,7 +115,8 @@ class AddressTest extends PHPUnit\Framework\TestCase {
         $address = new Address();
         $code = '27643';
         $pattern = '/^\d{5}$/';
-        $this->assertMatchesRegularExpression($pattern, $address->setCode($code));
+        $address->setCode($code);
+        $this->assertMatchesRegularExpression($pattern, $address->getCode());
     }
 
     public function testsetCodeWithSpecialCharacter() {
@@ -131,7 +136,8 @@ class AddressTest extends PHPUnit\Framework\TestCase {
     public function testsetCodeIsNotEmpty() {
         $address = new Address();
         $code = '22249';
-        $this->assertNotEmpty($address->setCode($code, ''));
+        $address->setCode($code);
+        $this->assertNotEmpty($address->getCode(), '');
     }
 
     //Test unitaire sur setName
@@ -139,7 +145,8 @@ class AddressTest extends PHPUnit\Framework\TestCase {
         $address = new Address();
         $name = 'djsjd-ejjdéèUY';
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
-        $this->assertMatchesRegularExpression($pattern, $address->setName($name));
+        $address->setName($name);
+        $this->assertMatchesRegularExpression($pattern, $address->getName());
     }
 
     public function testsetNameWithNumber() {
@@ -166,6 +173,7 @@ class AddressTest extends PHPUnit\Framework\TestCase {
     public function testsetNameIsNotEmpty() {
         $address = new Address();
         $name = 'sjsèéêdY';
-        $this->assertNotEmpty($address->setName($name, ''));
+        $address->setName($name);
+        $this->assertNotEmpty($address->getName(), '');
     }
 }

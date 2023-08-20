@@ -33,7 +33,7 @@ class Person implements RegexTester {
         if($id > 0) {
 
             if (filter_var($id, FILTER_VALIDATE_INT)) {
-                return $this->id = $id;
+                $this->id = $id;
             } else {
                 throw new ExceptionPerso("Arrêtez de jouer avec mes posts");
             }
@@ -53,7 +53,7 @@ class Person implements RegexTester {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
             if ($this->testInput($pattern, $lastname)) {
-                return $this->lastname = $lastname;
+                $this->lastname = $lastname;
             } else {
                 throw new ExceptionPerso("Le nom n'est pas valide");
             }
@@ -71,7 +71,7 @@ class Person implements RegexTester {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
             if ($this->testInput($pattern, $firstname)) {
-                return $this->firstname = $firstname;
+                $this->firstname = $firstname;
             } else {
                 throw new ExceptionPerso("Le prénom n'est pas valide");
             }
@@ -88,11 +88,11 @@ class Person implements RegexTester {
         $pattern = '/^[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}$/';
         
         if ($phone == '') {
-            return $this->phone = '';
+            $this->phone = '';
         }
 
         if ($this->testInput($pattern, $phone)) {
-            return $this->phone = $phone;
+            $this->phone = $phone;
         } else {
             throw new ExceptionPerso("Le numéro de téléphone n'est pas valide");
         }
@@ -105,7 +105,7 @@ class Person implements RegexTester {
     public function setCivility(Civility $civility) {
 
         if ($civility instanceof Civility) {
-            return $this->civility = $civility;
+            $this->civility = $civility;
         }
         else {
             throw new ExceptionPerso("Ceci n'est pas une instance de la classe Civility");
@@ -119,7 +119,7 @@ class Person implements RegexTester {
     public function setAvatar(Avatar $avatar) {
 
         if ($avatar instanceof Avatar) {
-            return $this->avatar = $avatar;
+            $this->avatar = $avatar;
         }
         else {
             throw new ExceptionPerso("Ceci n'est pas une instance de la classe Avatar");
@@ -135,7 +135,7 @@ class Person implements RegexTester {
         if (!empty($email)) {
 
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                return $this->email = $email;
+                $this->email = $email;
             } else {
                 throw new ExceptionPerso("L'adresse mail n'est pas valide");
             }
@@ -155,7 +155,7 @@ class Person implements RegexTester {
 
             if ($this->testInput($pattern, $password)) {
                 $password = password_hash($password, PASSWORD_BCRYPT);
-                return $this->password = $password;
+                $this->password = $password;
             } else {
                 throw new ExceptionPerso(
                     "Veuillez renseigner un mot de passe de 8 caractères contenant au moins : \n
@@ -177,7 +177,7 @@ class Person implements RegexTester {
     public function setAddress(Address $address) {
         
         if ($address instanceof Address) {
-            return $this->address = $address;
+            $this->address = $address;
         }
         else {
             throw new ExceptionPerso("Ceci n'est pas une instance de la classe Address");
@@ -191,7 +191,7 @@ class Person implements RegexTester {
     public function setRole(Role $role) {
 
         if ($role instanceof Role) {
-            return $this->role = $role;
+            $this->role = $role;
         }
         else {
             throw new ExceptionPerso("Ceci n'est pas une instance de la classe Role");
@@ -205,7 +205,7 @@ class Person implements RegexTester {
     public function setHachedPassword(string $hachedPassword) {
 
         if (!empty($hachedPassword)) {
-            return $this->password = $hachedPassword;
+            $this->password = $hachedPassword;
         }
         else {
             throw new ExceptionPerso("Veuillez renseigner ce champ");

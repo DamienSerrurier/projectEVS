@@ -22,7 +22,7 @@ class TypeStructure implements RegexTester {
         if($id > 0) {
 
             if (filter_var($id, FILTER_VALIDATE_INT)) {
-                return $this->id = $id;
+                $this->id = $id;
             } else {
                 throw new ExceptionPerso("Arrêtez de jouer avec mes post");
             }
@@ -42,7 +42,7 @@ class TypeStructure implements RegexTester {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
             if ($this->testInput($pattern, $wording)) {
-                return $this->wording = $wording;
+                $this->wording = $wording;
             } else {
                 throw new ExceptionPerso("Le nom de la type de structure n'est pas valide");
             }

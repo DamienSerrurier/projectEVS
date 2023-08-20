@@ -33,7 +33,8 @@ class ActivityTest extends PHPUnit\Framework\TestCase {
         $activity = new Activity();
         $additionalInformation = 'Lundi/Mardi';
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç\/]+$/';
-        $this->assertMatchesRegularExpression($pattern, $activity->setAdditionalInformation($additionalInformation));
+        $activity->setAdditionalInformation($additionalInformation);
+        $this->assertMatchesRegularExpression($pattern, $activity->getAdditionalInformation());
     }
 
     public function testSetAdditionalInformationWithNumber() {

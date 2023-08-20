@@ -32,7 +32,8 @@ class DocumentTest extends PHPUnit\Framework\TestCase {
         $document = new Document();
         $name = 'djsjd-ejjdéèUY';
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
-        $this->assertMatchesRegularExpression($pattern, $document->setName($name));
+        $document->setName($name);
+        $this->assertMatchesRegularExpression($pattern, $document->getName());
     }
 
     public function testSetNameWithNumber() {
@@ -59,7 +60,8 @@ class DocumentTest extends PHPUnit\Framework\TestCase {
     public function testSetNameIsNotEmpty() {
         $document = new Document();
         $name = 'sjsèéêdY';
-        $this->assertNotEmpty($document->setName($name, ''));
+        $document->setName($name);
+        $this->assertNotEmpty($document->getName(), '');
     }
 
     //Test unitaire sur setLink

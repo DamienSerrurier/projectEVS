@@ -33,7 +33,8 @@ class SupervisorTest extends PHPUnit\Framework\TestCase {
         $supervisor = new Supervisor();
         $school = 'djsjd-ejjdéèUY';
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
-        $this->assertMatchesRegularExpression($pattern, $supervisor->setSchool($school));
+        $supervisor->setSchool($school);
+        $this->assertMatchesRegularExpression($pattern, $supervisor->getSchool());
     }
 
     public function testSetSchoolWithNumber() {
@@ -60,7 +61,8 @@ class SupervisorTest extends PHPUnit\Framework\TestCase {
     public function testSetSchoolIsNotEmpty() {
         $supervisor = new Supervisor();
         $school = 'sjsèéêdY';
-        $this->assertNotEmpty($supervisor->setSchool($school, ''));
+        $supervisor->setSchool($school);
+        $this->assertNotEmpty($supervisor->getSchool(), '');
     }
 
     //Test unitaire sur setSchoolCity
@@ -68,7 +70,8 @@ class SupervisorTest extends PHPUnit\Framework\TestCase {
         $supervisor = new Supervisor();
         $schoolCity = 'djsjd-ejjdéèUY';
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
-        $this->assertMatchesRegularExpression($pattern, $supervisor->setSchoolCity($schoolCity));
+        $supervisor->setSchoolCity($schoolCity);
+        $this->assertMatchesRegularExpression($pattern, $supervisor->getSchoolCity());
     }
 
     public function testSetSchoolCityWithNumber() {
@@ -95,7 +98,8 @@ class SupervisorTest extends PHPUnit\Framework\TestCase {
     public function testSetSchoolCityIsNotEmpty() {
         $supervisor = new Supervisor();
         $schoolCity = 'sjsèéêdY';
-        $this->assertNotEmpty($supervisor->setSchoolCity($schoolCity, ''));
+        $supervisor->setSchoolCity($schoolCity);
+        $this->assertNotEmpty($supervisor->getSchoolCity(), '');
     }
 
     //Test unitaire sur setStructure

@@ -31,7 +31,8 @@ class RoleTest extends PHPUnit\Framework\TestCase {
         $role = new Role();
         $name = 'djsjd-ejjdéèUY';
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
-        $this->assertMatchesRegularExpression($pattern, $role->setName($name));
+        $role->setName($name);
+        $this->assertMatchesRegularExpression($pattern, $role->getName());
     }
 
     public function testSetNameWithNumber() {
@@ -58,6 +59,7 @@ class RoleTest extends PHPUnit\Framework\TestCase {
     public function testSetNameIsNotEmpty() {
         $role = new Role();
         $name = 'sjsèéêdY';
-        $this->assertNotEmpty($role->setName($name, ''));
+        $role->setName($name);
+        $this->assertNotEmpty($role->getName(), '');
     }
 }

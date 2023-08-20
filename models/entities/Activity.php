@@ -24,16 +24,24 @@ class Activity implements RegexTester {
     //Constructeur
 
     //Getters et Setters
+
+    /** Méthode permettant de récupérer l'id de l'activité
+     * @return int L'id de l'activité
+     */
     public function getId() : int {
         return $this->id;
     }
 
+    /** Méthode permettant de définir l'id de l'activité
+     * @param int L'id de l'activité
+     * 
+     */
     public function setId(int $id) {
 
         if($id > 0) {
 
             if (filter_var($id, FILTER_VALIDATE_INT)) {
-                return $this->id = $id;
+                $this->id = $id;
             } else {
                 throw new ExceptionPerso("Arrêtez de jouer avec mes post");
             }
@@ -51,7 +59,7 @@ class Activity implements RegexTester {
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç\/]+$/';
 
         if ($this->testInput($pattern, $additionalInformation)) {
-            return $this->additionalInformation = $additionalInformation;
+            $this->additionalInformation = $additionalInformation;
         } else {
             throw new ExceptionPerso("L'information additionnelle n'est pas valide");
         }
@@ -64,7 +72,7 @@ class Activity implements RegexTester {
     public function setStartDate(string $startDate) {
 
         if ($startDate == '') {
-            return $this->startDate = '';
+            $this->startDate = '';
         }
         else {
             $format = 'Y-m-d';
@@ -82,7 +90,7 @@ class Activity implements RegexTester {
                         $today = new DateTime();
                       
                         if ($today <= $dateFormat) {
-                            return $this->startDate = $startDate;
+                            $this->startDate = $startDate;
                         }
                         else {
                             throw new ExceptionPerso(
@@ -111,7 +119,7 @@ class Activity implements RegexTester {
     public function setEndDate(string $endDate) {
 
         if ($endDate == '') {
-            return $this->endDate = '';
+            $this->endDate = '';
         }
         else {
             $format = 'Y-m-d';
@@ -126,7 +134,7 @@ class Activity implements RegexTester {
                     list($year, $month, $day) = explode('/', $endDate);
                     
                     if (checkdate($month, $day, $year)) {                      
-                        return $this->endDate = $endDate;    
+                        $this->endDate = $endDate;    
                     }
                     else {
                         throw new ExceptionPerso("Le format de la date n'est pas valide");
@@ -152,7 +160,7 @@ class Activity implements RegexTester {
         $hourFormat = DateTime::createFromFormat($format, $startHour);
         
         if ($hourFormat && $hourFormat->format($format) == $startHour) {
-            return $this->startHour = $startHour;
+            $this->startHour = $startHour;
         }
         else {
             throw new ExceptionPerso("le format de l'heure n'est pas valide comme: 10h:30");
@@ -169,7 +177,7 @@ class Activity implements RegexTester {
         $hourFormat = DateTime::createFromFormat($format, $endHour);
         
         if ($hourFormat && $hourFormat->format($format) == $endHour) {
-            return $this->endHour = $endHour;
+            $this->endHour = $endHour;
         }
         else {
             throw new ExceptionPerso("le format de l'heure n'est pas valide comme: 10h:30");
@@ -241,7 +249,7 @@ class Activity implements RegexTester {
     public function setCategory(Category $category) {
 
         if ($category instanceof Category) {
-            return $this->category = $category;
+            $this->category = $category;
         }
         else {
             throw new ExceptionPerso("Ceci n'est pas une instance de la classe Category");
@@ -257,14 +265,10 @@ class Activity implements RegexTester {
         $timestampEndDate = strtotime($endDate);
 
         if ($timestampStartDate < $timestampEndDate) {
-            return $this->endDate = $endDate;
+            $this->endDate = $endDate;
         }
         else {
             throw new ExceptionPerso("La date de fin doit être supérieur à la date de départ");
         }
     }
-
-    public function moveUploadedFile() {
-
-    } 
 }

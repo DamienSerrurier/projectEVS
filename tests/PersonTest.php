@@ -39,7 +39,8 @@ class PersonTest extends PHPUnit\Framework\TestCase {
         $person = new Person();
         $lastname = 'djsjd-ejjdéèUY';
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
-        $this->assertMatchesRegularExpression($pattern, $person->setLastname($lastname));
+        $person->setLastname($lastname);
+        $this->assertMatchesRegularExpression($pattern, $person->getLastname());
     }
 
     public function testSetLastnameWithNumber() {
@@ -66,7 +67,8 @@ class PersonTest extends PHPUnit\Framework\TestCase {
     public function testSetLastnameIsNotEmpty() {
         $person = new Person();
         $lastname = 'sjsèéêdY';
-        $this->assertNotEmpty($person->setLastname($lastname, ''));
+        $person->setLastname($lastname);
+        $this->assertNotEmpty($person->getLastname(), '');
     }
 
     //Test unitaire sur setFirstname
@@ -74,7 +76,8 @@ class PersonTest extends PHPUnit\Framework\TestCase {
         $person = new Person();
         $firstname = 'djsjd-ej-éèUY';
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
-        $this->assertMatchesRegularExpression($pattern, $person->setFirstname($firstname));
+        $person->setFirstname($firstname);
+        $this->assertMatchesRegularExpression($pattern, $person->getFirstname());
     }
 
     public function testSetFirstnameWithNumber() {
@@ -101,7 +104,8 @@ class PersonTest extends PHPUnit\Framework\TestCase {
     public function testSetFirstnameIsNotEmpty() {
         $person = new Person();
         $firstname = 'sjsèéêdY';
-        $this->assertNotEmpty($person->setFirstname($firstname, ''));
+        $person->setFirstname($firstname);
+        $this->assertNotEmpty($person->getFirstname(), '');
     }
 
     //Test unitaire sur setPhone
@@ -109,7 +113,8 @@ class PersonTest extends PHPUnit\Framework\TestCase {
         $person = new Person();
         $phone = '05 56 23 07 51';
         $pattern = '/^[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}$/';
-        $this->assertMatchesRegularExpression($pattern, $person->setPhone($phone));
+        $person->setPhone($phone);
+        $this->assertMatchesRegularExpression($pattern, $person->getPhone());
     }
 
     public function testSetPhoneWithNumber() {
@@ -174,7 +179,8 @@ class PersonTest extends PHPUnit\Framework\TestCase {
     public function testSetEmailIsNotEmpty() {
         $person = new Person();
         $email = 'din@din.com';
-        $this->assertNotEmpty($person->setEmail($email, ''));
+        $person->setEmail($email);
+        $this->assertNotEmpty($person->getEmail(), '');
     }
 
     //Test unitaire sur setPassword
@@ -182,14 +188,16 @@ class PersonTest extends PHPUnit\Framework\TestCase {
         $person = new Person();
         $password = 'hd1e2ZR?';
         $pattern = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/';
-        $this->assertMatchesRegularExpression($pattern, $person->setPassword($password));
+        $person->setPassword($password);
+        $this->assertMatchesRegularExpression($pattern, $person->getPassword());
         $this->assertTrue(password_verify($password, $person->getPassword()), $person->getPassword());
     }
 
     public function testSetPasswordIsNotEmpty() {
         $person = new Person();
         $password = 'hda2ZR#f';
-        $this->assertNotEmpty($person->setPassword($password, ''));
+        $person->setPassword($password);
+        $this->assertNotEmpty($person->getPassword(), '');
     }
 
     public function testNotMatchPasswordRegex() {

@@ -29,11 +29,11 @@ class Member extends Person {
     public function setEmail(?string $email) {
 
         if ($email == '') {
-            return $this->email = '';
+            $this->email = '';
         }
 
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return $this->email = $email;
+            $this->email = $email;
         } else {
             throw new ExceptionPerso("L'adresse mail n'est pas valide");
         }
@@ -59,7 +59,7 @@ class Member extends Person {
                     $today = new DateTime();
                   
                     if ($today > $dateFormat) {
-                        return $this->birthdate = $birthdate;
+                        $this->birthdate = $birthdate;
                     }
                     else {
                         throw new ExceptionPerso("La date de naissance n'est pas bonne");
@@ -88,7 +88,7 @@ class Member extends Person {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
             if ($this->testInput($pattern, $placeOfBirth)) {
-                return $this->placeOfBirth = $placeOfBirth;
+                $this->placeOfBirth = $placeOfBirth;
             } else {
                 throw new ExceptionPerso("Le nom de la ville n'est pas valide");
             }
@@ -104,7 +104,7 @@ class Member extends Person {
     public function setMemberPair(Member $memberPair) {
 
         if ($memberPair instanceof Member) {
-            return $this->memberPair = $memberPair;
+            $this->memberPair = $memberPair;
         }
         else {
             throw new ExceptionPerso("Ceci n'est pas une instance de la classe Member");
@@ -119,7 +119,7 @@ class Member extends Person {
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
         if ($this->testInput($pattern, $profession)) {
-            return $this->profession = $profession;
+            $this->profession = $profession;
         } else {
             throw new ExceptionPerso("Le nom de la profession n'est pas valide");
         }
@@ -133,7 +133,7 @@ class Member extends Person {
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
         if ($this->testInput($pattern, $familySituation)) {
-            return $this->familySituation = $familySituation;
+            $this->familySituation = $familySituation;
         } else {
             throw new ExceptionPerso("Le nom de la situation de famille n'est pas valide");
         }
@@ -149,7 +149,7 @@ class Member extends Person {
             $pattern = '/^\d{7}\s\d{2}$/';
 
             if ($this->testInput($pattern, $cafNumber)) {
-                return $this->cafNumber = $cafNumber;
+                $this->cafNumber = $cafNumber;
             } else {
                 throw new ExceptionPerso("Le numéro d'allocation familiale n'est pas valide");
             }

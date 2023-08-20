@@ -26,7 +26,7 @@ class Supervisor implements RegexTester {
         if($id > 0) {
 
             if (filter_var($id, FILTER_VALIDATE_INT)) {
-                return $this->id = $id;
+                $this->id = $id;
             } else {
                 throw new ExceptionPerso("Arrêtez de jouer avec mes post");
             }
@@ -46,7 +46,7 @@ class Supervisor implements RegexTester {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
             if ($this->testInput($pattern, $school)) {
-                return $this->school = $school;
+                $this->school = $school;
             } else {
                 throw new ExceptionPerso("Le nom de l'école n'est pas valide");
             }
@@ -65,7 +65,7 @@ class Supervisor implements RegexTester {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
             if ($this->testInput($pattern, $schoolCity)) {
-                return $this->schoolCity = $schoolCity;
+                $this->schoolCity = $schoolCity;
             } else {
                 throw new ExceptionPerso("Le nom de la ville de l'école n'est pas valide");
             }
@@ -81,7 +81,7 @@ class Supervisor implements RegexTester {
     public function setStructure(Structure $structure) {
 
         if ($structure instanceof Structure) {
-            return $this->structure = $structure;
+            $this->structure = $structure;
         }
         else {
             throw new ExceptionPerso("Ceci n'est pas une instance de la classe Structure");
@@ -95,7 +95,7 @@ class Supervisor implements RegexTester {
     public function setMemberResponsible(Member $memberResponsible) {
 
         if ($memberResponsible instanceof Member) {
-            return $this->memberResponsible = $memberResponsible;
+            $this->memberResponsible = $memberResponsible;
         }
         else {
             throw new ExceptionPerso("Ceci n'est pas une instance de la classe Member");
@@ -109,7 +109,7 @@ class Supervisor implements RegexTester {
     public function setMemberNotResponsible(Member $memberNotResponsible) {
 
         if ($memberNotResponsible instanceof Member) {
-            return $this->memberNotResponsible = $memberNotResponsible;
+            $this->memberNotResponsible = $memberNotResponsible;
         }
         else {
             throw new ExceptionPerso("Ceci n'est pas une instance de la classe Member");

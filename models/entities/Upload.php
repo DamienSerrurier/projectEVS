@@ -21,7 +21,7 @@ class Upload {
     public function setPerson(Person $person) {
 
         if ($person instanceof Person) {
-            return $this->person = $person;
+            $this->person = $person;
         }
         else {
             throw new ExceptionPerso("Ceci n'est pas une instance de la classe Person");
@@ -35,7 +35,7 @@ class Upload {
     public function setDocument(Document $document) {
 
         if ($document instanceof Document) {
-            return $this->document = $document;
+            $this->document = $document;
         }
         else {
             throw new ExceptionPerso("Ceci n'est pas une instance de la classe Document");

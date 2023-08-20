@@ -32,7 +32,8 @@ class CivilityTest extends PHPUnit\Framework\TestCase {
         $civility = new Civility();
         $name = 'djsjd-ejjdéèUY';
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
-        $this->assertMatchesRegularExpression($pattern, $civility->setName($name));
+        $civility->setName($name);
+        $this->assertMatchesRegularExpression($pattern, $civility->getName());
     }
 
     public function testSetNameWithNumber() {
@@ -59,6 +60,7 @@ class CivilityTest extends PHPUnit\Framework\TestCase {
     public function testSetNameIsNotEmpty() {
         $civility = new Civility();
         $name = 'sjsèéêdY';
-        $this->assertNotEmpty($civility->setName($name, ''));
+        $civility->setName($name);
+        $this->assertNotEmpty($civility->getName(), '');
     }
 }

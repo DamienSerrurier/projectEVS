@@ -21,7 +21,7 @@ class Reservation {
     public function setActivity(Activity $activity) {
 
         if ($activity instanceof Activity) {
-            return $this->activity = $activity;
+            $this->activity = $activity;
         }
         else {
             throw new ExceptionPerso("Ceci n'est pas une instance de la classe Activity");
@@ -35,7 +35,7 @@ class Reservation {
     public function setPerson(Person $person) {
 
         if ($person instanceof Person) {
-            return $this->person = $person;
+            $this->person = $person;
         }
         else {
             throw new ExceptionPerso("Ceci n'est pas une instance de la classe Person");

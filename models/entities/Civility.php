@@ -5,7 +5,6 @@ namespace ProjectEvs;
 require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
  . 'utility' . DIRECTORY_SEPARATOR . 'exceptions' . DIRECTORY_SEPARATOR . 'ExceptionPerso.php';
 
-use Exception;
 use ProjectEvs\ExceptionPerso;
 
 class Civility implements RegexTester {
@@ -30,7 +29,7 @@ class Civility implements RegexTester {
         if($id > 0) {
 
             if (filter_var($id, FILTER_VALIDATE_INT)) {
-                return $this->id = $id;
+                $this->id = $id;
             } else {
                 throw new ExceptionPerso("Arrêtez de jouer avec mes post");
             }
@@ -50,7 +49,7 @@ class Civility implements RegexTester {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
             if ($this->testInput($pattern, $name)) {
-                return $this->name = $name;
+                $this->name = $name;
             } else {
                 throw new ExceptionPerso("Le nom de la civilité n'est pas valide");
             }

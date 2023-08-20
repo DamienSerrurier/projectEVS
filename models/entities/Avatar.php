@@ -22,7 +22,7 @@ class Avatar {
         if($id > 0) {
 
             if (filter_var($id, FILTER_VALIDATE_INT)) {
-                return $this->id = $id;
+                $this->id = $id;
             } else {
                 throw new ExceptionPerso("Arrêtez de jouer avec mes post");
             }
@@ -75,7 +75,6 @@ class Avatar {
             else {
                 throw new ExceptionPerso("Veuillez choisir un fichier image (png, jpeg / jpg ou GIF)");
             }
-            
         }
         else {
             throw new ExceptionPerso("Votre fichier n'a pu être envoyé, veuillez réessayer");

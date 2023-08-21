@@ -24,14 +24,24 @@ class Person implements RegexTester {
     //Constructeur
 
     //Getters et Setters
+
+    /** Méthode permettant de récupérer l'id de la personne
+     * @return int L'id de la personne
+     */
     public function getid(): int {
         return $this->id;
     }
 
+    /** Méthode permettant de définir l'id de la personne
+     * @param int L'id de la personne
+     * @throws ExceptionPerso Si l'id est négatif ou non valide
+     */
     public function setId(int $id) {
 
+        //Vérifie si l'id est positif
         if($id > 0) {
 
+            //Vérifie si l'id est valide
             if (filter_var($id, FILTER_VALIDATE_INT)) {
                 $this->id = $id;
             } else {
@@ -43,15 +53,24 @@ class Person implements RegexTester {
         }
     }
 
+    /** Méthode permettant de récupérer le nom
+     * @return string Le nom
+     */
     public function getLastname(): string {
         return $this->lastname;
     }
 
+     /** Méthode permettant de définir le nom
+     * @param string Le nom
+     * @throws ExceptionPerso Si le nom est non valide
+     */
     public function setLastname(string $lastname) {
 
+        //Vérifie si le champ n'est pas vide
         if (!empty($lastname)) {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
+            //Vérifie si le nom correspond au pattern
             if ($this->testInput($pattern, $lastname)) {
                 $this->lastname = $lastname;
             } else {
@@ -62,14 +81,24 @@ class Person implements RegexTester {
         }
     }
 
+    /** Méthode permettant de récupérer le prénom
+     * @return string Le prénom
+     */
     public function getFirstname(): string {
         return $this->firstname;
     }
 
+    /** Méthode permettant de définir le prénom
+     * @param string Le prénom
+     * @throws ExceptionPerso Si le prénom est non valide
+     */
     public function setFirstname(string $firstname) {
+
+        //Vérifie si le champ n'est pas vide
         if (!empty($firstname)) {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
+            //Vérifie si le prénom correspond au pattern
             if ($this->testInput($pattern, $firstname)) {
                 $this->firstname = $firstname;
             } else {
@@ -80,60 +109,80 @@ class Person implements RegexTester {
         }
     }
 
+    /** Méthode permettant de récupérer le numéro de téléphone
+     * @return string Le numéro de téléphone
+     */
     public function getPhone(): ?string {
         return $this->phone;
     }
 
+     /** Méthode permettant de définir le numéro de téléphone
+     * @param string Le numéro de téléphone
+     * @throws ExceptionPerso Si le numéro de téléphone est non valide
+     */
     public function setPhone(?string $phone) {
         $pattern = '/^[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}$/';
         
-        if ($phone == '') {
+        //Vérifie si le numéro de téléphone est vide
+        if (empty($phone)) {
             $this->phone = '';
         }
-
-        if ($this->testInput($pattern, $phone)) {
-            $this->phone = $phone;
-        } else {
-            throw new ExceptionPerso("Le numéro de téléphone n'est pas valide");
+        else {
+            
+            //Vérifie si le numéro de téléphone est valide
+            if ($this->testInput($pattern, $phone)) {
+                $this->phone = $phone;
+            } else {
+                throw new ExceptionPerso("Le numéro de téléphone n'est pas valide");
+            }
         }
     }
 
+    /** Méthode permettant de récupérer l'objet Civility
+     * @return Civility l'objet Civility
+     */
     public function getCivility(): Civility {
         return $this->civility;
     }
 
+    /** Méthode permettant de définir l'objet Civility
+     * @param Civility l'objet Civility
+     */
     public function setCivility(Civility $civility) {
-
-        if ($civility instanceof Civility) {
-            $this->civility = $civility;
-        }
-        else {
-            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Civility");
-        }
+        $this->civility = $civility;
     }
 
+    /** Méthode permettant de récupérer l'objet Avatar
+     * @return Avatar l'objet Avatar
+     */
     public function getAvatar(): Avatar {
         return $this->avatar;
     }
 
+     /** Méthode permettant de définir l'objet Avatar
+     * @param Avatar l'objet Avatar
+     */
     public function setAvatar(Avatar $avatar) {
-
-        if ($avatar instanceof Avatar) {
             $this->avatar = $avatar;
-        }
-        else {
-            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Avatar");
-        }
     }
 
+    /** Méthode permettant de récupérer l'adresse mail
+     * @return string L'adresse mail
+     */
     public function getEmail(): string {
         return $this->email;
     }
 
+    /** Méthode permettant de définir l'adresse mail
+     * @param string L'adresse mail
+     * @throws ExceptionPerso Si l'adresse mail est non valide
+     */
     public function setEmail(string $email) {
 
+        //Vérifie si l'adresse mail n'est pas vide
         if (!empty($email)) {
 
+            //Vérifie si l'adresse mail est valide
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $this->email = $email;
             } else {
@@ -144,16 +193,26 @@ class Person implements RegexTester {
         }
     }
 
+    /** Méthode permettant de récupérer le mot de passe
+     * @return string Le mot de passe
+     */
     public function getPassword(): string {
         return $this->password;
     }
 
+    /** Méthode permettant de définir le mot de passe
+     * @param string Le mot de passe
+     * @throws ExceptionPerso Si le mot de passe est non valide
+     */
     public function setPassword(string $password) {
 
+        //Vérifie si le mot de passe n'est pas vide
         if (!empty($password)) {
             $pattern = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/';
 
+            //Vérifie si le mot de passe est valide
             if ($this->testInput($pattern, $password)) {
+                //Cryptage du mot de passe 
                 $password = password_hash($password, PASSWORD_BCRYPT);
                 $this->password = $password;
             } else {
@@ -170,40 +229,50 @@ class Person implements RegexTester {
         }
     }
 
+    /** Méthode permettant de récupérer l'objet Address
+     * @return Address l'objet Address
+     */
     public function getAddress(): Address {
         return $this->address;
     }
 
+    /** Méthode permettant de définir l'objet Address
+     * @param Address l'objet Address
+     */
     public function setAddress(Address $address) {
-        
-        if ($address instanceof Address) {
-            $this->address = $address;
-        }
-        else {
-            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Address");
-        }
+        $this->address = $address;
     }
 
+    /** Méthode permettant de récupérer l'objet Role
+     * @return Role l'objet Role
+     */
     public function getRole(): Role {
         return $this->role;
     }
 
+    /** Méthode permettant de définir l'objet Role
+     * @param Role l'objet Role
+     */
     public function setRole(Role $role) {
-
-        if ($role instanceof Role) {
-            $this->role = $role;
-        }
-        else {
-            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Role");
-        }
+        $this->role = $role;
     }
 
+    /** Méthode permettant de vérifier si une valeur correspond à un pattern donné
+     * @param string $pattern Le pattern à vérifier
+     * @param string $input La valeur à vérifier
+     * @return boolean Renvoie true si la valeur correspond au pattern, false sinon
+     */
     public function testInput($pattern, $input) {
         return preg_match($pattern, $input);
     }
 
+    /** Méthode permettant de définir le mot de passe déjà haché
+     * @param string Le mot de passe déjà haché
+     * @throws ExceptionPerso Si le mot de passe déjà haché n'est pas vide
+     */
     public function setHachedPassword(string $hachedPassword) {
 
+        //Vérifie si le mot de passe déjà haché n'est pas vide
         if (!empty($hachedPassword)) {
             $this->password = $hachedPassword;
         }

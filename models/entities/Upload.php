@@ -14,33 +14,35 @@ class Upload {
     //Constructeur
 
     //Getters et Setters
+
+    /** Méthode permettant de récupérer l'objet Person
+     * @return Person l'objet Person
+     */
     public function getPerson() : Person {
         return $this->person;
     }
 
+    /** Méthode permettant de définir l'objet Person
+     * @param Person l'objet Person
+     */
     public function setPerson(Person $person) {
-
-        if ($person instanceof Person) {
-            $this->person = $person;
-        }
-        else {
-            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Person");
-        }
+        $this->person = $person;
     }
     
+    /** Méthode permettant de récupérer l'objet Document
+     * @return Document l'objet Document
+     */
     public function getDocument() : Document {
         return $this->document;
     }
 
+    /** Méthode permettant de définir l'objet Document
+     * @param Document l'objet Document
+     */
     public function setDocument(Document $document) {
-
-        if ($document instanceof Document) {
-            $this->document = $document;
-        }
-        else {
-            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Document");
-        }
+        $this->document = $document;    
     }
+
     public function getUploadDate() : string {
         return $this->uploadDate;
     }

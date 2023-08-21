@@ -14,32 +14,33 @@ class Reservation {
     //Constructeur
 
     //Getters et Setters
+
+    /** Méthode permettant de récupérer l'objet Activity
+     * @return Activity l'objet Activity
+     */
     public function getActivity() : Activity {
         return $this->activity;
     }
 
+    /** Méthode permettant de définir l'objet Activity
+     * @param Activity l'objet Activity
+     */
     public function setActivity(Activity $activity) {
-
-        if ($activity instanceof Activity) {
-            $this->activity = $activity;
-        }
-        else {
-            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Activity");
-        }
+        $this->activity = $activity;
     }
 
+    /** Méthode permettant de récupérer l'objet Person
+     * @return Person l'objet Person
+     */
     public function getPerson() : Person {
         return $this->person;
     }
 
+    /** Méthode permettant de définir l'objet Person
+     * @param Person l'objet Person
+     */
     public function setPerson(Person $person) {
-
-        if ($person instanceof Person) {
-            $this->person = $person;
-        }
-        else {
-            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Person");
-        }
+        $this->person = $person;  
     }
 
     public function getBooking_date() : string {
@@ -50,18 +51,31 @@ class Reservation {
         $this->booking_date = $booking_date;
     }
 
+    /** Méthode permettant de récupérer le status de réservation de l'activité
+     * @return bool le status de réservation de l'activité
+     */
     public function getStatus() : bool {
         return $this->status;
     }
 
+    /** Méthode permettant de définir le status de réservation de l'activité
+     * @param bool le status de réservation de l'activité
+     */
     public function setStatus(bool $status) {
         $this->status = $status;
     }
     
+    /** Méthode permettant de récupérer le nombre de réservation de l'activité
+     * @return int Le nombre de réservation de l'activité
+     */
     public function getNumber_of_reservation() : int {
         return $this->number_of_reservation;
     }
 
+    /** Méthode permettant de définir le nombre de réservation de l'activité
+     * @param int Le nombre de réservation de l'activité
+     * @throws ExceptionPerso Si le nombre de réservation est négatif ou non valide
+     */
     public function setNumber_of_reservation(int $number_of_reservation) {
         $this->number_of_reservation = $number_of_reservation;
     }

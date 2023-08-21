@@ -21,8 +21,6 @@ class Activity implements RegexTester {
     private string $picture;
     private Category $category;
 
-    //Constructeur
-
     //Getters et Setters
 
     /** Méthode permettant de récupérer l'id de l'activité
@@ -34,12 +32,14 @@ class Activity implements RegexTester {
 
     /** Méthode permettant de définir l'id de l'activité
      * @param int L'id de l'activité
-     * 
+     * @throws ExceptionPerso Si l'id est négatif ou non valide
      */
     public function setId(int $id) {
 
+        //Vérifie si l'id est positif
         if($id > 0) {
 
+            //Vérifie si l'id est valide
             if (filter_var($id, FILTER_VALIDATE_INT)) {
                 $this->id = $id;
             } else {
@@ -51,13 +51,21 @@ class Activity implements RegexTester {
         }
     }
 
+    /** Méthode permettant de récupérer l'information additionelle de l'activité
+     * @return string L'information additionelle de l'activité
+     */
     public function getAdditionalInformation() : string {
         return $this->additionalInformation;
     }
 
+    /** Méthode permettant de définir l'information additionelle de l'activité
+     * @param string L'information additionelle de l'activité
+     * @throws ExceptionPerso Si l'information additionelle est non valide
+     */
     public function setAdditionalInformation(string $additionalInformation) {
         $pattern = '/^[a-zA-Z- éèêôâàîïùûç\/]+$/';
 
+        //Vérifie si l'information additionelle correspond au pattern
         if ($this->testInput($pattern, $additionalInformation)) {
             $this->additionalInformation = $additionalInformation;
         } else {
@@ -65,30 +73,42 @@ class Activity implements RegexTester {
         }
     }
 
+    /** Méthode permettant de récupérer la date de début de l'activité
+     * @return string La date de début de l'activité
+     */
     public function getStartDate() : string {
         return $this->startDate;
     }
 
+    /** Méthode permettant de définir la date de début de l'activité
+     * @param string La date de début de l'activité
+     * @throws ExceptionPerso Si la date de début est non valide
+     */
     public function setStartDate(string $startDate) {
 
-        if ($startDate == '') {
+        //Vérifie si la date de début est vide
+        if (empty($startDate)) {
             $this->startDate = '';
         }
         else {
             $format = 'Y-m-d';
-    
+
+            //Vérifie si la date de début de l'activité est au bon format
             if (date_create_from_format($format, $startDate)) {
                list($year, $month, $day) = explode('-', $startDate);
                 $startDate = $year . '/' . $month . '/' . $day;
                 $format = 'Y/m/d';
                 $dateFormat = DateTime::createFromFormat($format, $startDate);
-    
+
+                //Vérifie si la date de début de l'activité correspond au nouveau format défini
                 if ($dateFormat && $dateFormat->format($format) == $startDate) {
                     list($year, $month, $day) = explode('/', $startDate);
-                    
+
+                    //Vérifie si la date de début de l'activité est valide
                     if (checkdate($month, $day, $year)) {
                         $today = new DateTime();
-                      
+
+                        //Vérifie si la date de début de l'activité est inférieure à la date aujourd'hui
                         if ($today <= $dateFormat) {
                             $this->startDate = $startDate;
                         }
@@ -112,27 +132,38 @@ class Activity implements RegexTester {
         }
     }
 
+    /** Méthode permettant de récupérer la date de fin de l'activité
+     * @return string La date de fin de l'activité
+     */
     public function getEndDate() : string {
         return $this->endDate;
     }
 
+    /** Méthode permettant de définir la date de fin de l'activité
+     * @param string La date de fin de l'activité
+     * @throws ExceptionPerso Si la date de fin est non valide
+     */
     public function setEndDate(string $endDate) {
 
-        if ($endDate == '') {
+        //Vérifie si la date de fin est vide
+        if (empty($endDate)) {
             $this->endDate = '';
         }
         else {
             $format = 'Y-m-d';
-    
+
+            //Vérifie si la date de fin de l'activité est au bon format
             if (date_create_from_format($format, $endDate)) {
                list($year, $month, $day) = explode('-', $endDate);
                 $endDate = $year . '/' . $month . '/' . $day;
                 $format = 'Y/m/d';
                 $dateFormat = DateTime::createFromFormat($format, $endDate);
-    
+
+                //Vérifie si la date de fin de l'activité correspond au nouveau format défini
                 if ($dateFormat && $dateFormat->format($format) == $endDate) {
                     list($year, $month, $day) = explode('/', $endDate);
-                    
+
+                    //Vérifie si la date de fin de l'activité est valide
                     if (checkdate($month, $day, $year)) {                      
                         $this->endDate = $endDate;    
                     }
@@ -150,15 +181,23 @@ class Activity implements RegexTester {
         }
     }
 
+    /** Méthode permettant de récupérer l'heure de début de l'activité
+     * @return string L'heure de début de l'activité
+     */
     public function getStartHour() : string {
         return $this->startHour;
     }
 
+    /** Méthode permettant de définir l'heure de début de l'activité
+     * @param string L'heure de début de l'activité
+     * @throws ExceptionPerso Si l'heure de début est non valide
+     */
     public function setStartHour(string $startHour) {
         date_default_timezone_set('Europe/Paris');
         $format = 'H\h\:i';
         $hourFormat = DateTime::createFromFormat($format, $startHour);
-        
+
+        //Vérifie si l'heure de début de l'activité est au bon format
         if ($hourFormat && $hourFormat->format($format) == $startHour) {
             $this->startHour = $startHour;
         }
@@ -167,15 +206,23 @@ class Activity implements RegexTester {
         }
     }
 
+    /** Méthode permettant de récupérer l'heure de fin de l'activité
+     * @return string L'heure de fin de l'activité
+     */
     public function getEndHour() : string {
         return $this->endHour;
     }
 
+    /** Méthode permettant de définir l'heure de fin de l'activité
+     * @param string L'heure de fin de l'activité
+     * @throws ExceptionPerso Si l'heure de fin est non valide
+     */
     public function setEndHour(string $endHour) {
         date_default_timezone_set('Europe/Paris');
         $format = 'H\h\:i';
         $hourFormat = DateTime::createFromFormat($format, $endHour);
-        
+
+        //Vérifie si l'heure de fin de l'activité est au bon format
         if ($hourFormat && $hourFormat->format($format) == $endHour) {
             $this->endHour = $endHour;
         }
@@ -184,35 +231,52 @@ class Activity implements RegexTester {
         }
     }
 
+     /** Méthode permettant de récupérer la description de l'activité
+     * @return string La description de l'activité
+     */
     public function getDescription() : string {
         return $this->description;
     }
 
+    /** Méthode permettant de définir la description de l'activité
+     * @param string La description de l'activité
+     */
     public function setDescription(string $description) {
         $this->description = $description;
     }
 
+    /** Méthode permettant de récupérer le lien de l'image de l'activité
+     * @return string Le lien de l'image de l'activité
+     */
     public function getPicture() : string {
         return $this->picture;
     }
 
+    /** Méthode permettant de définir le lien de l'image de l'activité
+     * @param string Le lien de l'image de l'activité
+     * @throws ExceptionPerso Si le lien de l'image est non valide
+     */
     public function setPicture(string $picture) {
         $error = $_FILES['userfile']['error'];
-        
+
+        //Vérifie s'il n'y a pas d'erreur
         if ($error == 0) {
             $path = $_FILES['userfile']['tmp_name'];
             $expectedType = ['image/png', 'image/jpeg'];
             $mineType = mime_content_type($path . $picture);
-    
+
+            //Vérifie si le type mime de l'image correspond aux types mime définis dans le tableau
             if (in_array($mineType, $expectedType)) {
                 $maxWidth = 1000;
                 $maxHeight = 1000;
                 list($width, $height) = getimagesize($path . $picture);
-    
+
+                //Vérifie si l'image ne dépasse pas une certaine dimension
                 if ($maxWidth >= $width || $maxHeight >= $height) {
                     $maxSize = 10000;
                     $fileSize = filesize($path . $picture);
-                    
+
+                    //véririe si le poid de l'image ne dépasse pas une certaine valeur 
                     if ($maxSize >= $fileSize) {
                         $pathUpload = '../../assets/img/uploadPicture/';
                         $fileName = pathinfo($_FILES['userfile']['name']);
@@ -220,6 +284,7 @@ class Activity implements RegexTester {
                         $newUploadFileName = uniqid($fileName['filename'], true);
                         $fileNameWithTargetDirectory = $pathUpload . $newUploadFileName . '.' . $fileExtension;
                         
+                        //Vérifie si l'image peut être déplacée du fichier temporaire à la nouvelle destination
                         if (move_uploaded_file($path, $fileNameWithTargetDirectory)) {
                             $this->picture = $picture;
                         }
@@ -242,28 +307,40 @@ class Activity implements RegexTester {
         }
     }
 
+    /** Méthode permettant de récupérer l'objet Catégorie de l'activité
+     * @return Category L'objet Catégorie de l'activité
+     */
     public function getCategory() : Category {
         return $this->category;
     }
 
+    /** Méthode permettant de définir l'objet Catégorie de l'activité
+     * @param Category L'objet Catégorie de l'activité
+     */
     public function setCategory(Category $category) {
-
-        if ($category instanceof Category) {
-            $this->category = $category;
-        }
-        else {
-            throw new ExceptionPerso("Ceci n'est pas une instance de la classe Category");
-        }
+        $this->category = $category; 
     }
 
+    /** Méthode permettant de vérifier si une valeur correspond à un pattern donné
+     * @param string $pattern Le pattern à vérifier
+     * @param string $input La valeur à vérifier
+     * @return boolean Renvoie true si la valeur correspond au pattern, false sinon
+     */
     public function testInput($pattern, $input) {
         return preg_match($pattern, $input);
     }
 
+    /** Méthode permettant de comparer deux dates et défini la date de fin si elle 
+     * est postérieur à la date de début
+     * @param string $startDate La date de début au format 'Y/m/d'
+     * @param string $endDate La date de fin au format 'Y/m/d'
+     * @throws ExceptionPerso Si la date de fin est antérieure ou égale à la date de début 
+     */
     public function compareDates(string $startDate, string $endDate) {
         $timestampStartDate = strtotime($startDate);
         $timestampEndDate = strtotime($endDate);
 
+        //Vérifie si la date de fin est postérieure à la date de début
         if ($timestampStartDate < $timestampEndDate) {
             $this->endDate = $endDate;
         }

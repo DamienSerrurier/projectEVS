@@ -1,9 +1,9 @@
 RewriteEngine on
 Options +FollowSymLinks
-RewriteRule home index.php?page=home
-RewriteRule accountCreation index.php?page=accountCreation
-RewriteRule accountConnection index.php?page=accountConnection
-RewriteRule accountLogout index.php?page=accountLogout
-RewriteRule userSpace index.php?page=userSpace
-RewriteRule educationalEstablishment index.php?page=educationalEstablishment
-RewriteRule administratorSpace index.php?page=administratorSpace
+RewriteRule home index.php?page=home [QSA]
+RewriteRule accountCreation index.php?page=accountCreation [QSA]
+RewriteRule accountConnection index.php?page=accountConnection [QSA]
+RewriteRule accountLogout index.php?page=accountLogout [QSA]
+RewriteRule userSpace index.php?page=userSpace [QSA]
+RewriteRule educationalEstablishment index.php?page=educationalEstablishment [QSA]
+RewriteRule administratorSpace index.php?page=administratorSpace [QSA]

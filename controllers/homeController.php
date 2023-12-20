@@ -1,7 +1,7 @@
 <?php
 
 require_once 'models/managers/connection.php';
-require_once 'app/function.php';
+require_once 'utility/function.php';
 
 sessionStartWithGenerateToken('token');
 

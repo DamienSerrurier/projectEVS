@@ -2,7 +2,8 @@
 
 namespace ProjectEvs;
 
-require_once '../../utility/exceptions/ExceptionPerso.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
+ . 'utility' . DIRECTORY_SEPARATOR . 'exceptions' . DIRECTORY_SEPARATOR . 'ExceptionPerso.php';
 
 class Supervisor implements RegexTester {
 
@@ -26,7 +27,7 @@ class Supervisor implements RegexTester {
     }
 
     /** Méthode permettant de définir l'id du superviseur
-     * @param int L'id du superviseur
+     * @param int $id L'id du superviseur
      * @throws ExceptionPerso Si l'id est négatif ou non valide
      */
     public function setId(int $id) {
@@ -46,16 +47,16 @@ class Supervisor implements RegexTester {
         }
     }
 
-    /** Méthode permettant de récupérer le nom du superviseur
-     * @return string Le nom du superviseur
+    /** Méthode permettant de récupérer le nom de l'établissement scolaire
+     * @return string Le nom de l'établissement scolaire
      */
     public function getSchool() : string {
         return $this->school;
     }
 
-    /** Méthode permettant de définir le nom du superviseur
-     * @param string Le nom du superviseur
-     * @throws ExceptionPerso Si le nom du superviseur est non valide
+    /** Méthode permettant de définir le nom de l'établissement scolaire
+     * @param string $school Le nom de l'établissement scolaire
+     * @throws ExceptionPerso Si le nom de l'établissement scolaire est non valide
      */
     public function setSchool(string $school) {
 
@@ -63,7 +64,7 @@ class Supervisor implements RegexTester {
         if (!empty($school)) {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
-            //Vérifie si le nom du superviseur correspond au pattern
+            //Vérifie si le nom de l'établissement scolaire correspond au pattern
             if ($this->testInput($pattern, $school)) {
                 $this->school = $school;
             } else {
@@ -82,7 +83,7 @@ class Supervisor implements RegexTester {
     }
 
     /** Méthode permettant de définir le nom de la ville où se trouve l'école
-     * @param string Le nom de la ville où se trouve l'école
+     * @param string $schoolCity Le nom de la ville où se trouve l'école
      * @throws ExceptionPerso Si le nom de la ville où se trouve l'école est non valide
      */
     public function setSchoolCity(string $schoolCity) {
@@ -149,7 +150,7 @@ class Supervisor implements RegexTester {
      * @param string $input La valeur à vérifier
      * @return boolean Renvoie true si la valeur correspond au pattern, false sinon
      */
-    public function testInput($pattern, $input) {
+    public function testInput(string $pattern, string $input) {
         return preg_match($pattern, $input);
     }
 

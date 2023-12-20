@@ -1,6 +1,11 @@
 const divMemberResponsible = document.getElementById('memberResponsible');
-const responsibleSelect = document.getElementById('responsibleSelect');
+let responsibleSelect = document.getElementById('responsibleSelect');
+console.log(divMemberResponsible);
 
+/**Fonction asynchrone permettant d'attribuer un nombre de responsable
+ * @param {*} responsibleValue 
+ * @returns doc
+ */
 let asyncChoiceNumberMember = async function (responsibleValue) {
 
     try {
@@ -8,7 +13,7 @@ let asyncChoiceNumberMember = async function (responsibleValue) {
 
         if (response.ok) {
             let data = await response.text();
-            let parser = new DOMParser();
+            const parser = new DOMParser();
             doc = parser.parseFromString(data, 'text/html');
             return doc;
         } else {
@@ -19,23 +24,23 @@ let asyncChoiceNumberMember = async function (responsibleValue) {
     }
 }
 
+//Ecouteur d'événement sur le bouton select
 responsibleSelect.addEventListener('change', function () {
     let responsibleValue = parseInt(responsibleSelect.value);
 
+    //Vérifie si la valeur est égale à 0 et réinitialise l'élément div du formulaire
     if (responsibleValue === 0) {
-
         divMemberResponsible.innerHTML = '';
-        responsibleSelect = 0;
-        
     }
-    if (!isNaN(responsibleValue && responsibleValue > 0 && responsibleValue <= 2)) {
-
-        asyncChoiceNumberMember(responsibleValue).then(doc => {
-            const docMemberResponsible = doc.querySelector('#memberResponsible');
-            divMemberResponsible.innerHTML = docMemberResponsible.innerHTML;
-        });
-    } else {
-        alert(new Error("Veuillez faire un choix"));
+    else {
+        //Vérifie si c'est un nombre et que ce nombre soit à la fois plus grand que 0 et plus petit ou égale à 2 
+        if (!isNaN(responsibleValue && responsibleValue > 0 && responsibleValue <= 2)) {
+    
+            asyncChoiceNumberMember(responsibleValue).then(doc => {
+                const docMemberResponsible = doc.querySelector('#memberResponsible');
+                divMemberResponsible.innerHTML = docMemberResponsible.innerHTML;
+            });
+        }
     }
 
     const regexText = /^[a-zA-Z- éèêôâàîïùûç]+$/;

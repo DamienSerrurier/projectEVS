@@ -1,11 +1,17 @@
 <?php
 
-require_once 'utility/exceptions/ExceptionPersoDAO.php';
 require_once 'models/managers/connection.php';
+require_once 'utility/exceptions/ExceptionPersoDAO.php';
 require_once 'models/entities/Person.php';
 
 class AccountCreationManager {
 
+    /** Méthode permettant d'insérer un utilisateur dans la base de données
+     * 
+     * @param array $arrayParametters
+     * @return boolean
+     * @throws EcxecptionPersoDAO
+     */
     public static function insertUser(array $arrayParametters) {
         try {
             $pdo = baseConnection();

@@ -2,8 +2,8 @@
 
 use PhpParser\Node\Stmt;
 
-require_once 'utility/exceptions/ExceptionPersoDAO.php';
 require_once 'models/managers/connection.php';
+require_once 'utility/exceptions/ExceptionPersoDAO.php';
 require_once 'models/entities/Person.php';
 
 class AccountConnectionManager {

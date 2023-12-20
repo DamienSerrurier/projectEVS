@@ -2,7 +2,8 @@
 
 namespace ProjectEvs;
 
-require_once '../../utility/exceptions/ExceptionPerso.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
+ . 'utility' . DIRECTORY_SEPARATOR . 'exceptions' . DIRECTORY_SEPARATOR . 'ExceptionPerso.php';
 
 use ProjectEvs\ExceptionPerso;
 
@@ -58,13 +59,20 @@ class Address implements RegexTester {
      * @throws ExceptionPerso Si le numéro de rue est non valide
      */
     public function setStreetNumber(string $streetNumber) {
-        $pattern = '/^\d+\s?[a-zA-Z\s]*$/';
 
-        //Vérifie si le numéro de rue correspond au pattern
-        if ($this->testInput($pattern, $streetNumber)) {
-            $this->streetNumber = $streetNumber;
-        } else {
-            throw new ExceptionPerso("Le numéro de rue n'est pas valide");
+        //Vérifie si le champ est vide
+        if (empty($streetNumber)) {
+            $this->streetNumber = '';
+        }
+        else {
+            $pattern = '/^\d+\s?[a-zA-Z\s]*$/';
+    
+            //Vérifie si le numéro de rue correspond au pattern
+            if ($this->testInput($pattern, $streetNumber)) {
+                $this->streetNumber = $streetNumber;
+            } else {
+                throw new ExceptionPerso("Le numéro de rue n'est pas valide");
+            }
         }
     }
 
@@ -108,13 +116,20 @@ class Address implements RegexTester {
      * @throws ExceptionPerso Si le complément d'adresse est non valide
      */
     public function setStreetComplement(string $streetComplement) {
-        $pattern = '/^[\w\s-]*$/';
 
-        //Vérifie si le complément d'adresse correspond au pattern
-        if ($this->testInput($pattern, $streetComplement)) {
-            $this->streetComplement = $streetComplement;
-        } else {
-            throw new ExceptionPerso("Le nom du complément d'adresse n'est pas valide");
+        //Vérifie si le champ est vide
+        if (empty($streetComplement)) {
+            $this->streetComplement = '';
+        }
+        else {
+            $pattern = '/^[\w\s-]*$/';
+    
+            //Vérifie si le complément d'adresse correspond au pattern
+            if ($this->testInput($pattern, $streetComplement)) {
+                $this->streetComplement = $streetComplement;
+            } else {
+                throw new ExceptionPerso("Le nom du complément d'adresse n'est pas valide");
+            }
         }
     }
 

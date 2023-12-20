@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS member_data (
     email VARCHAR(255),
     profession VARCHAR(50),
     family_situation VARCHAR(50),
-    caf_number CHAR(10) NOT NULL UNIQUE
+    caf_number CHAR(10) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS _date (

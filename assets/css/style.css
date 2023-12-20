@@ -1,3 +1,11 @@
 li {
     list-style-type: none;
 }
+
+body {
+    background-color: #fcfdec;
+}
+
+.box {
+    background-color: #e8f3f9;
+}

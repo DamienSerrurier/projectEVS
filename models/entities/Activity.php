@@ -332,8 +332,8 @@ class Activity implements RegexTester {
 
     /** Méthode permettant de comparer deux dates et défini la date de fin si elle 
      * est postérieur à la date de début
-     * @param string $startDate La date de début au format 'Y/m/d'
-     * @param string $endDate La date de fin au format 'Y/m/d'
+     * @param string $startDate La date de début au format 'Y-m-d'
+     * @param string $endDate La date de fin au format 'Y-m-d'
      * @throws ExceptionPerso Si la date de fin est antérieure ou égale à la date de début 
      */
     public function compareDates(string $startDate, string $endDate) {

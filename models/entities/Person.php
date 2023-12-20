@@ -21,19 +21,17 @@ class Person implements RegexTester {
     protected Address $address;
     private Role $role;
 
-    //Constructeur
-
     //Getters et Setters
 
     /** Méthode permettant de récupérer l'id de la personne
      * @return int L'id de la personne
      */
-    public function getid(): int {
+    public function getId(): int {
         return $this->id;
     }
 
     /** Méthode permettant de définir l'id de la personne
-     * @param int L'id de la personne
+     * @param int $id L'id de la personne
      * @throws ExceptionPerso Si l'id est négatif ou non valide
      */
     public function setId(int $id) {
@@ -45,7 +43,7 @@ class Person implements RegexTester {
             if (filter_var($id, FILTER_VALIDATE_INT)) {
                 $this->id = $id;
             } else {
-                throw new ExceptionPerso("Arrêtez de jouer avec mes posts");
+                throw new ExceptionPerso("Arrêtez de jouer avec mes identifiants");
             }
         }
         else {
@@ -61,7 +59,7 @@ class Person implements RegexTester {
     }
 
      /** Méthode permettant de définir le nom
-     * @param string Le nom
+     * @param string $lastname Le nom
      * @throws ExceptionPerso Si le nom est non valide
      */
     public function setLastname(string $lastname) {
@@ -89,7 +87,7 @@ class Person implements RegexTester {
     }
 
     /** Méthode permettant de définir le prénom
-     * @param string Le prénom
+     * @param string $firstname Le prénom
      * @throws ExceptionPerso Si le prénom est non valide
      */
     public function setFirstname(string $firstname) {
@@ -117,7 +115,7 @@ class Person implements RegexTester {
     }
 
      /** Méthode permettant de définir le numéro de téléphone
-     * @param string Le numéro de téléphone
+     * @param string $phone Le numéro de téléphone
      * @throws ExceptionPerso Si le numéro de téléphone est non valide
      */
     public function setPhone(?string $phone) {
@@ -166,15 +164,15 @@ class Person implements RegexTester {
             $this->avatar = $avatar;
     }
 
-    /** Méthode permettant de récupérer l'adresse mail
-     * @return string L'adresse mail
+    /** Méthode permettant de récupérer l'adresse mail de l'utilisateur
+     * @return string L'adresse mail de l'utilisateur
      */
     public function getEmail(): string {
         return $this->email;
     }
 
-    /** Méthode permettant de définir l'adresse mail
-     * @param string L'adresse mail
+    /** Méthode permettant de définir l'adresse mail de l'utilisateur
+     * @param string $email L'adresse mail de l'utilisateur
      * @throws ExceptionPerso Si l'adresse mail est non valide
      */
     public function setEmail(string $email) {
@@ -201,7 +199,7 @@ class Person implements RegexTester {
     }
 
     /** Méthode permettant de définir le mot de passe
-     * @param string Le mot de passe
+     * @param string $password Le mot de passe
      * @throws ExceptionPerso Si le mot de passe est non valide
      */
     public function setPassword(string $password) {
@@ -262,13 +260,13 @@ class Person implements RegexTester {
      * @param string $input La valeur à vérifier
      * @return boolean Renvoie true si la valeur correspond au pattern, false sinon
      */
-    public function testInput($pattern, $input) {
+    public function testInput(string $pattern, string $input) {
         return preg_match($pattern, $input);
     }
 
     /** Méthode permettant de définir le mot de passe déjà haché
-     * @param string Le mot de passe déjà haché
-     * @throws ExceptionPerso Si le mot de passe déjà haché n'est pas vide
+     * @param string $hachedPassword Le mot de passe déjà haché
+     * @throws ExceptionPerso Si le mot de passe déjà haché est vide
      */
     public function setHachedPassword(string $hachedPassword) {
 

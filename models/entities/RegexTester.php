@@ -11,5 +11,5 @@ interface RegexTester {
     //Elle prend deux paramètres : 
     //$pattern une expression régulière
     //$input la chaîne de caractères à tester avec cette expression régulière
-    public function testInput($pattern, $input);
+    public function testInput(string $pattern, string $input);
 }

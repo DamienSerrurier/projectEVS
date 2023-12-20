@@ -6,7 +6,6 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
  . 'utility' . DIRECTORY_SEPARATOR . 'exceptions' . DIRECTORY_SEPARATOR . 'ExceptionPerso.php';
 
 use DateTime;
-use Exception;
 use ProjectEvs\ExceptionPerso;
 
 class Member extends Person {
@@ -24,30 +23,48 @@ class Member extends Person {
     
     //Getters et Setters
 
-    /** Méthode permettant de récupérer l'adresse mail
-     * @return string L'adresse mail
+    /** Méthode permettant de récupérer l'id du membre
+     * @return int L'id du membre
      */
-    public function getEmail(): string {
-        return $this->email;
+    public function getId(): int {
+        return parent::getId();
     }
 
-    /** Méthode permettant de définir l'adresse mail
-     * @param string L'adresse mail
-     * @throws ExceptionPerso Si l'adresse mail est non valide
+    /** Méthode permettant de définir l'id du membre
+     * @param int $id L'id du membre
+     * @throws ExceptionPerso Reprends les exceptions du parent
+     */
+    public function setId(int $id) {
+
+        //Vérifie si l'id est null
+        if($id === null) {
+            $this->id = null;
+        }
+        else {
+            //Reprend le comportement de la classe parente
+            parent::setId($id);
+        }
+    }
+
+    /** Méthode permettant de récupérer l'adresse mail du membre
+     * @return string L'adresse mail du membre
+     */
+    public function getEmail(): string {
+        return parent::getEmail();
+    }
+
+    /** Méthode permettant de définir l'adresse mail du membre
+     * @param string $email L'adresse mail du membre
+     * @throws ExceptionPerso Reprends les exceptions du parent
      */
     public function setEmail(?string $email) {
         //Vérifie si l'adresse mail est vide
         if (empty($email)) {
-            $this->email = '';
+            parent::setEmail('');
         } 
         else {
-
-            //Vérifie si l'adresse mail est valide
-            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $this->email = $email;
-            } else {
-                throw new ExceptionPerso("L'adresse mail n'est pas valide");
-            }
+            //Reprend le comportement de la classe parente
+            parent::setEmail($email);      
         }
     }
 
@@ -59,7 +76,7 @@ class Member extends Person {
     }
 
     /** Méthode permettant de définir la date de naissance
-     * @param string La date de naissance
+     * @param string $birthdate La date de naissance
      * @throws ExceptionPerso Si la date de naissance est non valide
      */
     public function setBirthdate(string $birthdate) {
@@ -73,14 +90,11 @@ class Member extends Person {
 
             //Vérifie si la date de naissance est au bon format
             if (date_create_from_format($format, $birthdate)) {
-               list($year, $month, $day) = explode('-', $birthdate);
-                $birthdate = $year . '/' . $month . '/' . $day;
-                $format = 'Y/m/d';
                 $dateFormat = DateTime::createFromFormat($format, $birthdate);
-    
+                
                 //Vérifie si la date de naissance correspond au nouveau format défini
                 if ($dateFormat && $dateFormat->format($format) == $birthdate) {
-                    list($year, $month, $day) = explode('/', $birthdate);
+                    list($year, $month, $day) = explode('-', $birthdate);
                     
                     //Vérifie si la date de naissance est valide
                     if (checkdate($month, $day, $year)) {
@@ -116,7 +130,7 @@ class Member extends Person {
     }
 
     /** Méthode permettant de définir le nom du lieu de naissance
-     * @param string Le nom du lieu de naissance
+     * @param string $placeOfBirth Le nom du lieu de naissance
      * @throws ExceptionPerso Si le nom du lieu de naissance est non valide
      */
     public function setPlaceOfBirth(string $placeOfBirth) {
@@ -126,7 +140,7 @@ class Member extends Person {
             $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
             //Vérifie si le nom du lieu de naissance correspond au pattern
-            if ($this->testInput($pattern, $placeOfBirth)) {
+            if (parent::testInput($pattern, $placeOfBirth)) {
                 $this->placeOfBirth = $placeOfBirth;
             } else {
                 throw new ExceptionPerso("Le nom de la ville n'est pas valide");
@@ -158,17 +172,23 @@ class Member extends Person {
     }
 
     /** Méthode permettant de définir le nom de la profession
-     * @param string Le nom de la profession
+     * @param string $profession Le nom de la profession
      * @throws ExceptionPerso Si le nom de la profession
      */
     public function setProfession(string $profession) {
-        $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
-        //Vérifie si le nom de la profession correspond au pattern
-        if ($this->testInput($pattern, $profession)) {
-            $this->profession = $profession;
-        } else {
-            throw new ExceptionPerso("Le nom de la profession n'est pas valide");
+        if (empty($profession)) {
+            return $this->profession = '';
+        }
+        else {
+            $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
+    
+            //Vérifie si le nom de la profession correspond au pattern
+            if (parent::testInput($pattern, $profession)) {
+                $this->profession = $profession;
+            } else {
+                throw new ExceptionPerso("Le nom de la profession n'est pas valide");
+            }
         }
     }
 
@@ -180,17 +200,23 @@ class Member extends Person {
     }
 
     /** Méthode permettant de définir le nom de la situation familiale
-     * @param string Le nom de la situation familiale
+     * @param string $familySituation Le nom de la situation familiale
      * @throws ExceptionPerso Si le nom de la situation familiale
      */
     public function setFamilySituation(string $familySituation) {
-        $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
 
-        //Vérifie si le nom de la situation familiale correspond au pattern
-        if ($this->testInput($pattern, $familySituation)) {
-            $this->familySituation = $familySituation;
-        } else {
-            throw new ExceptionPerso("Le nom de la situation de famille n'est pas valide");
+        if (empty($familySituation)) {
+            return $this->familySituation = '';
+        }
+        else {
+            $pattern = '/^[a-zA-Z- éèêôâàîïùûç]+$/';
+    
+            //Vérifie si le nom de la situation familiale correspond au pattern
+            if (parent::testInput($pattern, $familySituation)) {
+                $this->familySituation = $familySituation;
+            } else {
+                throw new ExceptionPerso("Le nom de la situation de famille n'est pas valide");
+            }
         }
     }
 
@@ -202,17 +228,17 @@ class Member extends Person {
     }
 
      /** Méthode permettant de définir le numéro de caf
-     * @param string Le numéro de caf
+     * @param string $cafNumber Le numéro de caf
      * @throws ExceptionPerso Si le numéro de caf est non valide
      */
     public function setCafNumber(string $cafNumber) {
 
         //Vérifie si le champ n'est pas vide
         if (!empty($cafNumber)) {
-            $pattern = '/^\d{7}\s\d{2}$/';
+            $pattern = '/^[0-9]{7}[A-Z]$/';
 
             //Vérifie si le numéro de caf correspond au pattern
-            if ($this->testInput($pattern, $cafNumber)) {
+            if (parent::testInput($pattern, $cafNumber)) {
                 $this->cafNumber = $cafNumber;
             } else {
                 throw new ExceptionPerso("Le numéro d'allocation familiale n'est pas valide");
@@ -228,5 +254,9 @@ class Member extends Person {
 
     public function setRegistrationDate(string $registrationDate) {
         $this->registrationDate = $registrationDate;
+    }
+
+    public function __toString() {
+        return $this->getid();
     }
 }

@@ -56,7 +56,7 @@ class Avatar {
     public function setPicture(string $picture) {
         $error = $_FILES['userfile']['error'];
 
-        //Vérifie s'il n'y a pas d'erreur
+        //Vérifie si error est égale à zéro
         if ($error == 0) {
             $path = '../../assets/test/';
             $expectedType = ['image/png', 'image/jpeg'];
@@ -95,7 +95,7 @@ class Avatar {
                 }
             }
             else {
-                throw new ExceptionPerso("Veuillez choisir un fichier image (png, jpeg / jpg ou GIF)");
+                throw new ExceptionPerso("Veuillez choisir un fichier image (png ou jpeg)");
             }
         }
         else {

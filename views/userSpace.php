@@ -15,40 +15,60 @@
     ?>
 
     <section>
-        <div class="border py-3 mb-lg-5">
+        <div class="colorLine box py-3 mb-lg-5">
             <h2 class="text-center">Espace utilisateur</h2>
         </div>
 
-        <?php
-        if (isset($_SESSION['success'])) :
-        ?>
-            <p class="text-success"><?= $_SESSION['success'] ?></p>
-        <?php
-            unset($_SESSION['success']);
-        endif;
-        ?>
 
-        <form action="userSpace" method="post">
+        <form action="userSpace" method="post" id="form">
             <div class="container p-4">
+                <?php
+                if (isset($_SESSION['success'])) :
+                ?>
+                    <p class="text-success"><?= $_SESSION['success'] ?></p>
+                <?php
+                    unset($_SESSION['success']);
+                endif;
+                ?>
+
+                <?php
+                if (isset($_SESSION['info'])) :
+                ?>
+                    <p class="text-info"><?= $_SESSION['info'] ?></p>
+                <?php
+                    unset($_SESSION['info']);
+                endif;
+                ?>
                 <div class="form-check">
-                    <p class="text-danger m-0"><?= isset($infoMessages['id']) && !empty($infoMessages['id']) ? htmlspecialchars($infoMessages['id']) : '' ?></p>
 
                     <input class="form-check-input" type="checkbox" name="member" id="member">
                     <label class="form-label-lg fs-6" for="member">J'adhère à l'association EVS Maison Prévert</label>
                 </div>
 
+
                 <div class="row justify-content-between">
                     <div class="col-sm-10 col-md-4 col-xl-3">
                         <label class="form-label-lg fs-6" for="responsibleSelect">Nombre de responsable</label>
                         <select class="form-select form-select-lg my-2 fs-6" name="responsible" id="responsibleSelect">
-                            <option value="">responsable</option>
-                            <option value="" selected>1 responsable</option>
-                            <option value="">2 responsables</option>
+                            <option value="0">responsable</option>
+                            <?php
+                            $maxNumberResponsible = 2;
+                            for ($i = 1; $i <= $maxNumberResponsible; $i++) :
+                                $selected = '';
+                                if (isset($_SESSION['responsible']) && $_SESSION['responsible'] == $i) :
+                                    $selected = 'selected';
+                                endif;
+                            ?>
+                                <option value="<?= $i ?>" <?= $selected ?>><?= $i ?> responsable</option>
+                            <?php
+                            endfor;
+                            ?>
                         </select>
                     </div>
 
                     <div class="col-sm-10 col-md-4 col-xl-2">
-                        <div class="border text-center">
+                        <div class="box rounded
+                        text-center">
                             <p>Cotisation annuelle:</p>
                             <ul>
                                 <li>5/Adulte</li>
@@ -57,141 +77,176 @@
                         </div>
                     </div>
                 </div>
-
-                <fieldset class="border p-4 mt-5" form="">
-                    <legend class="col-form-label-lg">Informations personnelles</legend>
-                    <p class="text-danger m-0"><?= isset($infoMessages['memberCivility']) && !empty($infoMessages['memberCivility']) ? htmlspecialchars($infoMessages['memberCivility']) : '' ?></p>
-
+                <div id="memberResponsible">
                     <?php
-                    if (!empty($resultCivility)) :
-                        foreach ($resultCivility as $value) :
+
+                    if (isset($_SESSION['responsible']) && $_SESSION['responsible'] > 0) :
+                        unset($_SESSION['info']);
+                        // var_dump($_SESSION['responsible']);
+
+                        for ($i = 1; $i <= $_SESSION['responsible']; $i++) :
                     ?>
-                            <input class="form-check-input" type="radio" name="memberCivility" id="choice <?= htmlspecialchars($value->getId()) ?>" value="<?= htmlspecialchars($value->getId())  ?>">
-                            <label class="form-label-lg fs-6" for="choice <?= htmlspecialchars($value->getId()) ?>"><?= htmlspecialchars($value->getName()) ?></label>
+                            <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['id']) && !empty($arrayInfoMessages[$i]['id']) ? htmlspecialchars($arrayInfoMessages[$i]['id']) : '' ?></p>
+                            <fieldset class="box rounded p-4 mt-5" form="">
+                                <legend class="col-form-label-lg">Informations personnelles</legend>
+                                <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['memberCivility' . $i]) && !empty($arrayInfoMessages[$i]['memberCivility' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['memberCivility' . $i]) : '' ?></p>
+
+                                <?php
+                                if (!empty($resultCivility)) :
+
+                                    foreach ($resultCivility as $value) :
+                                        $checked = '';
+                                        if (isset($arrayParametters[$i]['memberCivility' . $i]) && $arrayParametters[$i]['memberCivility' . $i] == $value->getId()) {
+                                            $checked = 'checked';
+                                        }
+                                ?>
+                                        <input class="form-check-input choice" type="radio" name="memberCivility<?= $i ?>" id="choice <?= htmlspecialchars($value->getId()) . $i ?>" value="<?= htmlspecialchars($value->getId()) ?>" <?= $checked ?>>
+                                        <label class="form-label-lg fs-6" for="choice <?= htmlspecialchars($value->getId()) . $i ?>"><?= htmlspecialchars($value->getName()) ?></label>
+                                <?php
+                                    endforeach;
+                                endif;
+                                ?>
+
+                                <div class="row">
+                                    <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                                        <label class="form-label-lg fs-6" for="memberLastname<?= $i ?>">Nom</label>
+                                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom" type="text" name="memberLastname<?= $i ?>" id="memberLastname<?= $i ?>" value="<?= isset($arrayParametters[$i]['memberLastname' . $i]) ? htmlspecialchars($arrayParametters[$i]['memberLastname' . $i]) : '' ?>">
+                                        <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['memberLastname' . $i]) && !empty($arrayInfoMessages[$i]['memberLastname' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['memberLastname' . $i]) : '' ?></p>
+                                    </div>
+                                    <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                                        <label class="form-label-lg fs-6" for="memberFirstname<?= $i ?>">Prénom</label>
+                                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un prénom" type="text" name="memberFirstname<?= $i ?>" id="memberFirstname<?= $i ?>" value="<?= isset($arrayParametters[$i]['memberFirstname' . $i]) ? htmlspecialchars($arrayParametters[$i]['memberFirstname' . $i]) : '' ?>">
+                                        <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['memberFirstname' . $i]) && !empty($arrayInfoMessages[$i]['memberFirstname' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['memberFirstname' . $i]) : '' ?></p>
+                                    </div>
+                                    <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                                        <label class="form-label-lg fs-6" for="memberMail<?= $i ?>">Adresse mail</label>
+                                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un émail" type="email" name="memberMail<?= $i ?>" id="memberMail<?= $i ?>" value="<?= isset($arrayParametters[$i]['memberMail' . $i]) ? htmlspecialchars($arrayParametters[$i]['memberMail' . $i]) : '' ?>">
+                                        <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['memberMail' . $i]) && !empty($arrayInfoMessages[$i]['memberMail' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['memberMail' . $i]) : '' ?></p>
+                                    </div>
+                                    <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                                        <label class="form-label-lg fs-6" for="memberPhone<?= $i ?>">Téléphone</label>
+                                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un numéro de téléphone" type="tel" name="memberPhone<?= $i ?>" id="memberPhone<?= $i ?>" value="<?= isset($arrayParametters[$i]['memberPhone' . $i]) ? htmlspecialchars($arrayParametters[$i]['memberPhone' . $i]) : '' ?>">
+                                        <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['memberPhone' . $i]) && !empty($arrayInfoMessages[$i]['memberPhone' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['memberPhone' . $i]) : '' ?></p>
+                                    </div>
+                                    <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                                        <label class="form-label-lg fs-6" for="memberBirthdate<?= $i ?>">Date de naissance</label>
+                                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez une date de naissance" type="date" name="memberBirthdate<?= $i ?>" id="memberBirthdate<?= $i ?>" value="<?= isset($arrayParametters[$i]['memberBirthdate' . $i]) ? htmlspecialchars($arrayParametters[$i]['memberBirthdate' . $i]) : '' ?>">
+                                        <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['memberBirthdate' . $i]) && !empty($arrayInfoMessages[$i]['memberBirthdate' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['memberBirthdate' . $i]) : '' ?></p>
+                                    </div>
+                                    <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                                        <label class="form-label-lg fs-6" for="memberBirthPlace<?= $i ?>">Lieu de naissance</label>
+                                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom" type="text" name="memberBirthPlace<?= $i ?>" id="memberBirthPlace<?= $i ?>" value="<?= isset($arrayParametters[$i]['memberBirthPlace' . $i]) ? htmlspecialchars($arrayParametters[$i]['memberBirthPlace' . $i]) : '' ?>">
+                                        <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['memberBirthPlace' . $i]) && !empty($arrayInfoMessages[$i]['memberBirthPlace' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['memberBirthPlace' . $i]) : '' ?></p>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="box rounded p-4 mt-5" form="">
+                                <legend class="col-form-label-lg">Informations habitation</legend>
+
+                                <div class="row justify-content-end">
+                                    <div class="col-sm-10 col-md-4 col-xl-3 mt-3">
+                                        <label class="form-label-lg fs-6" for="memberStreetNumber<?= $i ?>">Numéro de rue</label>
+                                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un numéro de rue" type="text" name="memberStreetNumber<?= $i ?>" id="memberStreetNumber<?= $i ?>" value="<?= isset($arrayParametters[$i]['memberStreetNumber' . $i]) ? htmlspecialchars($arrayParametters[$i]['memberStreetNumber' . $i]) : '' ?>">
+                                        <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['memberStreetNumber' . $i]) && !empty($arrayInfoMessages[$i]['memberStreetNumber' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['memberStreetNumber' . $i]) : '' ?></p>
+                                    </div>
+                                    <div class="col-sm-10 col-md-4 col-xl-9 mt-3">
+                                        <label class="form-label-lg fs-6" for="memberStreetName<?= $i ?>">Nom de rue</label>
+                                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom de rue" type="text" name="memberStreetName<?= $i ?>" id="memberStreetName<?= $i ?>" value="<?= isset($arrayParametters[$i]['memberStreetName' . $i]) ? htmlspecialchars($arrayParametters[$i]['memberStreetName' . $i]) : '' ?>">
+                                        <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['memberStreetName' . $i]) && !empty($arrayInfoMessages[$i]['memberStreetName' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['memberStreetName' . $i]) : '' ?></p>
+                                    </div>
+                                    <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                                        <label class="form-label-lg fs-6" for="memberStreetComplement<?= $i ?>">Complément d'adresse</label>
+                                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un complément d'adresse" type="text" name="memberStreetComplement<?= $i ?>" id="memberStreetComplement<?= $i ?>" value="<?= isset($arrayParametters[$i]['memberStreetComplement' . $i]) ? htmlspecialchars($arrayParametters[$i]['memberStreetComplement' . $i]) : '' ?>">
+                                        <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['memberStreetComplement' . $i]) && !empty($arrayInfoMessages[$i]['memberStreetComplement' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['memberStreetComplement' . $i]) : '' ?></p>
+                                    </div>
+                                    <div class="col-sm-10 col-md-4 col-xl-3 mt-3">
+                                        <label class="form-label-lg fs-6" for="memberZipCode<?= $i ?>">Code postal</label>
+                                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un code postal" type="text" name="memberZipCode<?= $i ?>" id="memberZipCode<?= $i ?>" value="<?= isset($arrayParametters[$i]['memberZipCode' . $i]) ? htmlspecialchars($arrayParametters[$i]['memberZipCode' . $i]) : '' ?>">
+                                        <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['memberZipCode' . $i]) && !empty($arrayInfoMessages[$i]['memberZipCode' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['memberZipCode' . $i]) : '' ?></p>
+                                    </div>
+                                    <div class="col-sm-10 col-md-4 col-xl-3 mt-3">
+                                        <label class="form-label-lg fs-6" for="memberCity<?= $i ?>">Ville</label>
+                                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez une ville" type="text" name="memberCity<?= $i ?>" id="memberCity<?= $i ?>" value="<?= isset($arrayParametters[$i]['memberCity' . $i]) ? htmlspecialchars($arrayParametters[$i]['memberCity' . $i]) : '' ?>">
+                                        <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['memberCity' . $i]) && !empty($arrayInfoMessages[$i]['memberCity' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['memberCity' . $i]) : '' ?></p>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="box rounded p-4 mt-5 mb-2" form="">
+                                <legend class="col-form-label-lg">Informations de situation</legend>
+
+                                <div class="row">
+                                    <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                                        <label class="form-label-lg fs-6" for="profession<?= $i ?>">Profession</label>
+                                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Une profession" type="text" name="profession<?= $i ?>" id="profession<?= $i ?>" value="<?= isset($arrayParametters[$i]['profession' . $i]) ? htmlspecialchars($arrayParametters[$i]['profession' . $i]) : '' ?>">
+                                        <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['profession' . $i]) && !empty($arrayInfoMessages[$i]['profession' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['profession' . $i]) : '' ?></p>
+                                    </div>
+                                    <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                                        <label class="form-label-lg fs-6" for="familySituation<?= $i ?>">Situation de famille</label>
+                                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="une situation de famille" type="text" name="familySituation<?= $i ?>" id="familySituation<?= $i ?>" value="<?= isset($arrayParametters[$i]['familySituation' . $i]) ? htmlspecialchars($arrayParametters[$i]['familySituation' . $i]) : '' ?>">
+                                        <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['familySituation' . $i]) && !empty($arrayInfoMessages[$i]['familySituation' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['familySituation' . $i]) : '' ?></p>
+                                    </div>
+                                    <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                                        <label class="form-label-lg fs-6" for="cafNumber<?= $i ?>">Numéro d'identifiant d'allocation familiale</label>
+                                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="un numéro d'identifiant d'allocation familiale" type="text" name="cafNumber<?= $i ?>" id="cafNumber<?= $i ?>" value="<?= isset($arrayParametters[$i]['cafNumber' . $i]) ? htmlspecialchars($arrayParametters[$i]['cafNumber' . $i]) : '' ?>">
+                                        <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['cafNumber' . $i]) && !empty($arrayInfoMessages[$i]['cafNumber' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['cafNumber' . $i]) : '' ?></p>
+                                    </div>
+                                </div>
+                            </fieldset>
                     <?php
-                        endforeach;
+                        endfor;
                     endif;
                     ?>
-
-                    <div class="row">
-                        <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
-                            <label class="form-label-lg fs-6" for="memberLastname">Nom</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom" type="text" name="memberLastname" id="memberLastname">
-                            <p class="text-danger m-0"><?= isset($infoMessages['memberLastname']) && !empty($infoMessages['memberLastname']) ? htmlspecialchars($infoMessages['memberLastname']) : '' ?></p>
-                        </div>
-                        <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
-                            <label class="form-label-lg fs-6" for="memberFirstname">Prénom</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un prénom" type="text" name="memberFirstname" id="memberFirstname">
-                            <p class="text-danger m-0"><?= isset($infoMessages['memberFirstname']) && !empty($infoMessages['memberFirstname']) ? htmlspecialchars($infoMessages['memberFirstname']) : '' ?></p>
-                        </div>
-                        <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
-                            <label class="form-label-lg fs-6" for="memberMail">Adresse mail</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un émail" type="email" name="memberMail" id="memberMail">
-                            <p class="text-danger m-0"><?= isset($infoMessages['memberMail']) && !empty($infoMessages['memberMail']) ? htmlspecialchars($infoMessages['memberMail']) : '' ?></p>
-                        </div>
-                        <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
-                            <label class="form-label-lg fs-6" for="memberPhone">Téléphone</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un numéro de téléphone" type="tel" name="memberPhone" id="memberPhone">
-                            <p class="text-danger m-0"><?= isset($infoMessages['memberPhone']) && !empty($infoMessages['memberPhone']) ? htmlspecialchars($infoMessages['memberPhone']) : '' ?></p>
-                        </div>
-                        <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
-                            <label class="form-label-lg fs-6" for="memberBirthdate">Date de naissance</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez une date de naissance" type="date" name="memberBirthdate" id="memberBirthdate">
-                            <p class="text-danger m-0"><?= isset($infoMessages['memberBirthdate']) && !empty($infoMessages['memberBirthdate']) ? htmlspecialchars($infoMessages['memberBirthdate']) : '' ?></p>
-                        </div>
-                        <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
-                            <label class="form-label-lg fs-6" for="memberBirthPlace">Lieu de naissance</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom" type="text" name="memberBirthPlace" id="memberBirthPlace">
-                            <p class="text-danger m-0"><?= isset($infoMessages['memberBirthPlace']) && !empty($infoMessages['memberBirthPlace']) ? htmlspecialchars($infoMessages['memberBirthPlace']) : '' ?></p>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset class="border p-4 mt-5" form="">
-                    <legend class="col-form-label-lg">Informations habitation</legend>
-
-                    <div class="row justify-content-end">
-                        <div class="col-sm-10 col-md-4 col-xl-3 mt-3">
-                            <label class="form-label-lg fs-6" for="memberStreetNumber">Numéro de rue</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un numéro de rue" type="text" name="memberStreetNumber" id="memberStreetNumber">
-                        </div>
-                        <div class="col-sm-10 col-md-4 col-xl-9 mt-3">
-                            <label class="form-label-lg fs-6" for="memberStreetName">Nom de rue</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom de rue" type="text" name="memberStreetName" id="memberStreetName">
-                        </div>
-                        <div class="col-sm-10 col-md-4 col-xl-7 mt-3">
-                            <label class="form-label-lg fs-6" for="memberStreetComplement">Complément
-                                d'adresse</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un complément d'adresse" type="text" name="memberStreetComplement" id="memberStreetComplement">
-                        </div>
-                        <div class="col-sm-10 col-md-4 col-xl-3 mt-3">
-                            <label class="form-label-lg fs-6" for="memberZipCode">Code postal</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un code postal" type="text" name="memberZipCode" id="memberZipCode">
-                        </div>
-                        <div class="col-sm-10 col-md-4 col-xl-2 mt-3">
-                            <label class="form-label-lg fs-6" for="memberCity">Ville</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez une ville" type="text" name="memberCity" id="memberCity">
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset class="border p-4 mt-5 mb-2" form="">
-                    <legend class="col-form-label-lg">Informations de situation</legend>
-
-                    <div class="row">
-                        <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
-                            <label class="form-label-lg fs-6" for="profession">Profession</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Une profession" type="text" name="profession" id="profession">
-                        </div>
-                        <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
-                            <label class="form-label-lg fs-6" for="familySituation">Situation de famille</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="une situation de famille" type="text" name="familySituation" id="familySituation">
-                        </div>
-                        <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
-                            <label class="form-label-lg fs-6" for="cafNumber">Numéro d'identifiant d'allocation
-                                familiale</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="un numéro d'identifiant d'allocation
-                                familiale" type="text" name="cafNumber" id="cafNumber">
-                        </div>
-                    </div>
-                </fieldset>
+                </div>
 
                 <div class="row">
                     <div class="col-sm-10 col-md-4 col-xl-3">
                         <label class="form-label-lg fs-6" for="minorSelect">Nombre de mineurs</label>
                         <select class="form-select form-select-lg my-2 fs-6" name="minor" id="minorSelect">
                             <option value="">mineur</option>
-                            <option value="minor1" selected>1 mineur</option>
+                            <option value="minor1">1 mineur</option>
                             <option value="minor2">2 mineurs</option>
                         </select>
                     </div>
                 </div>
 
-                <fieldset class="border p-4 mt-3 mb-5">
+                <fieldset class="box rounded p-4 mt-3 mb-5">
                     <div class="row">
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="childLastname">Nom</label>
                             <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom d'enfant" type="text" name="childLastname" id="childLastname">
+                            <p class="text-danger m-0"><?= isset($infoMessages['childLastname']) && !empty($infoMessages['childLastname']) ? htmlspecialchars($infoMessages['childLastname']) : '' ?></p>
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                             <label class="form-label-lg fs-6" for="childFirstname">Prénom</label>
                             <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un prénom d'enfant" type="text" name="childFirstname" id="childFirstname">
+                            <p class="text-danger m-0"><?= isset($infoMessages['childFirstname']) && !empty($infoMessages['childFirstname']) ? htmlspecialchars($infoMessages['childFirstname']) : '' ?></p>
                         </div>
-                        <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                        <div class="col-sm-10 col-md-4 col-xl-4 mt-3">
                             <label class="form-label-lg fs-6" for="childBirthdate">Date de naissance</label>
                             <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez la date de naissance d'un enfant" type="date" name="childBirthdate" id="childBirthdate">
+                            <p class="text-danger m-0"><?= isset($infoMessages['childBirthdate']) && !empty($infoMessages['childBirthdate']) ? htmlspecialchars($infoMessages['childBirthdate']) : '' ?></p>
                         </div>
-                        <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                        <div class="col-sm-10 col-md-4 col-xl-4 mt-3">
                             <label class="form-label-lg fs-6" for="childBirthPlace">Lieu de naissance</label>
                             <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un lieu de naissance d'un enfant" type="text" name="childBirthPlace" id="childBirthPlace">
+                            <p class="text-danger m-0"><?= isset($infoMessages['childBirthPlace']) && !empty($infoMessages['childBirthPlace']) ? htmlspecialchars($infoMessages['childBirthPlace']) : '' ?></p>
                         </div>
-                        <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                        <div class="col-sm-10 col-md-4 col-xl-4 mt-3">
                             <label class="form-label-lg fs-6" for="childPhone">Téléphone</label>
                             <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un numéro de téléphone d'un enfant" type="tel" name="childPhone" id="childPhone">
+                            <p class="text-danger m-0"><?= isset($infoMessages['childPhone']) && !empty($infoMessages['childPhone']) ? htmlspecialchars($infoMessages['childPhone']) : '' ?></p>
                         </div>
                         <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
-                            <label class="form-label-lg fs-6" for="childSchool">Ecole</label>
+                            <label class="form-label-lg fs-6" for="childSchool">Etablissement scolaire</label>
                             <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom d'école de l'enfant" type="text" name="childSchool" id="childSchool">
+                            <p class="text-danger m-0"><?= isset($infoMessages['childSchool']) && !empty($infoMessages['childSchool']) ? htmlspecialchars($infoMessages['childSchool']) : '' ?></p>
+                        </div>
+                        <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                            <label class="form-label-lg fs-6" for="childSchoolCity">Ville de l'établissement scolaire</label>
+                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom d'école de l'enfant" type="text" name="childSchoolCity" id="childSchoolCity">
+                            <p class="text-danger m-0"><?= isset($infoMessages['childSchoolCity']) && !empty($infoMessages['childSchoolCity']) ? htmlspecialchars($infoMessages['childSchoolCity']) : '' ?></p>
                         </div>
                     </div>
                 </fieldset>
@@ -294,7 +349,7 @@
                 </div>
 
                 <input type="hidden" name="token1" value="<?= $_SESSION['token1'] ?>">
-                <input class="btn btn-success text-uppercase" type="submit" name="memberCreate" value="Envoyer">
+                <input class="btn btn-success text-uppercase" type="submit" name="memberCreate" id="memberCreate" value="Envoyer">
             </div>
         </form>
 
@@ -351,7 +406,7 @@
         </form>
     </section>
 
-    <div class="border py-3 mb-lg-5">
+    <div class="colorLine box py-3 mb-lg-5">
         <h2 class="text-center">Espace documents éducatifs</h2>
     </div>
 
@@ -397,7 +452,7 @@
     </section>
 
     <section>
-        <div class="border py-3 mb-lg-5">
+        <div class="colorLine box py-3 mb-lg-5">
             <h2 class="text-center">Espace réservation</h2>
         </div>
 
@@ -411,6 +466,7 @@
     ?>
 
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/ajax.js"></script>
 
 </body>
 

@@ -1,11 +1,11 @@
 <?php
 
 require_once 'utility/exceptions/ExceptionPerso.php';
+require_once 'utility/function.php';
 require_once 'models/entities/RegexTester.php';
 require_once 'models/managers/AccountConnecionManager.php';
 require_once 'models/entities/Person.php';
 require_once 'models/entities/Role.php';
-require_once 'app/function.php';
 
 use ProjectEvs\ExceptionPerso;
 use ProjectEvs\Person;
@@ -28,7 +28,8 @@ if (isset($_POST['token'])) {
             $infoMessages = [];
         
             try {
-                $cleanEmail =  $person->setEmail($mail);
+                $person->setEmail($mail);
+                $cleanEmail =  $person->getEmail();
                 $resultQuery = AccountConnectionManager::verifyInfoUserConnection($cleanEmail);
             }
             catch (ExceptionPerso $e){

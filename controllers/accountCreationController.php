@@ -1,11 +1,10 @@
 <?php
 
 require_once 'utility/exceptions/ExceptionPerso.php';
+require_once 'utility/function.php';
 require_once 'models/entities/RegexTester.php';
 require_once 'models/managers/AccountCreationManager.php';
 require_once 'models/entities/Person.php';
-require_once 'app/function.php';
-
 
 use ProjectEvs\ExceptionPerso;
 use ProjectEvs\Person;
@@ -31,7 +30,8 @@ if (isset($_POST['token'])) {
             $arrayParametters = [];
 
             try {
-                $arrayParametters['lastname'] =  $person->setLastname($lastname);
+                $person->setLastname($lastname);
+                $arrayParametters['lastname'] =  $person->getLastname();
 
             } 
             catch (ExceptionPerso $e) {
@@ -39,7 +39,8 @@ if (isset($_POST['token'])) {
             }
 
             try {
-                $arrayParametters['firstname'] =  $person->setFirstname($firstname);
+                $person->setFirstname($firstname);
+                $arrayParametters['firstname'] =  $person->getFirstname();
 
             } 
             catch (ExceptionPerso $e) {
@@ -47,7 +48,8 @@ if (isset($_POST['token'])) {
             }
 
             try {
-                $arrayParametters['mail'] =  $person->setEmail($mail);
+                $person->setEmail($mail);
+                $arrayParametters['mail'] =  $person->getEmail();
 
             } 
             catch (ExceptionPerso $e) {
@@ -57,7 +59,8 @@ if (isset($_POST['token'])) {
             if (($passw == $confPassw)) {
 
                 try {
-                    $arrayParametters['passw'] =  $person->setPassword($passw);
+                    $person->setPassword($passw);
+                    $arrayParametters['passw'] =  $person->getPassword();
 
                 }
                 catch (ExceptionPerso $e) {

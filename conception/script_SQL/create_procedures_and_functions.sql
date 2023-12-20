@@ -519,12 +519,9 @@ BEGIN
     FROM _date
     WHERE yyyy_mm_dd = CURRENT_DATE INTO documentDate;
    
-    IF CURRENT_DATE = documentDate THEN
-        UPDATE _date SET yyyy_mm_dd = CURRENT_DATE
-        WHERE yyyy_mm_dd = CURRENT_DATE;
-    ELSE
-        INSERT INTO _date (yyyy_mm_dd)
-        VALUES (NOW());
+    IF documentDate IS NULL THEN
+    INSERT INTO _date (yyyy_mm_dd)
+    VALUES (CURRENT_DATE);
     END IF;
 
     INSERT INTO document (name, link, id_structure)
@@ -563,12 +560,9 @@ BEGIN
     FROM _date
     WHERE yyyy_mm_dd = CURRENT_DATE INTO reservationDate;
     
-    IF CURRENT_DATE = reservationDate THEN
-        UPDATE _date SET yyyy_mm_dd = CURRENT_DATE
-        WHERE yyyy_mm_dd = CURRENT_DATE;
-    ELSE
-        INSERT INTO _date (yyyy_mm_dd)
-        VALUES (NOW());
+    IF reservationDate IS NULL THEN
+    INSERT INTO _date (yyyy_mm_dd)
+    VALUES (CURRENT_DATE);
     END IF;
 
     INSERT INTO reservation (
@@ -660,6 +654,15 @@ BEGIN
     FROM _member
     WHERE id_person = personId;
 
+    SELECT yyyy_mm_dd INTO registrationDate
+    FROM _date
+    WHERE yyyy_mm_dd = CURRENT_DATE;
+    
+    IF registrationDate IS NULL THEN
+    INSERT INTO _date (yyyy_mm_dd)
+    VALUES (CURRENT_DATE);
+    END IF;
+
     IF memberId IS NULL THEN
         INSERT INTO _member (
                 birthdate,
@@ -675,20 +678,9 @@ BEGIN
             personId,
             memberIdPair,
             idMemberData,
-            NOW()
+            CURRENT_DATE
         ) RETURNING id INTO idMember;
 
-        SELECT yyyy_mm_dd INTO registrationDate
-        FROM _date
-        WHERE yyyy_mm_dd = CURRENT_DATE;
-        
-        IF CURRENT_DATE = registrationDate THEN
-            UPDATE _date SET yyyy_mm_dd = CURRENT_DATE
-            WHERE yyyy_mm_dd = CURRENT_DATE;
-        ELSE
-            INSERT INTO _date (yyyy_mm_dd)
-            VALUES (NOW());
-        END IF;
     ELSE
         UPDATE _member SET birthdate = memberBirthdate,
                            place_of_birth = memberPlaceBirth,
@@ -808,7 +800,7 @@ END;
 $$;
 
 --Appel de fonction permettant de créer ou de mettre à jour un membre adulte avec son adresse
-SELECT insertMemberAdult(5, 'Jaffar', 'kamal', '08 52 21 07 45', '8', 'rue Marie Currie', '', '54130', 'Saint-Max', '1974/03/15', 'Nancy', NULL, 'jaffar@Kamal.fr', 'Comptable', 'Célibataire', '5128746H', 2);
+SELECT insertMemberAdult(5, 'Jaffar', 'kamal', '08 52 21 07 45', '8', 'rue Marie Currie', '', '54130', 'Saint-Max', '1974/03/15', 'Nancy', NULL, 'jaffar@kamal.fr', 'Comptable', 'Célibataire', '5128746H', 2);
 SELECT insertMemberAdult(NULL, 'Jaffar', 'Mathilda', '08 67 20 49 62', '8', 'rue Marie Currie', '', '54130', 'Saint-Max', '1978/06/08', 'Nancy', 1, 'jaffar@mathilda.fr', 'Femme de ménage', 'Célibataire', '5139466H', 1);
 
 --Fonction permettant de créer un membre mineur et rechercher si l'école lui est rattachée et de retourner son id

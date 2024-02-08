@@ -166,12 +166,10 @@ responsibleSelect.addEventListener('change', function () {
     //Vérifie si la valeur est égale à 0 et réinitialise l'élément div du formulaire
     if (responsibleValue === 0) {
         divMemberResponsible.innerHTML = '';
-        console.log(responsibleValue);
     }
     else {
         //Vérifie si c'est un nombre et que ce nombre soit à la fois plus grand que 0 et plus petit ou égale à 2 
         if (!isNaN(responsibleValue && responsibleValue > 0 && responsibleValue <= 2)) {
-            console.log(responsibleValue);
     
             asyncChoiceNumberMember(responsibleValue).then(doc => {
                 const docMemberResponsible = doc.querySelector('#memberResponsible');

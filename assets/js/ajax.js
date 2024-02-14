@@ -1,4 +1,7 @@
 const divMemberResponsible = document.getElementById('memberResponsible');
+const pInfo = document.getElementById('info');
+const textnumberOfResponsible = "Veuillez faire un choix du nombre de responsable";
+const infoText = document.createTextNode(textnumberOfResponsible);
 
 const regexText = /^[a-zA-Z- éèêôâàîïùûç]+$/;
 const regexMail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
@@ -154,7 +157,15 @@ let inputsBlur = function(number) {
             }
         }, true)
     }
+};
+
+if (sessionResponsibleValue > 0) {
+    pInfo.innerHTML = "";
+} 
+else {
+    pInfo.append(infoText);
 }
+
 
 inputsBlur(sessionResponsibleValue);
 
@@ -166,6 +177,7 @@ responsibleSelect.addEventListener('change', function () {
     //Vérifie si la valeur est égale à 0 et réinitialise l'élément div du formulaire
     if (responsibleValue === 0) {
         divMemberResponsible.innerHTML = '';
+        pInfo.innerHtml = pInfo.innerHTML = textnumberOfResponsible;
     }
     else {
         //Vérifie si c'est un nombre et que ce nombre soit à la fois plus grand que 0 et plus petit ou égale à 2 
@@ -173,7 +185,9 @@ responsibleSelect.addEventListener('change', function () {
     
             asyncChoiceNumberMember(responsibleValue).then(doc => {
                 const docMemberResponsible = doc.querySelector('#memberResponsible');
+                const docInfo = doc.getElementById('info');
                 divMemberResponsible.innerHTML = docMemberResponsible.innerHTML;
+                pInfo.innerHTML =  docInfo.innerHtml = "";
             });
         }
     }

@@ -31,21 +31,14 @@
                 endif;
                 ?>
 
-                <?php
-                if (isset($_SESSION['info'])) :
-                ?>
-                    <p class="text-info"><?= $_SESSION['info'] ?></p>
-                <?php
-                    unset($_SESSION['info']);
-                endif;
-                ?>
+                <p class="text-info" id="info"></p>
+
                 <div class="form-check">
 
                     <input class="form-check-input" type="checkbox" name="member" id="member">
                     <label class="form-label-lg fs-6" for="member">J'adhère à l'association EVS Maison Prévert</label>
                 </div>
-
-
+                
                 <div class="row justify-content-between">
                     <div class="col-sm-10 col-md-4 col-xl-3">
                         <label class="form-label-lg fs-6" for="responsibleSelect">Nombre de responsable</label>
@@ -81,8 +74,6 @@
                     <?php
 
                     if (isset($_SESSION['responsible']) && $_SESSION['responsible'] > 0) :
-                        unset($_SESSION['info']);
-                        // var_dump($_SESSION['responsible']);
 
                         for ($i = 1; $i <= $_SESSION['responsible']; $i++) :
                     ?>
@@ -96,9 +87,9 @@
 
                                     foreach ($resultCivility as $value) :
                                         $checked = '';
-                                        if (isset($arrayParametters[$i]['memberCivility' . $i]) && $arrayParametters[$i]['memberCivility' . $i] == $value->getId()) {
+                                        if (isset($arrayParametters[$i]['memberCivility' . $i]) && $arrayParametters[$i]['memberCivility' . $i] == $value->getId()) :
                                             $checked = 'checked';
-                                        }
+                                        endif
                                 ?>
                                         <input class="form-check-input choice" type="radio" name="memberCivility<?= $i ?>" id="choice <?= htmlspecialchars($value->getId()) . $i ?>" value="<?= htmlspecialchars($value->getId()) ?>" <?= $checked ?>>
                                         <label class="form-label-lg fs-6" for="choice <?= htmlspecialchars($value->getId()) . $i ?>"><?= htmlspecialchars($value->getName()) ?></label>
@@ -349,7 +340,7 @@
                 </div>
 
                 <input type="hidden" name="token1" value="<?= $_SESSION['token1'] ?>">
-                <input class="btn btn-success text-uppercase" type="submit" name="memberCreate" id="memberCreate" value="Envoyer">
+                <input class="btn btn-success text-uppercase" type="submit" name="createMember" id="createMember" value="Envoyer">
             </div>
         </form>
 
@@ -357,7 +348,7 @@
 
         <form action="userSpace" method="post">
             <div class="container p-4">
-                <input class="btn btn-danger text-uppercase" type="submit" name="userDelete" value="Suppression">
+                <input class="btn btn-danger text-uppercase" type="submit" name="deleteUser" value="Suppression">
                 <div class="row">
                     <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                         <label class="form-label-lg fs-6" for="astname">Nom</label>
@@ -399,7 +390,7 @@
                     <div>
                         <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
                         <input class="btn btn-secondary text-uppercase" type="button" name="" value="Annulation">
-                        <input class="btn btn-warning text-uppercase" type="submit" name="userUpdate" value="Modification">
+                        <input class="btn btn-warning text-uppercase" type="submit" name="updateUser" value="Modification">
                     </div>
                 </div>
             </div>
@@ -467,6 +458,7 @@
 
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/ajax.js"></script>
+    <script src="../assets/js/userSpaceResponsible.js"></script>
 
 </body>
 

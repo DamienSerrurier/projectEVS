@@ -36,8 +36,8 @@ class UserSpaceManager {
             }
         }
         catch (PDOException $e) {
-            Loggy::warning("Un problème serveur est survenu" . $e);
-            throw new ExceptionPersoDAO("Un problème serveur est survenu");
+            Loggy::warning("Un problème serveur est survenu" . $e->getMessage());
+            throw new ExceptionPersoDAO("Un problème serveur est survenu" . $e->getMessage());
         }
     }
 
@@ -68,8 +68,8 @@ class UserSpaceManager {
             return $stmt->execute();
 
         } catch (PDOException $e) {
-            Loggy::warning("Un problème serveur est survenu" . $e);
-            throw new ExceptionPersoDAO("Un problème serveur est survenu");
+            Loggy::warning("Un problème serveur est survenu" . $e->getMessage());
+            throw new ExceptionPersoDAO("Un problème serveur est survenu" . $e->getMessage());
         }
     }
 
@@ -88,8 +88,8 @@ class UserSpaceManager {
             return $stmt->execute();
 
         } catch (PDOException $e) {
-            Loggy::warning("Un problème serveur est survenu" . $e);
-            throw new ExceptionPersoDAO("Un problème serveur est survenu");
+            Loggy::warning("Un problème serveur est survenu" . $e->getMessage());
+            throw new ExceptionPersoDAO("Un problème serveur est survenu" . $e->getMessage());
         }
     }
 
@@ -114,8 +114,8 @@ class UserSpaceManager {
             }
         }
         catch (PDOException $e) {
-            Loggy::warning("Un problème serveur est survenu" . $e);
-            throw new ExceptionPersoDAO("Un problème serveur est survenu");
+            Loggy::warning("Un problème serveur est survenu" . $e->getMessage());
+            throw new ExceptionPersoDAO("Un problème serveur est survenu" . $e->getMessage());
         }
     }
 
@@ -166,8 +166,8 @@ class UserSpaceManager {
             
 
         } catch (PDOException $e) {
-            Loggy::warning("Un problème serveur est survenu" . $e);
-            throw new ExceptionPersoDAO("Un problème serveur est survenu");
+            Loggy::warning("Un problème serveur est survenu" . $e->getMessage());
+            throw new ExceptionPersoDAO("Un problème serveur est survenu" . $e->getMessage());
         }
     }
 
@@ -188,8 +188,8 @@ class UserSpaceManager {
             }
         }
         catch (PDOException $e) {
-            Loggy::warning("Un problème serveur est survenu" . $e);
-            throw new ExceptionPersoDAO("Un problème serveur est survenu");
+            Loggy::warning("Un problème serveur est survenu" . $e->getMessage());
+            throw new ExceptionPersoDAO("Un problème serveur est survenu" . $e->getMessage());
         }
     }
 }

@@ -5,6 +5,7 @@ require_once 'utility/exceptions/ExceptionPerso.php';
 require_once 'utility/function.php';
 require_once 'models/entities/RegexTester.php';
 require_once 'models/managers/userSpaceManager.php';
+require_once 'models/entities/GenericObject.php';
 require_once 'models/entities/Person.php';
 require_once 'models/entities/Member.php';
 require_once 'models/entities/Civility.php';
@@ -37,13 +38,8 @@ if (isset($_GET['responsible']) && $_GET['responsible'] >= 0) {
     
     //Filtrage de la valeur get et stockage dans une variable session permettant sa réutilisation
     if (filter_var($responsible, FILTER_VALIDATE_INT)) {
-        unset($_SESSION['info']);
         $_SESSION['responsible'] = $responsible;
     }
-}
-else {
-    //Si aucun choix n'a été fait, un message d'information sera stocké dans une variable session
-    $_SESSION['info'] = "Veuillez faire un choix du nombre de responsable";
 }
 
 //Vérification si l'identifiant de l'utilisateur est stocké dans une variable session
@@ -70,7 +66,7 @@ if (isset($_POST['token'])) {
     } else {
 
         //Vérification si la variable post de modification d'un utilisateur a été déclarée
-        if (isset($_POST['userUpdate'])) {
+        if (isset($_POST['updateUser'])) {
             //On transforme les caractères spéciaux en entités html et on supprime les espaces si les variables sont déclarées et non-vide
             $id = isset($_SESSION['user']['id']) ? htmlspecialchars($_SESSION['user']['id']) : '';
             $lastname = isset($_POST['lastname']) && !empty($_POST['lastname']) ? htmlspecialchars(trim($_POST['lastname'])) : '';
@@ -87,45 +83,50 @@ if (isset($_POST['token'])) {
 
             try {
                 //On vérifie si l'identifiant passe tous les différents tests dans le setter, le cas échéant, on le retourne et stock
-                $person->setId($id);
-                $arrayParametters['id'] =  $person->getid();
-            } catch (ExceptionPerso $e) {
+                GenericObject::init($person, $person->setId((int) $id), $person->getId(), $arrayParametters[$i], 'id');
+                $arrayParametters[$i] = GenericObject::getArrayData();
+            } 
+            catch (ExceptionPerso $e) {
                 //On capture une exception et on la stocke si les tests n'ont pas passé
                 $infoMessages['id'] = $e->getMessage();
             }
 
             try {
                 //On vérifie si le nom passe tous les différents tests dans le setter, le cas échéant, on le retourne et stock
-                $person->setLastname($lastname);
-                $arrayParametters['lastname'] =  $person->getLastname();
-            } catch (ExceptionPerso $e) {
+                GenericObject::init($person, $person->setLastname($lastname), $person->getLastname(), $arrayParametters[$i], 'lastname');
+                $arrayParametters[$i] = GenericObject::getArrayData();
+            } 
+            catch (ExceptionPerso $e) {
                 //On capture une exception et on la stocke si les tests n'ont pas passé
                 $infoMessages['lastname'] = $e->getMessage();
             }
 
             try {
                 //On vérifie si le prénom passe tous les différents tests dans le setter, le cas échéant, on le retourne et stock
-                $person->setFirstname($firstname);
-                $arrayParametters['firstname'] =  $person->getFirstname();
-            } catch (ExceptionPerso $e) {
+                GenericObject::init($person, $person->setFirstname($firstname), $person->getFirstname(), $arrayParametters[$i], 'firstname');
+                $arrayParametters[$i] = GenericObject::getArrayData();
+            } 
+            catch (ExceptionPerso $e) {
                 //On capture une exception et on la stocke si les tests n'ont pas passé
                 $infoMessages['firstname'] = $e->getMessage();
             }
 
             try {
                 //On vérifie si l'adresse électronique passe tous les différents tests dans le setter, le cas échéant, on la retourne et stock
-                $person->setEmail($mail);
-                $arrayParametters['mail'] =  $person->getEmail();
-            } catch (ExceptionPerso $e) {
+                GenericObject::init($person, $person->setEmail($mail), $person->getEmail(), $arrayParametters[$i], 'mail');
+                $arrayParametters[$i] = GenericObject::getArrayData();
+            } 
+            catch (ExceptionPerso $e) {
                 //On capture une exception et on la stocke si les tests n'ont pas passé
                 $infoMessages['mail'] = $e->getMessage();
             }
 
             try {
                 //On vérifie si le numéro de téléphone passe tous les différents tests dans le setter, le cas échéant, on le retourne et stock
-                $person->setPhone($phone);
-                $arrayParametters['phone'] =  $person->getPhone();
-            } catch (ExceptionPerso $e) {
+                GenericObject::init($person, $person->setPhone($phone), $person->getPhone(), $arrayParametters[$i], 'phone');
+                $arrayParametters[$i] = GenericObject::getArrayData();
+            } 
+            catch (ExceptionPerso $e) {
                 //On capture une exception et on la stocke si les tests n'ont pas passé
                 $infoMessages['phone'] = $e->getMessage();
             }
@@ -135,9 +136,10 @@ if (isset($_POST['token'])) {
 
                 try {
                     //On vérifie si le mot de passe passe tous les différents tests dans le setter, le cas échéant on le hache, on le retourne et stock
-                    $person->setPassword($passw);
-                    $arrayParametters['passw'] =  $person->getPassword();
-                } catch (ExceptionPerso $e) {
+                    GenericObject::init($person, $person->setPassword($passw), $person->getPassword(), $arrayParametters[$i], 'passw');
+                    $arrayParametters[$i] = GenericObject::getArrayData();
+                } 
+                catch (ExceptionPerso $e) {
                     $infoMessages['passw'] = $e->getMessage();
                 }
             } else {
@@ -164,7 +166,7 @@ if (isset($_POST['token'])) {
         }
 
         //Vérification si la variable post de suppression d'un utilisateur a été déclarée
-        if (isset($_POST['userDelete'])) {
+        if (isset($_POST['deleteUser'])) {
 
             //On transforme les caractères spéciaux en entités html et on supprime les espaces
             $id = isset($_SESSION['user']['id']) ? htmlspecialchars($_SESSION['user']['id']) : '';
@@ -205,17 +207,12 @@ if (isset($_POST['token1'])) {
     } else {
 
         //Vérification si la variable post de création de membre a été déclarée
-        if (isset($_POST['memberCreate'])) {
+        if (isset($_POST['createMember'])) {
             
             //Vérification si la variable session a été déclarée et si elle est supérieure à 0
             if (isset($_SESSION['responsible']) && $_SESSION['responsible'] > 0) {
                 //Création de tableaux vides permettant de stocker les différentes instances, les tableaux d'erreurs et de paramètres
-                $members = [];
-                $civilities = [];
-                $addresses = [];
-                $supervisors = [];
-                $arrayOfArrayInfoMessages = [];
-                $arrayOfArrayParametters = [];
+                
                 $idMember = 0;
                 
                 //On transforme les caractères spéciaux en entités html
@@ -263,8 +260,8 @@ if (isset($_POST['token1'])) {
                         $person = new Person();
 
                         try {
-                            $person->setId($id);
-                            $arrayParametters[$i]['id'] =  $person->getId();
+                            GenericObject::init($person, $person->setId((int) $id), $person->getId(), $arrayParametters[$i], 'id');
+                            $arrayParametters[$i] = GenericObject::getArrayData();
                         }
                         catch (ExceptionPerso $e) {
                             $arrayInfoMessages[$i]['id'] = $e->getMessage();
@@ -272,107 +269,122 @@ if (isset($_POST['token1'])) {
                     }
 
                     try {
-                        $civilities[$i]->setId((int) $memberCivility);
-                        $arrayParametters[$i]['memberCivility' . $i] =  $civilities[$i]->getId();
-                    } catch (ExceptionPerso $e) {
+                        GenericObject::init($civilities[$i], $civilities[$i]->setId((int) $memberCivility), $civilities[$i]->getId(), $arrayParametters[$i], 'memberCivility' . $i);
+                        $arrayParametters[$i] = GenericObject::getArrayData();
+                    } 
+                    catch (ExceptionPerso $e) {
                         $arrayInfoMessages[$i]['memberCivility' . $i] = $e->getMessage();
                     }
 
                     try {
-                        $members[$i]->setLastname($memberLastname);
-                        $arrayParametters[$i]['memberLastname' . $i] =  $members[$i]->getLastname();
-                    } catch (ExceptionPerso $e) {
+                        GenericObject::init($members[$i], $members[$i]->setLastname($memberLastname), $members[$i]->getLastname(), $arrayParametters[$i], 'memberLastname' . $i);
+                        $arrayParametters[$i] = GenericObject::getArrayData();
+                    }
+                    catch (ExceptionPerso $e) {
                         $arrayInfoMessages[$i]['memberLastname' . $i] = $e->getMessage();
                     }
 
                     try {
-                        $members[$i]->setFirstname($memberFirstname);
-                        $arrayParametters[$i]['memberFirstname' . $i] =  $members[$i]->getFirstname();
-                    } catch (ExceptionPerso $e) {
+                        GenericObject::init($members[$i], $members[$i]->setFirstname($memberFirstname), $members[$i]->getFirstname(), $arrayParametters[$i], 'memberFirstname' . $i);
+                        $arrayParametters[$i] = GenericObject::getArrayData();
+                    } 
+                    catch (ExceptionPerso $e) {
                         $arrayInfoMessages[$i]['memberFirstname' . $i] = $e->getMessage();
                     }
 
                     try {
-                        $members[$i]->setEmail($memberMail);
-                        $arrayParametters[$i]['memberMail' . $i] =  $members[$i]->getEmail();
-                    } catch (ExceptionPerso $e) {
+                        GenericObject::init($members[$i], $members[$i]->setEmail($memberMail), $members[$i]->getEmail(), $arrayParametters[$i], 'memberMail' . $i);
+                        $arrayParametters[$i] = GenericObject::getArrayData();
+                    } 
+                    catch (ExceptionPerso $e) {
                         $arrayInfoMessages[$i]['memberMail' . $i] = $e->getMessage();
                     }
 
                     try {
-                        $members[$i]->setPhone($memberPhone);
-                        $arrayParametters[$i]['memberPhone' . $i] =  $members[$i]->getPhone();
-                    } catch (ExceptionPerso $e) {
+                        GenericObject::init($members[$i], $members[$i]->setPhone($memberPhone), $members[$i]->getPhone(), $arrayParametters[$i], 'memberPhone' . $i);
+                        $arrayParametters[$i] = GenericObject::getArrayData();
+                    } 
+                    catch (ExceptionPerso $e) {
                         $arrayInfoMessages[$i]['memberPhone' . $i] = $e->getMessage();
                     }
 
                     try {
-                        $members[$i]->setBirthdate($memberBirthdate);
-                        $arrayParametters[$i]['memberBirthdate' . $i] =  $members[$i]->getBirthdate();
-                    } catch (ExceptionPerso $e) {
+                        GenericObject::init($members[$i], $members[$i]->setBirthdate($memberBirthdate), $members[$i]->getBirthdate(), $arrayParametters[$i], 'memberBirthdate' . $i);
+                        $arrayParametters[$i] = GenericObject::getArrayData();
+                    } 
+                    catch (ExceptionPerso $e) {
                         $arrayInfoMessages[$i]['memberBirthdate' . $i] = $e->getMessage();
                     }
 
                     try {
-                        $members[$i]->setPlaceOfBirth($memberBirthPlace);
-                        $arrayParametters[$i]['memberBirthPlace' . $i] =  $members[$i]->getPlaceOfBirth();
-                    } catch (ExceptionPerso $e) {
+                        GenericObject::init($members[$i], $members[$i]->setPlaceOfBirth($memberBirthPlace), $members[$i]->getPlaceOfBirth(), $arrayParametters[$i], 'memberBirthPlace' . $i);
+                        $arrayParametters[$i] = GenericObject::getArrayData();
+                    }
+                    catch (ExceptionPerso $e) {
                         $arrayInfoMessages[$i]['memberBirthPlace' . $i] = $e->getMessage();
                     }
 
                     try {
-                        $addresses[$i]->setStreetNumber($memberStreetNumber);
-                        $arrayParametters[$i]['memberStreetNumber' . $i] =  $addresses[$i]->getStreetNumber();
-                    } catch (ExceptionPerso $e) {
+                        GenericObject::init($addresses[$i], $addresses[$i]->setStreetNumber($memberStreetNumber), $addresses[$i]->getStreetNumber(), $arrayParametters[$i], 'memberStreetNumber' . $i);
+                        $arrayParametters[$i] = GenericObject::getArrayData();
+                    } 
+                    catch (ExceptionPerso $e) {
                         $arrayInfoMessages[$i]['memberStreetNumber' . $i] = $e->getMessage();
                     }
 
                     try {
-                        $addresses[$i]->setStreetName($memberStreetName);
-                        $arrayParametters[$i]['memberStreetName' . $i] =  $addresses[$i]->getStreetName();
-                    } catch (ExceptionPerso $e) {
+                        GenericObject::init($addresses[$i], $addresses[$i]->setStreetName($memberStreetName), $addresses[$i]->getStreetName(), $arrayParametters[$i], 'memberStreetName' . $i);
+                        $arrayParametters[$i] = GenericObject::getArrayData();
+                    } 
+                    catch (ExceptionPerso $e) {
                         $arrayInfoMessages[$i]['memberStreetName' . $i] = $e->getMessage();
                     }
 
                     try {
-                        $addresses[$i]->setStreetComplement($memberStreetComplement);
-                        $arrayParametters[$i]['memberStreetComplement' . $i] =  $addresses[$i]->getStreetComplement();
-                    } catch (ExceptionPerso $e) {
+                        GenericObject::init($addresses[$i], $addresses[$i]->setStreetComplement($memberStreetComplement), $addresses[$i]->getStreetComplement(), $arrayParametters[$i], 'memberStreetComplement' . $i);
+                        $arrayParametters[$i] = GenericObject::getArrayData();
+                    } 
+                    catch (ExceptionPerso $e) {
                         $arrayInfoMessages[$i]['memberStreetComplement' . $i] = $e->getMessage();
                     }
 
                     try {
-                        $addresses[$i]->setCode($memberZipCode);
-                        $arrayParametters[$i]['memberZipCode' . $i] =  $addresses[$i]->getCode();
-                    } catch (ExceptionPerso $e) {
+                        GenericObject::init($addresses[$i], $addresses[$i]->setCode($memberZipCode), $addresses[$i]->getCode(), $arrayParametters[$i], 'memberZipCode' . $i);
+                        $arrayParametters[$i] = GenericObject::getArrayData();
+                    } 
+                    catch (ExceptionPerso $e) {
                         $arrayInfoMessages[$i]['memberZipCode' . $i] = $e->getMessage();
                     }
 
                     try {
-                        $addresses[$i]->setName($memberCity);
-                        $arrayParametters[$i]['memberCity' . $i] =  $addresses[$i]->getName();
-                    } catch (ExceptionPerso $e) {
+                        GenericObject::init($addresses[$i], $addresses[$i]->setName($memberCity), $addresses[$i]->getName(), $arrayParametters[$i], 'memberCity' . $i);
+                        $arrayParametters[$i] = GenericObject::getArrayData();
+                    } 
+                    catch (ExceptionPerso $e) {
                         $arrayInfoMessages[$i]['memberCity' . $i] = $e->getMessage();
                     }
 
                     try {
-                        $members[$i]->setProfession($profession);
-                        $arrayParametters[$i]['profession' . $i] =  $members[$i]->getProfession();
-                    } catch (ExceptionPerso $e) {
+                        GenericObject::init($members[$i], $members[$i]->setProfession($profession), $members[$i]->getProfession(), $arrayParametters[$i], 'profession' . $i);
+                        $arrayParametters[$i] = GenericObject::getArrayData();
+                    } 
+                    catch (ExceptionPerso $e) {
                         $arrayInfoMessages[$i]['profession' . $i] = $e->getMessage();
                     }
 
                     try {
-                        $members[$i]->setFamilySituation($familySituation);
-                        $arrayParametters[$i]['familySituation' . $i] =  $members[$i]->getFamilySituation();
-                    } catch (ExceptionPerso $e) {
+                        GenericObject::init($members[$i], $members[$i]->setFamilySituation($familySituation), $members[$i]->getFamilySituation(), $arrayParametters[$i], 'familySituation' . $i);
+                        $arrayParametters[$i] = GenericObject::getArrayData();
+                    } 
+                    catch (ExceptionPerso $e) {
                         $arrayInfoMessages[$i]['familySituation' . $i] = $e->getMessage();
                     }
 
                     try {
-                        $members[$i]->setCafNumber($cafNumber);
-                        $arrayParametters[$i]['cafNumber' . $i] =  $members[$i]->getCafNumber();
-                    } catch (ExceptionPerso $e) {
+                        GenericObject::init($members[$i], $members[$i]->setCafNumber($cafNumber), $members[$i]->getCafNumber(), $arrayParametters[$i], 'cafNumber' . $i);
+                        $arrayParametters[$i] = GenericObject::getArrayData();
+                    } 
+                    catch (ExceptionPerso $e) {
                         $arrayInfoMessages[$i]['cafNumber' . $i] = $e->getMessage();
                     }
                     
@@ -432,9 +444,9 @@ if (isset($_POST['token1'])) {
                     // catch (ExceptionPerso $e) {
                     //     $infoMessages['childSchoolCity'.$i] = $e->getMessage();
                     // }
-                    // var_dump($arrayParametters);
-                    // var_dump($arrayOfArrayParametters);
-                    // var_dump($arrayParametters);
+
+                    var_dump($arrayParametters[$i]);
+                    
                     try {
                         if (empty($arrayInfoMessages[$i])) {
 

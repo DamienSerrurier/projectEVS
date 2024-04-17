@@ -705,14 +705,14 @@ RETURNS INTEGER
 LANGUAGE plpgsql
 AS $$
 DECLARE
-idMemberData INTEGER;
+idPerson INTEGER;
 memberDataId INTEGER;
 BEGIN
-    SELECT id_member_data INTO idMemberData
+    SELECT id_person INTO idPerson
     FROM _member
     WHERE id_person = personId;
 
-    IF idMemberData IS NULL THEN
+    IF idPerson IS NULL THEN
         INSERT INTO member_data (email, profession, family_situation, caf_number)
         VALUES (
             memberDataEmail,
@@ -720,12 +720,13 @@ BEGIN
             memberDataFamilySituation,
             memberDataCafNumber
         ) RETURNING id INTO memberDataId;
+          
     ELSE
         UPDATE member_data SET email = memberDataEmail,
                                profession = memberDataProfession,
                                family_situation = memberDataFamilySituation,
                                caf_number = memberDataCafNumber
-        WHERE id = idMemberData RETURNING id INTO memberDataId;
+        WHERE id = idPerson RETURNING id INTO memberDataId;
     END IF;
 
     RETURN memberDataId;

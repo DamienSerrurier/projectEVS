@@ -1,4 +1,5 @@
-DROP VIEW displayAllActivities,
+DROP VIEW displayAllCivility,
+          displayAllActivities,
           displayAllAdministrators,
           displayAllDocumentsWithSchools,
           displayAllReservations,

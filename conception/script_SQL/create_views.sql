@@ -1,8 +1,10 @@
+--Vue permettant d'afficher toutes les civilités
 CREATE OR REPLACE VIEW displayAllCivility
 AS
 SELECT civility.id, civility.name
 FROM civility;
 
+--Fonction permettant d'afficher un utilisateur grâce à son mail
 CREATE OR REPLACE FUNCTION displayOneUserByEmail(userEmail VARCHAR(255))
 RETURNS TABLE (
     id INTEGER,
@@ -23,6 +25,7 @@ BEGIN
 END;
 $$;
 
+--Fonction permettant d'afficher un utilisateur grâce à son identifiant
 CREATE OR REPLACE FUNCTION displayOneUserById(personId INTEGER)
 RETURNS TABLE (
     lastname VARCHAR(50),
@@ -42,6 +45,7 @@ BEGIN
 END;
 $$;
 
+--Vue permettant d'afficher tous les utilisateurs
 CREATE OR REPLACE VIEW displayAllUsers
 AS
 SELECT person.id, lastname, firstname, phone, role.name, id_avatar, id_address
@@ -49,6 +53,7 @@ FROM person
 LEFT JOIN connection ON person.id_connection = connection.id
 LEFT JOIN role ON person.id_role = role.id;
 
+--Vue permettant d'afficher tous les administrateurs
 CREATE OR REPLACE VIEW displayAllAdministrators
 AS
 SELECT _user, picture, street_number, street_name, street_complement,
@@ -61,6 +66,7 @@ JOIN zip_code ON address.code_zip_code = zip_code.code
 JOIN city ON address.id_city = city.id
 WHERE _user.name = 'Admin';
 
+--Vue permettant d'afficher toutes les activités
 CREATE OR REPLACE VIEW displayAllActivities
 AS
 SELECT activity.id, title, additional_information, date_start,
@@ -69,6 +75,7 @@ picture, name
 FROM activity
 JOIN category ON activity.id_category = category.id;
 
+--Vue permettant d'afficher toutes les structures
 CREATE OR REPLACE VIEW displayAllStructures
 AS
 SELECT structure.name AS structureName, logo, phone, wording, street_number,
@@ -80,6 +87,7 @@ JOIN address_complement ON address.id_address_complement = address_complement.id
 JOIN zip_code ON address.code_zip_code = zip_code.code
 JOIN city ON address.id_city = city.id;
 
+--Vue permettant d'afficher toutes les écoles
 CREATE OR REPLACE VIEW displayAllStructureSchools
 AS
 SELECT structure.id, structure.name AS structureName, logo, phone, wording, 
@@ -92,6 +100,7 @@ JOIN zip_code ON address.code_zip_code = zip_code.code
 JOIN city ON address.id_city = city.id
 WHERE type_structure.wording = 'Ecole';
 
+--Vue permettant d'afficher tous les documents avec toutes les écoles
 CREATE OR REPLACE VIEW displayAllDocumentsWithSchools
 AS
 SELECT document.name, link, _user, upload_date, documentSchool
@@ -100,6 +109,7 @@ JOIN displayAllStructureSchools AS documentSchool ON document.id_structure = doc
 JOIN upload ON document.id = upload.id_document
 JOIN displayAllUsers AS _user ON upload.id_teacher = _user.id;
 
+--Vue permettant d'afficher toutes les réservations
 CREATE OR REPLACE VIEW displayAllReservations
 AS
 SELECT activity, _user, booking_date,
@@ -108,13 +118,14 @@ FROM reservation
 JOIN displayAllUsers AS _user ON reservation.id_person = _user.id
 JOIN displayAllActivities AS activity ON reservation.id_activity = activity.id;
 
+--Fonction permettant d'afficher un membre adulte grâce l'identifiant de la table person
 CREATE OR REPLACE FUNCTION displayOneMember(personId INTEGER)
 RETURNS TABLE (id INTEGER, member_info TEXT, member_address TEXT)
 LANGUAGE plpgsql
 AS $$
 BEGIN
     RETURN QUERY
-    SELECT person.id, (
+    SELECT _member.id, (
         SELECT string_agg(p.member_info, ', ')
         FROM (
             SELECT (
@@ -131,8 +142,9 @@ BEGIN
             ) AS member_info
             FROM _member
             JOIN member_data ON _member.id_member_data = member_data.id
+            JOIN person ON _member.id_person = person.id
             JOIN civility ON person.id_civility = civility.id
-            WHERE _member.id_person = person.id
+            WHERE _member.id_person = personId
         ) p
     ), (
         SELECT string_agg(p.member_address, ', ')
@@ -145,18 +157,20 @@ BEGIN
                 city.name
             ) AS member_address
             FROM _member
+            JOIN person ON _member.id_person = person.id
             JOIN address ON person.id_address = address.id
-            LEFT JOIN address_complement ON address.id_address_complement = address_complement.id
+            JOIN address_complement ON address.id_address_complement = address_complement.id
             JOIN zip_code ON address.code_zip_code = zip_code.code
             JOIN city ON address.id_city = city.id
-            WHERE _member.id_person = person.id
+            WHERE _member.id_person = personId
         ) p
     )
-    FROM person 
-    WHERE person.id = personId;
+    FROM _member 
+    WHERE _member.id_person = personId;
 END;
 $$;
 
+--Fonction permettant d'afficher un membre lié au membre principal grâce à son identifiant
 CREATE OR REPLACE FUNCTION displayOneMemberPair(memberId INTEGER)
 RETURNS TABLE (id INTEGER, member_pair_info TEXT, member_pair_address TEXT)
 LANGUAGE plpgsql
@@ -206,6 +220,7 @@ BEGIN
 END;
 $$;
 
+--Fonction permettant d'afficher tous les membres mineurs de manière récursive grâce à l'identifiant de son responsable
 CREATE OR REPLACE FUNCTION displayChildrenOfMember(memberId INTEGER)
 RETURNS TABLE (id INTEGER, child_info TEXT, school_info_or_name TEXT)
 LANGUAGE plpgsql
@@ -298,6 +313,7 @@ BEGIN
 END;
 $$;
 
+--Fonction permettant d'afficher tous les membres d'une famille rattachés au membre principal
 CREATE OR REPLACE FUNCTION displayAllMemberById(personId INTEGER)
 RETURNS TABLE (displayMember TEXT, displayPair TEXT, displayChild TEXT[])
 LANGUAGE plpgsql

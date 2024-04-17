@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS city (
 );
 
 --Niveau 1 - Tables avec clés étrangères
-CREATE TABLE If NOT EXISTS address (
+CREATE TABLE IF NOT EXISTS address (
     id SERIAL PRIMARY KEY,
     street_number VARCHAR(10),
     street_name VARCHAR(100) NOT NULL,

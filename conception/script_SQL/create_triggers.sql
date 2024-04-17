@@ -1,4 +1,4 @@
---Fonction permettant de vérifier s'il existe un identifiant en fonction d'un nom d'école et l'assigner le cas échéant dans la table supervisor
+--Fonction permettant de vérifier s'il existe un identifiant en fonction d'un nom d'école ainsi que d'une ville et l'assigner le cas échéant dans la table supervisor
 CREATE OR REPLACE FUNCTION addSchoolIfExistInSupervised()
 RETURNS TRIGGER
 LANGUAGE plpgsql

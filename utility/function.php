@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Méthode qui permet de démarrer une session s'il n'y en a pas déjà une d'ouverte et générer un jeton
+ * @param string $tokenName
+ */
 function sessionStartWithGenerateToken($tokenName) {
 
     if (!session_id()) {

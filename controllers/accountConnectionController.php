@@ -56,7 +56,12 @@ if (isset($_POST['token'])) {
                     $userRole['name'] = $role->getName();
                     $_SESSION['user'] = $userRole;
         
-                    header('Location: userSpace');
+                    if (isset($_SESSION['user']['name']) && $_SESSION['user']['name'] == "Admin") {
+                        header('Location: administratorSpace');
+                    }
+                    else {
+                        header('Location: userSpace');
+                    }
                 }
                 else {
                     $infoMessages['passw'] = "Vérifier vos identifiants";

@@ -19,7 +19,6 @@
             <h2 class="text-center">Espace utilisateur</h2>
         </div>
 
-
         <form action="userSpace" method="post" id="form">
             <div class="container p-4">
                 <?php
@@ -31,6 +30,15 @@
                 endif;
                 ?>
 
+                <?php
+                if (isset($_SESSION['warning'])) :
+                ?>
+                    <p class="text-warning"><?= $_SESSION['warning'] ?></p>
+                <?php
+                    unset($_SESSION['warning']);
+                endif;
+                ?>
+
                 <p class="text-info" id="info"></p>
 
                 <div class="form-check">
@@ -38,7 +46,7 @@
                     <input class="form-check-input" type="checkbox" name="member" id="member">
                     <label class="form-label-lg fs-6" for="member">J'adhère à l'association EVS Maison Prévert</label>
                 </div>
-                
+
                 <div class="row justify-content-between">
                     <div class="col-sm-10 col-md-4 col-xl-3">
                         <label class="form-label-lg fs-6" for="responsibleSelect">Nombre de responsable</label>
@@ -101,17 +109,47 @@
                                 <div class="row">
                                     <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                                         <label class="form-label-lg fs-6" for="memberLastname<?= $i ?>">Nom</label>
-                                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom" type="text" name="memberLastname<?= $i ?>" id="memberLastname<?= $i ?>" value="<?= isset($arrayParametters[$i]['memberLastname' . $i]) ? htmlspecialchars($arrayParametters[$i]['memberLastname' . $i]) : '' ?>">
+                                        <?php
+                                        if (!isset($_POST['createMember']) && $i === 1) :
+                                        ?>
+                                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom" type="text" name="memberLastname<?= $i ?>" id="memberLastname<?= $i ?>" value="<?= !empty($resultQuery->getLastname()) ? htmlspecialchars($resultQuery->getLastname()) : '' ?>">
+                                        <?php
+                                        else :
+                                        ?>
+                                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom" type="text" name="memberLastname<?= $i ?>" id="memberLastname<?= $i ?>" value="<?= isset($arrayParametters[$i]['memberLastname' . $i]) ? htmlspecialchars($arrayParametters[$i]['memberLastname' . $i]) : '' ?>">
+                                        <?php
+                                        endif;
+                                        ?>
                                         <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['memberLastname' . $i]) && !empty($arrayInfoMessages[$i]['memberLastname' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['memberLastname' . $i]) : '' ?></p>
                                     </div>
                                     <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                                         <label class="form-label-lg fs-6" for="memberFirstname<?= $i ?>">Prénom</label>
-                                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un prénom" type="text" name="memberFirstname<?= $i ?>" id="memberFirstname<?= $i ?>" value="<?= isset($arrayParametters[$i]['memberFirstname' . $i]) ? htmlspecialchars($arrayParametters[$i]['memberFirstname' . $i]) : '' ?>">
+                                        <?php
+                                        if (!isset($_POST['createMember']) && $i === 1) :
+                                        ?>
+                                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un prénom" type="text" name="memberFirstname<?= $i ?>" id="memberFirstname<?= $i ?>" value="<?= !empty($resultQuery->getFirstname()) ? htmlspecialchars($resultQuery->getFirstname()) : '' ?>">
+                                        <?php
+                                        else :
+                                        ?>
+                                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un prénom" type="text" name="memberFirstname<?= $i ?>" id="memberFirstname<?= $i ?>" value="<?= isset($arrayParametters[$i]['memberFirstname' . $i]) ? htmlspecialchars($arrayParametters[$i]['memberFirstname' . $i]) : '' ?>">
+                                        <?php
+                                        endif;
+                                        ?>
                                         <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['memberFirstname' . $i]) && !empty($arrayInfoMessages[$i]['memberFirstname' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['memberFirstname' . $i]) : '' ?></p>
                                     </div>
                                     <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
                                         <label class="form-label-lg fs-6" for="memberMail<?= $i ?>">Adresse mail</label>
-                                        <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un émail" type="email" name="memberMail<?= $i ?>" id="memberMail<?= $i ?>" value="<?= isset($arrayParametters[$i]['memberMail' . $i]) ? htmlspecialchars($arrayParametters[$i]['memberMail' . $i]) : '' ?>">
+                                        <?php
+                                        if (!isset($_POST['createMember']) && $i === 1) :
+                                        ?>
+                                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un émail" type="email" name="memberMail<?= $i ?>" id="memberMail<?= $i ?>" value="<?= !empty($resultQuery->getEmail()) ? htmlspecialchars($resultQuery->getEmail()) : '' ?>">
+                                        <?php
+                                        else :
+                                        ?>
+                                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un émail" type="email" name="memberMail<?= $i ?>" id="memberMail<?= $i ?>" value="<?= isset($arrayParametters[$i]['memberMail' . $i]) ? htmlspecialchars($arrayParametters[$i]['memberMail' . $i]) : '' ?>">
+                                        <?php
+                                        endif;
+                                        ?>
                                         <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['memberMail' . $i]) && !empty($arrayInfoMessages[$i]['memberMail' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['memberMail' . $i]) : '' ?></p>
                                     </div>
                                     <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
@@ -343,9 +381,11 @@
                 <input class="btn btn-success text-uppercase" type="submit" name="createMember" id="createMember" value="Envoyer">
             </div>
         </form>
+    </section>
 
-        <hr>
+    <hr>
 
+    <section>
         <form action="userSpace" method="post">
             <div class="container p-4">
                 <input class="btn btn-danger text-uppercase" type="submit" name="deleteUser" value="Suppression">

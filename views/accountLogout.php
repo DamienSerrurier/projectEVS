@@ -27,9 +27,21 @@
                         <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
                         <button class="btn btn-success text-uppercase" type="submit" name="logout">Oui</button>
                     </form>
-                    <a href="userSpace">
-                        <button class="btn btn-secondary text-uppercase">Non</button>
-                    </a>
+                    <?php
+                    if (isset($_SESSION['user']['name']) && $_SESSION['user']['name'] == "Admin") :
+                    ?>
+                        <a href="administratorSpace">
+                            <button class="btn btn-secondary text-uppercase">Nom</button>
+                        </a>
+                    <?php
+                    else :
+                    ?>
+                        <a href="userSpace">
+                            <button class="btn btn-secondary text-uppercase">Non</button>
+                        </a>
+                    <?php
+                    endif;
+                    ?>
                 </div>
             </div>
         </fieldset>

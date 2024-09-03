@@ -15,32 +15,42 @@
               if (isset($_SESSION['user'])) :
               ?>
                 <li class="nav-item col-xl-7">
-                  <a class="nav-link" href="userSpace">Espace utilisateur</a>
+                  <?php
+                  if (isset($_SESSION['user']['name']) && $_SESSION['user']['name'] == "Admin") :
+                  ?>
+                    <a class="nav-link" href="administratorSpace">Espace admin</a>
+                  <?php
+                  else :
+                  ?>
+                    <a class="nav-link" href="userSpace">Espace utilisateur</a>
                 </li>
               <?php
+                  endif;
+              ?>
+            <?php
               else :
-              ?>
-                <li class="nav-item col-xl-7">
-                  <a class="nav-link" href="accountCreation">Création compte</a>
-                </li>
-              <?php
+            ?>
+              <li class="nav-item col-xl-7">
+                <a class="nav-link" href="accountCreation">Création compte</a>
+              </li>
+            <?php
               endif;
-              ?>
-              <?php
-              if (isset($_SESSION['user'])) :
-              ?>
-                <li class="nav-item col-xl-5">
-                  <a class="nav-link" href="accountLogout">Déconnexion</a>
-                </li>
-              <?php
-              else :
-              ?>
-                <li class="nav-item col-xl-5">
-                  <a class="nav-link" href="accountConnection">Connexion</a>
-                </li>
-              <?php
-              endif;
-              ?>
+            ?>
+            <?php
+            if (isset($_SESSION['user'])) :
+            ?>
+              <li class="nav-item col-xl-5">
+                <a class="nav-link" href="accountLogout">Déconnexion</a>
+              </li>
+            <?php
+            else :
+            ?>
+              <li class="nav-item col-xl-5">
+                <a class="nav-link" href="accountConnection">Connexion</a>
+              </li>
+            <?php
+            endif;
+            ?>
             </div>
           </ul>
         </div>
@@ -64,32 +74,42 @@
             if (isset($_SESSION['user'])) :
             ?>
               <li class="nav-item">
-                <a class="nav-link" href="userSpace">Espace utilisateur</a>
+                <?php
+                if (isset($_SESSION['user']['name']) && $_SESSION['user']['name'] == "Admin") :
+                ?>
+                  <a class="nav-link" href="administratorSpace">Espace admin</a>
+                <?php
+                else :
+                ?>
+                  <a class="nav-link" href="userSpace">Espace utilisateur</a>
               </li>
             <?php
+                endif;
+            ?>
+          <?php
             else :
-            ?>
-              <li class="nav-item">
-                <a class="nav-link" href="accountCreation">Création compte</a>
-              </li>
-            <?php
+          ?>
+            <li class="nav-item">
+              <a class="nav-link" href="accountCreation">Création compte</a>
+            </li>
+          <?php
             endif;
-            ?>
-            <?php
-            if (isset($_SESSION['user'])) :
-            ?>
-              <li class="nav-item">
-                <a class="nav-link" href="accountLogout">Déconnexion</a>
-              </li>
-            <?php
-            else :
-            ?>
-              <li class="nav-item">
-                <a class="nav-link" href="accountConnection">Connexion</a>
-              </li>
-            <?php
-            endif;
-            ?>
+          ?>
+          <?php
+          if (isset($_SESSION['user'])) :
+          ?>
+            <li class="nav-item">
+              <a class="nav-link" href="accountLogout">Déconnexion</a>
+            </li>
+          <?php
+          else :
+          ?>
+            <li class="nav-item">
+              <a class="nav-link" href="accountConnection">Connexion</a>
+            </li>
+          <?php
+          endif;
+          ?>
           </ul>
         </div>
       </div>

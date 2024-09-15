@@ -9,3 +9,8 @@ body {
 .box {
     background-color: #e8f3f9;
 }
+
+menu {
+    position: sticky;
+    top: 20%;
+}

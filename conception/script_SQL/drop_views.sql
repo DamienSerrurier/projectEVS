@@ -5,5 +5,6 @@ DROP VIEW displayAllCivility,
           displayAllReservations,
           displayAllStructures,
           displayAllStructureSchools,
-          displayAllUsers;
+          displayAllUsers,
+          displayAllCategory;
        

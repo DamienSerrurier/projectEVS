@@ -17,7 +17,7 @@ class Civility implements RegexTester {
 
     //Getters et Setters
 
-     /** Méthode permettant de récupérer l'id de la civilité
+    /** Méthode permettant de récupérer l'id de la civilité
      * @return int L'id de la civilité
      */
     public function getId() : int {

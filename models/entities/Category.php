@@ -5,8 +5,8 @@ namespace ProjectEvs;
 require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR
  . "utility" . DIRECTORY_SEPARATOR . "exceptions" . DIRECTORY_SEPARATOR . "ExceptionPerso.php";
 
- use ProjectEvs\ExceptionPerso;
- 
+use ProjectEvs\ExceptionPerso;
+
 class Category implements RegexTester {
 
     //Propriétés

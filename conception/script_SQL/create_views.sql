@@ -4,6 +4,12 @@ AS
 SELECT civility.id, civility.name
 FROM civility;
 
+--Vue permettant d'afficher toutes les catégories d'activités
+CREATE OR REPLACE VIEW displayAllCategory
+AS
+SELECT category.id, category.name
+FROM category;
+
 --Fonction permettant d'afficher un utilisateur grâce à son mail
 CREATE OR REPLACE FUNCTION displayOneUserByEmail(userEmail VARCHAR(255))
 RETURNS TABLE (

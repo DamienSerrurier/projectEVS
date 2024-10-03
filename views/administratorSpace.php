@@ -159,6 +159,7 @@
                             </select>
                             <label class="form-label-lg fs-6" for="categoryName">Nom de la catégorie</label>
                             <input class="form-control form-control-lg my-2" placeholder="" aria-label="Une catégorie" type="text" name="categoryName" id="categoryName">
+                            <p class="text-danger m-0"><?= isset($errorCategoryName) && !empty($errorCategoryName) ? $errorCategoryName : "" ?></p>
                         </div>
                     <?php
                         break;

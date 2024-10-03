@@ -17,7 +17,6 @@ if (isset($_GET['categoryMenu'])) {
 }
 
 $categories = AdministratorSpaceManager::getAllCategory();
-var_dump($categories);
 
 if (isset($_POST['token'])) {
 
@@ -52,6 +51,7 @@ if (isset($_POST['token'])) {
 
                     if (empty($errorCategoryName)) {
                         AdministratorSpaceManager::insertCategoryName($resultCategoryName);
+                        header('Location: administratorSpace?categoryMenu=' . $categoryMenu);
                     }
 
                     break;

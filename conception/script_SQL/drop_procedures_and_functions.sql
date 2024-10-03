@@ -25,4 +25,5 @@ DROP FUNCTION insertUpdatePerson,
               displayChildrenOfMember,
               displayAllMemberById,
               displayOneUserByEmail,
-              displayOneUserById;
+              displayOneUserById,
+              displayOneCategory;

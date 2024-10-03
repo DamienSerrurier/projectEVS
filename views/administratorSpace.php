@@ -149,7 +149,13 @@
                                 modification</label>
                             <select class="form-select form-select-lg my-2 fs-6" name="category" id="categorySelect">
                                 <option value="">Choix catégorie</option>
-                                <option value=""></option>
+                                <?php
+                                foreach ($categories as $value) :
+                                ?>
+                                <option value="<?= $value->getId() ?>"><?= $value->getName() ?></option>
+                                <?php
+                                endforeach;
+                                ?>
                             </select>
                             <label class="form-label-lg fs-6" for="categoryName">Nom de la catégorie</label>
                             <input class="form-control form-control-lg my-2" placeholder="" aria-label="Une catégorie" type="text" name="categoryName" id="categoryName">

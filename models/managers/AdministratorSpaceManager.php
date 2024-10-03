@@ -19,5 +19,26 @@ class AdministratorSpaceManager {
         }
     }
 
-    
+    public static function getAllCategory() {
+
+        try {
+            $pdo = baseConnection();
+            $query = "SELECT * FROM displayallcategory;";
+            $stmt = $pdo->query($query);
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'ProjectEvs\Category');
+            $result = $stmt->fetchAll();
+            
+            if (!empty($result)) {
+                return $result;
+            }
+            else {
+                return false;
+            }
+
+        }
+        catch (PDOException $e) {
+            Loggy::warning("Un problème serveur est survenu" . $e->getMessage());
+            throw new ExceptionPersoDAO("Un problème serveur est survenu" . $e->getMessage());
+        }
+    }
 }

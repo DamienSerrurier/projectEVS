@@ -41,4 +41,21 @@ class AdministratorSpaceManager {
             throw new ExceptionPersoDAO("Un problème serveur est survenu" . $e->getMessage());
         }
     }
+
+    public static function getOneCategory(int $idCategory) {
+        $pdo = baseConnection();
+        $query = "SELECT * FROM displayOneCategory(:id);";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindValue(':id', $idCategory, PDO::PARAM_INT);
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'ProjectEvs\Category');
+        $result = $stmt->fetch();
+
+        if (!empty($result)) {
+            return $result;
+        }
+        else {
+            return false;
+        }
+    }
 }

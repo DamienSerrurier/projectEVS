@@ -158,8 +158,8 @@
                                 ?>
                             </select>
                             <label class="form-label-lg fs-6" for="categoryName">Nom de la catégorie</label>
-                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Une catégorie" type="text" name="categoryName" id="categoryName">
-                            <p class="text-danger m-0"><?= isset($errorCategoryName) && !empty($errorCategoryName) ? $errorCategoryName : "" ?></p>
+                            <input class="form-control form-control-lg my-2" aria-label="Une catégorie" type="text" name="categoryName" id="categoryName" value="<?= isset($categoryClass) && !empty($categoryClass->getName()) ? htmlspecialchars($categoryClass->getName()) : '' ?>">
+                            <p class="text-danger m-0" id="errorMessageCategory"><?= isset($errorCategoryName) && !empty($errorCategoryName) ? htmlspecialchars($errorCategoryName) : "" ?></p>
                         </div>
                     <?php
                         break;

@@ -16,6 +16,11 @@ if (isset($_GET['categoryMenu'])) {
     $categoryMenu = (int) htmlspecialchars($_GET['categoryMenu']);
 }
 
+if (isset($_GET['selectButtonValue'])) {
+    $selectButtonCategory = (int) htmlspecialchars($_GET['selectButtonValue']);
+    $categoryClass = AdministratorSpaceManager::getOneCategory($selectButtonCategory);
+}
+
 $categories = AdministratorSpaceManager::getAllCategory();
 
 if (isset($_POST['token'])) {

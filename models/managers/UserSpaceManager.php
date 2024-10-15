@@ -14,6 +14,7 @@ class UserSpaceManager {
      * @throws ExceptionPersoDAO
      */
     public static function getOneUserById(int $id) {
+
         try {
             $pdo = baseConnection();
             $query = "SELECT * FROM displayOneUserById(:id);";
@@ -48,6 +49,7 @@ class UserSpaceManager {
      * @throws ExceptionPersoDAO
      */
     public static function updateUser(array $arrayParametters) {
+
         try {
             $pdo = baseConnection();
             $query = "CALL updateUser(
@@ -66,8 +68,8 @@ class UserSpaceManager {
             $stmt->bindValue(':passw', $arrayParametters['passw'], PDO::PARAM_STR);
             $stmt->bindValue(':id', $arrayParametters['id'], PDO::PARAM_INT);
             return $stmt->execute();
-
-        } catch (PDOException $e) {
+        } 
+        catch (PDOException $e) {
             Loggy::warning("Un problème serveur est survenu" . $e->getMessage());
             throw new ExceptionPersoDAO("Un problème serveur est survenu" . $e->getMessage());
         }
@@ -80,14 +82,15 @@ class UserSpaceManager {
      * @throws ExceptionPersoDAO
      */
     public static function deleteUser(int $id) {
+
         try {
             $pdo = baseConnection();
             $query = "CALL deleteOneUser(:id);";
             $stmt = $pdo->prepare($query);
             $stmt->bindValue(':id', $id, PDO::PARAM_INT);
             return $stmt->execute();
-
-        } catch (PDOException $e) {
+        } 
+        catch (PDOException $e) {
             Loggy::warning("Un problème serveur est survenu" . $e->getMessage());
             throw new ExceptionPersoDAO("Un problème serveur est survenu" . $e->getMessage());
         }
@@ -99,6 +102,7 @@ class UserSpaceManager {
      * @throws ExceptionPersoDAO
      */
     public static function getAllCivility() {
+
         try {
             $pdo = baseConnection();
             $query = "SELECT * FROM displayAllCivility;";
@@ -119,10 +123,10 @@ class UserSpaceManager {
         }
     }
 
-    public static function insertMember(array $arrayParametters, int $number) {
+    public static function insertMember(array|string $arrayParametters, int $number) {
+
         try {
             $pdo = baseConnection();
-
             $query = "SELECT insertMemberAdult(
                 :id,
                 :memberLastname$number,
@@ -142,36 +146,36 @@ class UserSpaceManager {
                 :cafNumber$number,
                 :memberCivility$number
             );";
-                $stmt = $pdo->prepare($query);
-                $stmt->bindValue(':id', $arrayParametters['id'], PDO::PARAM_INT);
-                $stmt->bindValue(':memberLastname' . $number, $arrayParametters['memberLastname'.$number], PDO::PARAM_STR);
-                $stmt->bindValue(':memberFirstname' . $number, $arrayParametters['memberFirstname'.$number], PDO::PARAM_STR);
-                $stmt->bindValue(':memberPhone' . $number, $arrayParametters['memberPhone'.$number], PDO::PARAM_STR);
-                $stmt->bindValue(':memberStreetNumber' . $number, $arrayParametters['memberStreetNumber'.$number], PDO::PARAM_STR);
-                $stmt->bindValue(':memberStreetName' . $number, $arrayParametters['memberStreetName'.$number], PDO::PARAM_STR);
-                $stmt->bindValue(':memberStreetComplement' . $number, $arrayParametters['memberStreetComplement'.$number], PDO::PARAM_STR);
-                $stmt->bindValue(':memberZipCode' . $number, $arrayParametters['memberZipCode'.$number], PDO::PARAM_STR);
-                $stmt->bindValue(':memberCity' . $number, $arrayParametters['memberCity'.$number], PDO::PARAM_STR);
-                $stmt->bindValue(':memberBirthdate' . $number, $arrayParametters['memberBirthdate'.$number], PDO::PARAM_STR);
-                $stmt->bindValue(':memberBirthPlace' . $number, $arrayParametters['memberBirthPlace'.$number], PDO::PARAM_STR);
-                $stmt->bindValue(':memberIdPair', $arrayParametters['memberIdPair'], PDO::PARAM_INT);
-                $stmt->bindValue(':memberMail' . $number, $arrayParametters['memberMail'.$number], PDO::PARAM_STR);
-                $stmt->bindValue(':profession' . $number, $arrayParametters['profession'.$number], PDO::PARAM_STR);
-                $stmt->bindValue(':familySituation' . $number, $arrayParametters['familySituation'.$number], PDO::PARAM_STR);
-                $stmt->bindValue(':cafNumber' . $number, $arrayParametters['cafNumber'.$number], PDO::PARAM_STR);
-                $stmt->bindValue(':memberCivility' . $number, $arrayParametters['memberCivility'.$number], PDO::PARAM_INT);
-                $stmt->execute();
-                $idMember = $stmt->fetchColumn();
-                return $idMember;
-            
-
-        } catch (PDOException $e) {
+            $stmt = $pdo->prepare($query);
+            $stmt->bindValue(':id', $arrayParametters['id'], PDO::PARAM_INT);
+            $stmt->bindValue(':memberLastname' . $number, $arrayParametters['memberLastname'.$number], PDO::PARAM_STR);
+            $stmt->bindValue(':memberFirstname' . $number, $arrayParametters['memberFirstname'.$number], PDO::PARAM_STR);
+            $stmt->bindValue(':memberPhone' . $number, $arrayParametters['memberPhone'.$number], PDO::PARAM_STR);
+            $stmt->bindValue(':memberStreetNumber' . $number, $arrayParametters['memberStreetNumber'.$number], PDO::PARAM_STR);
+            $stmt->bindValue(':memberStreetName' . $number, $arrayParametters['memberStreetName'.$number], PDO::PARAM_STR);
+            $stmt->bindValue(':memberStreetComplement' . $number, $arrayParametters['memberStreetComplement'.$number], PDO::PARAM_STR);
+            $stmt->bindValue(':memberZipCode' . $number, $arrayParametters['memberZipCode'.$number], PDO::PARAM_STR);
+            $stmt->bindValue(':memberCity' . $number, $arrayParametters['memberCity'.$number], PDO::PARAM_STR);
+            $stmt->bindValue(':memberBirthdate' . $number, $arrayParametters['memberBirthdate'.$number], PDO::PARAM_STR);
+            $stmt->bindValue(':memberBirthPlace' . $number, $arrayParametters['memberBirthPlace'.$number], PDO::PARAM_STR);
+            $stmt->bindValue(':memberIdPair', $arrayParametters['memberIdPair'], PDO::PARAM_INT);
+            $stmt->bindValue(':memberMail' . $number, $arrayParametters['memberMail'.$number], PDO::PARAM_STR);
+            $stmt->bindValue(':profession' . $number, $arrayParametters['profession'.$number], PDO::PARAM_STR);
+            $stmt->bindValue(':familySituation' . $number, $arrayParametters['familySituation'.$number], PDO::PARAM_STR);
+            $stmt->bindValue(':cafNumber' . $number, $arrayParametters['cafNumber'.$number], PDO::PARAM_STR);
+            $stmt->bindValue(':memberCivility' . $number, $arrayParametters['memberCivility'.$number], PDO::PARAM_INT);
+            $stmt->execute();
+            $idMember = $stmt->fetchColumn();
+            return $idMember;
+        } 
+        catch (PDOException $e) {
             Loggy::warning("Un problème serveur est survenu" . $e->getMessage());
             throw new ExceptionPersoDAO("Un problème serveur est survenu" . $e->getMessage());
         }
     }
 
     public static function getOneMemberById(int $idPerson) {
+        
         try {
             $pdo = baseConnection();
             $query = "SELECT * FROM  displayOneMember(:idPerson);";

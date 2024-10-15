@@ -24,9 +24,9 @@ let asyncChoiceNumberMember = async function (responsibleValue) {
         let response = await fetch(`controllers/userSpaceController.php?page=userSpace&responsible=${responsibleValue}`);
 
         if (response.ok) {
-            let data = await response.text();
+            const data = await response.text();
             const parser = new DOMParser();
-            doc = parser.parseFromString(data, 'text/html');
+            const doc = parser.parseFromString(data, 'text/html');
             return doc;
         } else {
             alert(new Error("Retour serveur" + response.status));
@@ -187,7 +187,7 @@ responsibleSelect.addEventListener('change', function () {
                 const docMemberResponsible = doc.querySelector('#memberResponsible');
                 const docInfo = doc.getElementById('info');
                 divMemberResponsible.innerHTML = docMemberResponsible.innerHTML;
-                pInfo.innerHTML =  docInfo.innerHtml = "";
+                pInfo.innerHTML =  docInfo.innerHTML = "";
             });
         }
     }

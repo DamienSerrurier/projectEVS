@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS civility (
 
 CREATE TABLE IF NOT EXISTS type_structure (
     id SERIAL PRIMARY KEY,
-    wording VARCHAR(100)
+    wording VARCHAR(100) NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS member_data (
@@ -43,7 +43,8 @@ CREATE TABLE IF NOT EXISTS _date (
 
 CREATE TABLE IF NOT EXISTS category (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE
+    name VARCHAR(100) NOT NULL UNIQUE,
+    event BOOLEAN NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS address_complement (
@@ -119,6 +120,8 @@ CREATE TABLE IF NOT EXISTS activity (
     hour_end TIME,
     description TEXT,
     picture VARCHAR(255),
+    archived BOOLEAN NOT NULL,
+    maturity SMALLINT NOT NULL,
     id_category INTEGER NOT NULL,
     FOREIGN KEY(id_category) REFERENCES category(id)
 );

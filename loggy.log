@@ -1,1 +1,898 @@
 Error Problème d'accès à la base de données PDO::__construct(): Argument #1 ($dsn) must be a valid data source URI dans la méthode [baseConnection] 2023-08-08 13:07:04
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42601]: Syntax error: 7 ERREUR:  erreur de syntaxe sur ou près de « ) »
+LINE 6:             );
+                    ^ in C:\Logiciels\laragon\www\projectEvs\models\managers\AccountCreationManager.php:23
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\AccountCreationManager.php(23): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\accountCreationController.php(60): AccountCreationManager::insertUser(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(7): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [AccountCreationManager], dans la méthode [insertUser] 2023-08-16 15:16:19
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42501]: Insufficient privilege: 7 ERREUR:  droit refusé pour la table connection
+CONTEXT:  instruction SQL « INSERT INTO connection (email, password)
+    VALUES (personEmail, personPassword) RETURNING id »
+fonction PL/pgSQL insertuser(character varying,character varying,character varying,character varying), ligne 5 à instruction SQL in C:\Logiciels\laragon\www\projectEvs\models\managers\AccountCreationManager.php:23
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\AccountCreationManager.php(23): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\accountCreationController.php(60): AccountCreationManager::insertUser(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(7): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [AccountCreationManager], dans la méthode [insertUser] 2023-08-16 15:19:37
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42501]: Insufficient privilege: 7 ERREUR:  droit refusé pour la table connection
+CONTEXT:  instruction SQL « INSERT INTO connection (email, password)
+    VALUES (personEmail, personPassword) RETURNING id »
+fonction PL/pgSQL insertuser(character varying,character varying,character varying,character varying), ligne 5 à instruction SQL in C:\Logiciels\laragon\www\projectEvs\models\managers\AccountCreationManager.php:23
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\AccountCreationManager.php(23): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\accountCreationController.php(60): AccountCreationManager::insertUser(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(7): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [AccountCreationManager], dans la méthode [insertUser] 2023-08-16 15:27:24
+Error Problème d'accès à la base de données SQLSTATE[08006] [7] FATAL:  la base de donn�es � projectevs � n'existe pas dans la méthode [baseConnection] 2023-08-16 16:31:36
+Warning Un problème serveur est survenuPDOException: SQLSTATE[HY093]: Invalid parameter number: :lastname in C:\Logiciels\laragon\www\projectEvs\models\managers\AccountConnecionManager.php:16
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\AccountConnecionManager.php(16): PDOStatement->bindValue('lastname', 'jack@ritcher.fr', 2)
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\accountConnectionController.php(26): AccountConnectionManager::verifyInfoUserConnection('jack@ritcher.fr')
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(10): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [AccountConnectionManager], dans la méthode [verifyInfoUserConnection] 2023-08-17 07:02:45
+Warning Un problème serveur est survenuPDOException: SQLSTATE[HY093]: Invalid parameter number: :id in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:11
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(11): PDOStatement->bindValue(':id', 11, 1)
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(20): UserSpaceManager::getOneUserById(11)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [getOneUserById] 2023-08-17 17:12:41
+Warning Un problème serveur est survenuPDOException: SQLSTATE[HY093]: Invalid parameter number: :id in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:11
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(11): PDOStatement->bindValue(':id', 11, 1)
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(21): UserSpaceManager::getOneUserById(11)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [getOneUserById] 2023-08-17 17:13:51
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42883]: Undefined function: 7 ERREUR:  la procédure delateuser(unknown) n'existe pas
+LINE 1: CALL delateUser($1);
+             ^
+HINT:  Aucune procédure ne correspond au nom donné et aux types d'arguments.
+Vous pourriez avoir besoin d'ajouter des conversions de type explicites. in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:68
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(68): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(119): UserSpaceManager::deleteOneUser(14)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [deleteOneUser] 2023-08-18 11:55:56
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcivility() n'existe pas
+LINE 1: SELECT * FROM displayAllCivility();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:80
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(80): PDO->query('SELECT * FROM d...')
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(16): UserSpaceManager::getAllCivility()
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [getAllCivility] 2023-08-18 15:32:08
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcivility() n'existe pas
+LINE 1: SELECT * FROM displayAllCivility();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:80
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(80): PDO->query('SELECT * FROM d...')
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(16): UserSpaceManager::getAllCivility()
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [getAllCivility] 2023-08-18 15:33:56
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcivility() n'existe pas
+LINE 1: SELECT * FROM displayAllCivility();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:80
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(80): PDO->query('SELECT * FROM d...')
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(16): UserSpaceManager::getAllCivility()
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [getAllCivility] 2023-08-18 15:33:59
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcivility() n'existe pas
+LINE 1: SELECT * FROM displayAllCivility();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:80
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(80): PDO->query('SELECT * FROM d...')
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(16): UserSpaceManager::getAllCivility()
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [getAllCivility] 2023-08-18 15:36:43
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcivility() n'existe pas
+LINE 1: SELECT displayAllCivility();
+               ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:80
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(80): PDO->query('SELECT displayA...')
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(16): UserSpaceManager::getAllCivility()
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [getAllCivility] 2023-08-18 15:37:03
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcivility() n'existe pas
+LINE 1: SELECT * FROM displayAllCivility();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:80
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(80): PDO->query('SELECT * FROM d...')
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(16): UserSpaceManager::getAllCivility()
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [getAllCivility] 2023-08-18 15:38:09
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcivility() n'existe pas
+LINE 1: SELECT * FROM displayAllCivility();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:80
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(80): PDO->query('SELECT * FROM d...')
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(16): UserSpaceManager::getAllCivility()
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [getAllCivility] 2023-08-18 15:38:57
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcivility() n'existe pas
+LINE 1: SELECT * FROM displayAllCivility();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:80
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(80): PDO->query('SELECT * FROM d...')
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(16): UserSpaceManager::getAllCivility()
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [getAllCivility] 2023-08-18 15:40:26
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcivility() n'existe pas
+LINE 1: SELECT * FROM displayAllCivility();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:80
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(80): PDO->query('SELECT * FROM d...')
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(16): UserSpaceManager::getAllCivility()
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [getAllCivility] 2023-08-18 15:40:29
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcivility() n'existe pas
+LINE 1: SELECT * FROM displayAllCivility();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:80
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(80): PDO->query('SELECT * FROM d...')
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(16): UserSpaceManager::getAllCivility()
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [getAllCivility] 2023-08-18 15:41:23
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcivility() n'existe pas
+LINE 1: SELECT * FROM displayAllCivility();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:80
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(80): PDO->query('SELECT * FROM d...')
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(16): UserSpaceManager::getAllCivility()
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [getAllCivility] 2023-08-18 15:41:26
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcivility() n'existe pas
+LINE 1: SELECT * FROM displayAllCivility();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:80
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(80): PDO->query('SELECT * FROM d...')
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(16): UserSpaceManager::getAllCivility()
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [getAllCivility] 2023-08-18 15:44:27
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcivility() n'existe pas
+LINE 1: SELECT * FROM displayAllCivility();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:80
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(80): PDO->query('SELECT * FROM d...')
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(16): UserSpaceManager::getAllCivility()
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [getAllCivility] 2023-08-18 15:44:30
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcivility() n'existe pas
+LINE 1: SELECT * FROM displayAllCivility();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:80
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(80): PDO->query('SELECT * FROM d...')
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(16): UserSpaceManager::getAllCivility()
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [getAllCivility] 2023-08-18 15:44:41
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcivility() n'existe pas
+LINE 1: SELECT * FROM displayAllCivility();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:80
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(80): PDO->query('SELECT * FROM d...')
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(16): UserSpaceManager::getAllCivility()
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [getAllCivility] 2023-08-18 15:51:48
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 61 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:139
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(139): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(408): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-22 18:13:12
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 61 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:139
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(139): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(408): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-22 18:26:17
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 61 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:139
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(139): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(409): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-22 20:40:18
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 27 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:143
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(143): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(406): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-22 22:07:04
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 27 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:143
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(143): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(405): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-22 22:29:31
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 27 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:142
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(142): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(374): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-24 18:02:38
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 27 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:142
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(142): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(374): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-24 18:07:46
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 27 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:142
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(142): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(374): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-24 18:09:20
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 27 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:143
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(143): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(376): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-24 19:51:25
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 27 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:143
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(143): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(376): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-24 20:07:33
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 27 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:143
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(143): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(376): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-24 20:33:18
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 27 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:143
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(143): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(376): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-24 21:00:57
+Warning Un problème serveur est survenuPDOException: SQLSTATE[HY093]: Invalid parameter number: :id in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:124
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(124): PDOStatement->bindValue(':id', 24, 1)
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(377): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-24 21:58:55
+Warning Un problème serveur est survenuPDOException: SQLSTATE[HY093]: Invalid parameter number: :memberLastname1 in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:126
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(126): PDOStatement->bindValue(':memberLastname...', 'hhodhhd', 2)
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(377): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-24 22:03:42
+Warning Un problème serveur est survenuPDOException: SQLSTATE[HY093]: Invalid parameter number: :id1 in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:124
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(124): PDOStatement->bindValue(':id1', 24, 1)
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(377): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-24 22:25:29
+Warning Un problème serveur est survenuPDOException: SQLSTATE[HY093]: Invalid parameter number: :id1 in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:124
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(124): PDOStatement->bindValue(':id1', 24, 1)
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(377): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-24 22:46:02
+Warning Un problème serveur est survenuPDOException: SQLSTATE[HY093]: Invalid parameter number: :id1 in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:124
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(124): PDOStatement->bindValue(':id1', 24, 1)
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(377): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-24 22:50:50
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 61 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:141
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(141): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(429): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-26 21:44:36
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 61 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:141
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(141): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(430): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-26 21:51:00
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 61 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:141
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(141): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(468): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-27 00:36:30
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 61 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:141
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(141): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(468): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-27 00:40:42
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 61 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:140
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(140): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(468): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-27 00:45:47
+Warning Un problème serveur est survenuPDOException: SQLSTATE[HY093]: Invalid parameter number: :memberFirstname1 in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:126
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(126): PDOStatement->bindValue(':memberFirstnam...', NULL, 2)
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(468): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-27 00:49:27
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 61 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:141
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(141): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(468): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-27 00:54:14
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 27 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:141
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(141): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(468): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-27 01:05:49
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 27 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:141
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(141): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(468): UserSpaceManager::insertMember(Array)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-27 01:17:06
+Warning Un problème serveur est survenuPDOException: SQLSTATE[08P01]: <<Unknown error>>: 7 ERREUR:  le message bind fournit 16 paramètres, mais l'instruction préparée « pdo_stmt_00000001 » en requiert 17 in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:139
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(139): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(434): UserSpaceManager::insertMember(Array, 1)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-30 00:36:33
+Error Problème d'accès à la base de données PDO::__construct(): Argument #1 ($dsn) must be a valid data source URI dans la méthode [baseConnection] 2023-08-30 08:53:22
+Warning Un problème serveur est survenuPDOException: SQLSTATE[08P01]: <<Unknown error>>: 7 ERREUR:  le message bind fournit 16 paramètres, mais l'instruction préparée « pdo_stmt_00000001 » en requiert 17 in C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php:139
+Stack trace:
+#0 C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php(139): PDOStatement->execute()
+#1 C:\laragon\www\projectEvs\controllers\userSpaceController.php(434): UserSpaceManager::insertMember(Array, 1)
+#2 C:\laragon\www\projectEvs\index.php(16): require('C:\\laragon\\www\\...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-30 09:10:40
+Warning Un problème serveur est survenuPDOException: SQLSTATE[08P01]: <<Unknown error>>: 7 ERREUR:  le message bind fournit 16 paramètres, mais l'instruction préparée « pdo_stmt_00000001 » en requiert 17 in C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php:139
+Stack trace:
+#0 C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php(139): PDOStatement->execute()
+#1 C:\laragon\www\projectEvs\controllers\userSpaceController.php(434): UserSpaceManager::insertMember(Array, 1)
+#2 C:\laragon\www\projectEvs\index.php(16): require('C:\\laragon\\www\\...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-30 09:16:26
+Warning Un problème serveur est survenuPDOException: SQLSTATE[08P01]: <<Unknown error>>: 7 ERREUR:  le message bind fournit 16 paramètres, mais l'instruction préparée « pdo_stmt_00000001 » en requiert 17 in C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php:139
+Stack trace:
+#0 C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php(139): PDOStatement->execute()
+#1 C:\laragon\www\projectEvs\controllers\userSpaceController.php(434): UserSpaceManager::insertMember(Array, 1)
+#2 C:\laragon\www\projectEvs\index.php(16): require('C:\\laragon\\www\\...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-30 09:18:46
+Warning Un problème serveur est survenuPDOException: SQLSTATE[08P01]: <<Unknown error>>: 7 ERREUR:  le message bind fournit 16 paramètres, mais l'instruction préparée « pdo_stmt_00000001 » en requiert 17 in C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php:139
+Stack trace:
+#0 C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php(139): PDOStatement->execute()
+#1 C:\laragon\www\projectEvs\controllers\userSpaceController.php(434): UserSpaceManager::insertMember(Array, 1)
+#2 C:\laragon\www\projectEvs\index.php(16): require('C:\\laragon\\www\\...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-30 09:22:24
+Warning Un problème serveur est survenuPDOException: SQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction insertmemberadult(unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown) n'existe pas
+LINE 1: SELECT insertMemberAdult(
+               ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. in C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php:138
+Stack trace:
+#0 C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php(138): PDOStatement->execute()
+#1 C:\laragon\www\projectEvs\controllers\userSpaceController.php(434): UserSpaceManager::insertMember(Array, 1)
+#2 C:\laragon\www\projectEvs\index.php(16): require('C:\\laragon\\www\\...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-30 09:24:31
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « place_of_birth » dans la relation « _member »
+DETAIL:  La ligne en échec contient (6, 2023-08-02, null, 10, null, 4, 2023-08-30).
+CONTEXT:  instruction SQL « UPDATE _member SET birthdate = memberBirthdate,
+                           place_of_birth = memberPlaceBirth,
+                           id_person = personId,
+                           id_pair = memberIdPair,
+                           id_member_data = idMemberData
+        WHERE id_person = personId RETURNING id »
+fonction PL/pgSQL insertupdatemember(date,character varying,integer,integer,integer), ligne 39 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 34 à affectation in C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php:143
+Stack trace:
+#0 C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php(143): PDOStatement->execute()
+#1 C:\laragon\www\projectEvs\controllers\userSpaceController.php(443): UserSpaceManager::insertMember(Array, 1)
+#2 C:\laragon\www\projectEvs\index.php(16): require('C:\\laragon\\www\\...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-30 15:29:16
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23503]: Foreign key violation: 7 ERREUR:  une instruction insert ou update sur la table « _member » viole la contrainte de clé
+étrangère « _member_id_pair_fkey »
+DETAIL:  La clé (id_pair)=(10) n'est pas présente dans la table « _member ».
+CONTEXT:  instruction SQL « INSERT INTO _member (
+                birthdate,
+                place_of_birth,
+                id_person,
+                id_pair,
+                id_member_data,
+                registration_date
+        )
+        VALUES (
+            memberBirthdate,
+            memberPlaceBirth,
+            personId,
+            memberIdPair,
+            idMemberData,
+            CURRENT_DATE
+        ) RETURNING id »
+fonction PL/pgSQL insertupdatemember(date,character varying,integer,integer,integer), ligne 21 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 34 à affectation in C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php:143
+Stack trace:
+#0 C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php(143): PDOStatement->execute()
+#1 C:\laragon\www\projectEvs\controllers\userSpaceController.php(471): UserSpaceManager::insertMember(Array, 2)
+#2 C:\laragon\www\projectEvs\index.php(16): require('C:\\laragon\\www\\...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-30 15:55:02
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23503]: Foreign key violation: 7 ERREUR:  une instruction insert ou update sur la table « _member » viole la contrainte de clé
+étrangère « _member_id_pair_fkey »
+DETAIL:  La clé (id_pair)=(10) n'est pas présente dans la table « _member ».
+CONTEXT:  instruction SQL « INSERT INTO _member (
+                birthdate,
+                place_of_birth,
+                id_person,
+                id_pair,
+                id_member_data,
+                registration_date
+        )
+        VALUES (
+            memberBirthdate,
+            memberPlaceBirth,
+            personId,
+            memberIdPair,
+            idMemberData,
+            CURRENT_DATE
+        ) RETURNING id »
+fonction PL/pgSQL insertupdatemember(date,character varying,integer,integer,integer), ligne 21 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 34 à affectation in C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php:143
+Stack trace:
+#0 C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php(143): PDOStatement->execute()
+#1 C:\laragon\www\projectEvs\controllers\userSpaceController.php(471): UserSpaceManager::insertMember(Array, 2)
+#2 C:\laragon\www\projectEvs\index.php(16): require('C:\\laragon\\www\\...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-30 15:58:17
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23503]: Foreign key violation: 7 ERREUR:  une instruction insert ou update sur la table « _member » viole la contrainte de clé
+étrangère « _member_id_pair_fkey »
+DETAIL:  La clé (id_pair)=(10) n'est pas présente dans la table « _member ».
+CONTEXT:  instruction SQL « INSERT INTO _member (
+                birthdate,
+                place_of_birth,
+                id_person,
+                id_pair,
+                id_member_data,
+                registration_date
+        )
+        VALUES (
+            memberBirthdate,
+            memberPlaceBirth,
+            personId,
+            memberIdPair,
+            idMemberData,
+            CURRENT_DATE
+        ) RETURNING id »
+fonction PL/pgSQL insertupdatemember(date,character varying,integer,integer,integer), ligne 21 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 34 à affectation in C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php:143
+Stack trace:
+#0 C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php(143): PDOStatement->execute()
+#1 C:\laragon\www\projectEvs\controllers\userSpaceController.php(472): UserSpaceManager::insertMember(Array, 2)
+#2 C:\laragon\www\projectEvs\index.php(16): require('C:\\laragon\\www\\...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-30 16:03:53
+Error Problème d'accès à la base de données PDO::__construct(): Argument #1 ($dsn) must be a valid data source URI dans la méthode [baseConnection] 2023-08-30 20:49:04
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 27 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:143
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(143): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(443): UserSpaceManager::insertMember(Array, 1)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-30 23:21:54
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 27 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation in C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php:143
+Stack trace:
+#0 C:\Logiciels\laragon\www\projectEvs\models\managers\UserSpaceManager.php(143): PDOStatement->execute()
+#1 C:\Logiciels\laragon\www\projectEvs\controllers\userSpaceController.php(443): UserSpaceManager::insertMember(Array, 1)
+#2 C:\Logiciels\laragon\www\projectEvs\index.php(16): require('C:\\Logiciels\\la...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-30 23:33:32
+Error Problème d'accès à la base de données PDO::__construct(): Argument #1 ($dsn) must be a valid data source URI dans la méthode [baseConnection] 2023-08-31 08:22:00
+Error Problème d'accès à la base de données PDO::__construct(): Argument #1 ($dsn) must be a valid data source URI dans la méthode [baseConnection] 2023-08-31 08:22:52
+Error Problème d'accès à la base de données PDO::__construct(): Argument #1 ($dsn) must be a valid data source URI dans la méthode [baseConnection] 2023-08-31 08:24:17
+Error Problème d'accès à la base de données PDO::__construct(): Argument #1 ($dsn) must be a valid data source URI dans la méthode [baseConnection] 2023-08-31 08:34:33
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23505]: Unique violation: 7 ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « member_data_caf_number_key »
+DETAIL:  La clé « (caf_number)=(5128746H  ) » existe déjà.
+CONTEXT:  instruction SQL « UPDATE member_data SET email = memberDataEmail,
+                               profession = memberDataProfession,
+                               family_situation = memberDataFamilySituation,
+                               caf_number = memberDataCafNumber
+        WHERE id = idMemberData RETURNING id »
+fonction PL/pgSQL insertupdatememberdata(integer,character varying,character varying,character varying,character), ligne 19 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 17 à affectation in C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php:143
+Stack trace:
+#0 C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php(143): PDOStatement->execute()
+#1 C:\laragon\www\projectEvs\controllers\userSpaceController.php(442): UserSpaceManager::insertMember(Array, 1)
+#2 C:\laragon\www\projectEvs\index.php(16): require('C:\\laragon\\www\\...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-31 09:50:18
+Warning Un problème serveur est survenuPDOException: SQLSTATE[23505]: Unique violation: 7 ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « member_data_caf_number_key »
+DETAIL:  La clé « (caf_number)=(5128746H  ) » existe déjà.
+CONTEXT:  instruction SQL « INSERT INTO member_data (email, profession, family_situation, caf_number)
+        VALUES (
+            memberDataEmail,
+            memberDataProfession,
+            memberDataFamilySituation,
+            memberDataCafNumber
+        ) RETURNING id »
+fonction PL/pgSQL insertupdatememberdata(integer,character varying,character varying,character varying,character), ligne 11 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 17 à affectation in C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php:143
+Stack trace:
+#0 C:\laragon\www\projectEvs\models\managers\UserSpaceManager.php(143): PDOStatement->execute()
+#1 C:\laragon\www\projectEvs\controllers\userSpaceController.php(442): UserSpaceManager::insertMember(Array, 1)
+#2 C:\laragon\www\projectEvs\index.php(16): require('C:\\laragon\\www\\...')
+#3 {main} dans la classe [UserSpaceManager], dans la méthode [insertMember] 2023-08-31 10:14:10
+Warning Un problème serveur est survenuSQLSTATE[23505]: Unique violation: 7 ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « member_data_caf_number_key »
+DETAIL:  La clé « (caf_number)=(8368264J  ) » existe déjà.
+CONTEXT:  instruction SQL « INSERT INTO member_data (email, profession, family_situation, caf_number)
+        VALUES (
+            memberDataEmail,
+            memberDataProfession,
+            memberDataFamilySituation,
+            memberDataCafNumber
+        ) RETURNING id »
+fonction PL/pgSQL insertupdatememberdata(integer,character varying,character varying,character varying,character), ligne 11 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 17 à affectation dans la classe [UserSpaceManager], dans la méthode [insertMember] 2024-03-04 00:24:44
+Warning Un problème serveur est survenuSQLSTATE[23505]: Unique violation: 7 ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « member_data_caf_number_key »
+DETAIL:  La clé « (caf_number)=(8368264J  ) » existe déjà.
+CONTEXT:  instruction SQL « INSERT INTO member_data (email, profession, family_situation, caf_number)
+        VALUES (
+            memberDataEmail,
+            memberDataProfession,
+            memberDataFamilySituation,
+            memberDataCafNumber
+        ) RETURNING id »
+fonction PL/pgSQL insertupdatememberdata(integer,character varying,character varying,character varying,character), ligne 11 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 17 à affectation dans la classe [UserSpaceManager], dans la méthode [insertMember] 2024-04-01 21:33:40
+Warning Un problème serveur est survenuSQLSTATE[42883]: Undefined function: 7 ERREUR:  l'opérateur n'existe pas : integer = character
+LINE 1: cafNumber = NEW.caf_number
+                  ^
+HINT:  Aucun opérateur ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type.
+QUERY:  cafNumber = NEW.caf_number
+CONTEXT:  fonction PL/pgSQL comparecafnumberbeforeinsert(), ligne 9 à IF
+instruction SQL « INSERT INTO member_data (email, profession, family_situation, caf_number)
+        VALUES (
+            memberDataEmail,
+            memberDataProfession,
+            memberDataFamilySituation,
+            memberDataCafNumber
+        ) RETURNING id »
+fonction PL/pgSQL insertupdatememberdata(integer,character varying,character varying,character varying,character), ligne 11 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 17 à affectation dans la classe [UserSpaceManager], dans la méthode [insertMember] 2024-04-01 22:21:57
+Warning Un problème serveur est survenuSQLSTATE[23505]: Unique violation: 7 ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « member_data_caf_number_key »
+DETAIL:  La clé « (caf_number)=(8368264J  ) » existe déjà.
+CONTEXT:  instruction SQL « INSERT INTO member_data (email, profession, family_situation, caf_number)
+        VALUES (
+            memberDataEmail,
+            memberDataProfession,
+            memberDataFamilySituation,
+            memberDataCafNumber
+        ) RETURNING id »
+fonction PL/pgSQL insertupdatememberdata(integer,character varying,character varying,character varying,character), ligne 11 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 17 à affectation dans la classe [UserSpaceManager], dans la méthode [insertMember] 2024-04-01 22:31:31
+Warning Un problème serveur est survenuSQLSTATE[23505]: Unique violation: 7 ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « member_data_caf_number_key »
+DETAIL:  La clé « (caf_number)=(8368264J  ) » existe déjà.
+CONTEXT:  instruction SQL « INSERT INTO member_data (email, profession, family_situation, caf_number)
+        VALUES (
+            memberDataEmail,
+            memberDataProfession,
+            memberDataFamilySituation,
+            memberDataCafNumber
+        ) RETURNING id »
+fonction PL/pgSQL insertupdatememberdata(integer,character varying,character varying,character varying,character), ligne 11 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 17 à affectation dans la classe [UserSpaceManager], dans la méthode [insertMember] 2024-04-01 22:38:48
+Warning Un problème serveur est survenuSQLSTATE[23505]: Unique violation: 7 ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « member_data_caf_number_key »
+DETAIL:  La clé « (caf_number)=(8368264J  ) » existe déjà.
+CONTEXT:  instruction SQL « INSERT INTO member_data (email, profession, family_situation, caf_number)
+        VALUES (
+            memberDataEmail,
+            memberDataProfession,
+            memberDataFamilySituation,
+            memberDataCafNumber
+        ) RETURNING id »
+fonction PL/pgSQL insertupdatememberdata(integer,character varying,character varying,character varying,character), ligne 11 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 17 à affectation dans la classe [UserSpaceManager], dans la méthode [insertMember] 2024-04-01 22:57:36
+Warning Un problème serveur est survenuSQLSTATE[P0001]: Raise exception: 7 ERREUR:  8368264J   Je suis rentr‚ dans la condition et NEW id vaut
+CONTEXT:  fonction PL/pgSQL comparecafnumberbeforeinsert(), ligne 1 à RAISE
+instruction SQL « INSERT INTO member_data (email, profession, family_situation, caf_number)
+        VALUES (
+            memberDataEmail,
+            memberDataProfession,
+            memberDataFamilySituation,
+            memberDataCafNumber
+        ) RETURNING id »
+fonction PL/pgSQL insertupdatememberdata(integer,character varying,character varying,character varying,character), ligne 11 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 17 à affectation dans la classe [UserSpaceManager], dans la méthode [insertMember] 2024-04-01 23:04:14
+Warning Un problème serveur est survenuSQLSTATE[P0001]: Raise exception: 7 ERREUR:  8368264J   Je suis rentr‚ dans la condition et NEW caf_number vaut
+CONTEXT:  fonction PL/pgSQL comparecafnumberbeforeinsert(), ligne 11 à RAISE
+instruction SQL « INSERT INTO member_data (email, profession, family_situation, caf_number)
+        VALUES (
+            memberDataEmail,
+            memberDataProfession,
+            memberDataFamilySituation,
+            memberDataCafNumber
+        ) RETURNING id »
+fonction PL/pgSQL insertupdatememberdata(integer,character varying,character varying,character varying,character), ligne 11 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 17 à affectation dans la classe [UserSpaceManager], dans la méthode [insertMember] 2024-04-01 23:21:19
+Warning Un problème serveur est survenuSQLSTATE[23505]: Unique violation: 7 ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « member_data_caf_number_key »
+DETAIL:  La clé « (caf_number)=(8368264J  ) » existe déjà.
+CONTEXT:  instruction SQL « INSERT INTO member_data (email, profession, family_situation, caf_number)
+        VALUES (
+            memberDataEmail,
+            memberDataProfession,
+            memberDataFamilySituation,
+            memberDataCafNumber
+        ) RETURNING id »
+fonction PL/pgSQL insertupdatememberdata(integer,character varying,character varying,character varying,character), ligne 11 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 17 à affectation dans la classe [UserSpaceManager], dans la méthode [insertMember] 2024-04-01 23:31:43
+Warning Un problème serveur est survenuSQLSTATE[23505]: Unique violation: 7 ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « member_data_caf_number_key »
+DETAIL:  La clé « (caf_number)=(8368264J  ) » existe déjà.
+CONTEXT:  instruction SQL « INSERT INTO member_data (email, profession, family_situation, caf_number)
+        VALUES (
+            memberDataEmail,
+            memberDataProfession,
+            memberDataFamilySituation,
+            memberDataCafNumber
+        ) RETURNING id »
+fonction PL/pgSQL insertupdatememberdata(integer,character varying,character varying,character varying,character), ligne 11 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 17 à affectation dans la classe [UserSpaceManager], dans la méthode [insertMember] 2024-04-01 23:40:27
+Warning Un problème serveur est survenuSQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « caf_number » dans la relation « member_data »
+DETAIL:  La ligne en échec contient (24, doe@john.fr, Chasseur, Marié, null).
+CONTEXT:  instruction SQL « INSERT INTO member_data (email, profession, family_situation)         VALUES (             memberDataEmail,             memberDataProfession,             memberDataFamilySituation         ) RETURNING id »
+fonction PL/pgSQL insertupdatememberdata(integer,character varying,character varying,character varying,character), ligne 1 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 17 à affectation dans la classe [UserSpaceManager], dans la méthode [insertMember] 2024-04-15 17:47:42
+Warning Un problème serveur est survenuSQLSTATE[23505]: Unique violation: 7 ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « member_data_caf_number_key »
+DETAIL:  La clé « (caf_number)=(0000000A  ) » existe déjà.
+CONTEXT:  instruction SQL « INSERT INTO member_data (email, profession, family_situation, caf_number)
+        VALUES (
+            memberDataEmail,
+            memberDataProfession,
+            memberDataFamilySituation,
+            '0000000A'
+        ) RETURNING id »
+fonction PL/pgSQL insertupdatememberdata(integer,character varying,character varying,character varying,character), ligne 17 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 17 à affectation dans la classe [UserSpaceManager], dans la méthode [insertMember] 2024-04-15 19:14:57
+Warning Un problème serveur est survenuSQLSTATE[23505]: Unique violation: 7 ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « member_data_caf_number_key »
+DETAIL:  La clé « (caf_number)=(8368264J  ) » existe déjà.
+CONTEXT:  instruction SQL « UPDATE member_data SET caf_number = memberDataCafNumber
+            WHERE id = memberDataId »
+fonction PL/pgSQL insertupdatememberdata(integer,character varying,character varying,character varying,character), ligne 26 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 17 à affectation dans la classe [UserSpaceManager], dans la méthode [insertMember] 2024-04-15 21:21:55
+Warning Un problème serveur est survenuSQLSTATE[42601]: Syntax error: 7 ERREUR:  INSERT a plus de colonnes cibles que d'expressions
+LINE 1: ...member_data (email, profession, family_situation, caf_number...
+                                                             ^
+QUERY:  INSERT INTO member_data (email, profession, family_situation, caf_number)
+        VALUES (
+            memberDataEmail,
+            memberDataProfession,
+            memberDataFamilySituation
+        ) 
+        ON CONFLICT (caf_number) 
+        DO UPDATE SET caf_number = memberDataCafNumber RETURNING id
+CONTEXT:  fonction PL/pgSQL insertupdatememberdata(integer,character varying,character varying,character varying,character), ligne 16 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 17 à affectation dans la classe [UserSpaceManager], dans la méthode [insertMember] 2024-04-15 22:09:59
+Warning Un problème serveur est survenuSQLSTATE[22P02]: Invalid text representation: 7 ERREUR:  syntaxe en entrée invalide pour le type integer : « Array »
+CONTEXT:  paramètre de portail non nommé $1 = '...' dans la classe [UserSpaceManager], dans la méthode [updateUser] 2024-06-26 22:12:15
+Warning Un problème serveur est survenuSQLSTATE[22P02]: Invalid text representation: 7 ERREUR:  syntaxe en entrée invalide pour le type integer : « Array »
+CONTEXT:  paramètre de portail non nommé $1 = '...' dans la classe [UserSpaceManager], dans la méthode [updateUser] 2024-06-26 22:20:42
+Warning Un problème serveur est survenuSQLSTATE[22P02]: Invalid text representation: 7 ERREUR:  syntaxe en entrée invalide pour le type integer : « Array »
+CONTEXT:  paramètre de portail non nommé $1 = '...' dans la classe [UserSpaceManager], dans la méthode [updateUser] 2024-06-26 22:58:00
+Warning Un problème serveur est survenuSQLSTATE[22P02]: Invalid text representation: 7 ERREUR:  syntaxe en entrée invalide pour le type integer : « Array »
+CONTEXT:  paramètre de portail non nommé $1 = '...' dans la classe [UserSpaceManager], dans la méthode [updateUser] 2024-06-26 23:05:41
+Warning Un problème serveur est survenuSQLSTATE[22P02]: Invalid text representation: 7 ERREUR:  syntaxe en entrée invalide pour le type integer : « Array »
+CONTEXT:  paramètre de portail non nommé $1 = '...' dans la classe [UserSpaceManager], dans la méthode [updateUser] 2024-06-26 23:08:33
+Warning Un problème serveur est survenuSQLSTATE[22P02]: Invalid text representation: 7 ERREUR:  syntaxe en entrée invalide pour le type integer : « Array »
+CONTEXT:  paramètre de portail non nommé $1 = '...' dans la classe [UserSpaceManager], dans la méthode [updateUser] 2024-06-26 23:09:53
+Warning Un problème serveur est survenuSQLSTATE[22P02]: Invalid text representation: 7 ERREUR:  syntaxe en entrée invalide pour le type integer : « Array »
+CONTEXT:  paramètre de portail non nommé $1 = '...' dans la classe [UserSpaceManager], dans la méthode [updateUser] 2024-06-26 23:13:17
+Warning Un problème serveur est survenuSQLSTATE[22P02]: Invalid text representation: 7 ERREUR:  syntaxe en entrée invalide pour le type integer : « Array »
+CONTEXT:  paramètre de portail non nommé $1 = '...' dans la classe [UserSpaceManager], dans la méthode [updateUser] 2024-06-26 23:35:57
+Warning Un problème serveur est survenuSQLSTATE[22P02]: Invalid text representation: 7 ERREUR:  syntaxe en entrée invalide pour le type integer : « Array »
+CONTEXT:  paramètre de portail non nommé $1 = '...' dans la classe [UserSpaceManager], dans la méthode [updateUser] 2024-06-26 23:41:52
+Warning Un problème serveur est survenuSQLSTATE[23505]: Unique violation: 7 ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « connection_email_key »
+DETAIL:  La clé « (email)=(evs.frouard@francas54.org) » existe déjà.
+CONTEXT:  instruction SQL « INSERT INTO connection (email, password)
+    VALUES (personEmail, personPassword) RETURNING id »
+fonction PL/pgSQL insertuser(character varying,character varying,character varying,character varying), ligne 5 à instruction SQL dans la classe [AccountCreationManager], dans la méthode [insertUser] 2024-07-27 17:59:11
+Warning Un problème serveur est survenuSQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 61 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation dans la classe [UserSpaceManager], dans la méthode [insertMember] 2024-08-24 14:32:17
+Warning Un problème serveur est survenuSQLSTATE[23502]: Not null violation: 7 ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « code » dans la relation « zip_code »
+DETAIL:  La ligne en échec contient (null).
+CONTEXT:  instruction SQL « INSERT INTO zip_code (code)
+            VALUES (zipCode) RETURNING code »
+fonction PL/pgSQL insertaddress(integer,character varying,character varying,character varying,character varying,character varying), ligne 61 à instruction SQL
+fonction PL/pgSQL insertmemberadult(integer,character varying,character varying,character varying,character varying,character varying,character varying,character varying,character varying,date,character varying,integer,character varying,character varying,character varying,character,integer), ligne 8 à affectation dans la classe [UserSpaceManager], dans la méthode [insertMember] 2024-08-24 14:33:09
+Warning Un problème serveur est survenuSQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcategory() n'existe pas
+LINE 1: SELECT * FROM displayallcategory();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. dans la classe [AdministratorSpaceManager], dans la méthode [getAllCategory] 2024-10-01 23:54:32
+Warning Un problème serveur est survenuSQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcategory() n'existe pas
+LINE 1: SELECT * FROM displayallcategory();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. dans la classe [AdministratorSpaceManager], dans la méthode [getAllCategory] 2024-10-01 23:54:37
+Warning Un problème serveur est survenuSQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcategory() n'existe pas
+LINE 1: SELECT * FROM displayallcategory();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. dans la classe [AdministratorSpaceManager], dans la méthode [getAllCategory] 2024-10-01 23:54:40
+Warning Un problème serveur est survenuSQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcategory() n'existe pas
+LINE 1: SELECT * FROM displayallcategory();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. dans la classe [AdministratorSpaceManager], dans la méthode [getAllCategory] 2024-10-01 23:55:00
+Warning Un problème serveur est survenuSQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcategory() n'existe pas
+LINE 1: SELECT * FROM displayallcategory();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. dans la classe [AdministratorSpaceManager], dans la méthode [getAllCategory] 2024-10-01 23:55:01
+Warning Un problème serveur est survenuSQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcategory() n'existe pas
+LINE 1: SELECT * FROM displayallcategory();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. dans la classe [AdministratorSpaceManager], dans la méthode [getAllCategory] 2024-10-01 23:55:02
+Warning Un problème serveur est survenuSQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcategory() n'existe pas
+LINE 1: SELECT * FROM displayallcategory();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. dans la classe [AdministratorSpaceManager], dans la méthode [getAllCategory] 2024-10-01 23:55:03
+Warning Un problème serveur est survenuSQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcategory() n'existe pas
+LINE 1: SELECT * FROM displayallcategory();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. dans la classe [AdministratorSpaceManager], dans la méthode [getAllCategory] 2024-10-01 23:55:04
+Warning Un problème serveur est survenuSQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcategory() n'existe pas
+LINE 1: SELECT * FROM displayallcategory();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. dans la classe [AdministratorSpaceManager], dans la méthode [getAllCategory] 2024-10-01 23:55:05
+Warning Un problème serveur est survenuSQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcategory() n'existe pas
+LINE 1: SELECT * FROM displayallcategory();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. dans la classe [AdministratorSpaceManager], dans la méthode [getAllCategory] 2024-10-02 00:15:59
+Warning Un problème serveur est survenuSQLSTATE[42883]: Undefined function: 7 ERREUR:  la fonction displayallcategory() n'existe pas
+LINE 1: SELECT * FROM displayAllCategory();
+                      ^
+HINT:  Aucune fonction ne correspond au nom donné et aux types d'arguments.
+Vous devez ajouter des conversions explicites de type. dans la classe [AdministratorSpaceManager], dans la méthode [getAllCategory] 2024-10-02 00:18:27
+Warning Un problème serveur est survenuSQLSTATE[23505]: Unique violation: 7 ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « category_name_key »
+DETAIL:  La clé « (name)=(Activité permanente) » existe déjà.
+CONTEXT:  instruction SQL « INSERT INTO category (name)
+    VALUES (categoryName) »
+fonction PL/pgSQL insertcategory(character varying), ligne 3 à instruction SQL dans la classe [AdministratorSpaceManager], dans la méthode [insertCategoryName] 2024-10-12 00:10:44

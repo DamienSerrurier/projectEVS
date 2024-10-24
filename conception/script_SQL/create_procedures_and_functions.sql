@@ -423,21 +423,24 @@ $$;
 --Appel de la procédure insertLogoStructure pour ajouter un logo à la structure
 CALL insertLogoStructure(1, 'assets/img/logo/');
 
---Procédure permettant de créer une catégorie d'activité
-CREATE OR REPLACE PROCEDURE insertCategory(categoryName VARCHAR(100))
+--Procédure permettant de créer une catégorie d'activité et de la ranger dans un thème
+CREATE OR REPLACE PROCEDURE insertCategory(
+    categoryName VARCHAR(100),
+    categoryEvent INTEGER
+    )
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    INSERT INTO category (name)
-    VALUES (categoryName);
+    INSERT INTO category (name, event)
+    VALUES (categoryName, categoryEvent);
 END;
 $$;
 
 --Appel de la procédure insertCategory pour insertion d'une catégorie d'activité
-CALL insertCategory('Notre Programme hebdomadaire');
-CALL insertCategory('Atelier Cuisine du Monde');
-CALL insertCategory('Les festivités');
-CALL insertCategory('Nos Sorties');
+CALL insertCategory('Notre Programme hebdomadaire', CAST(1 AS SMALLINT));
+CALL insertCategory('Atelier Cuisine du Monde', CAST(2 AS SMALLINT));
+CALL insertCategory('Les festivités', CAST(1 AS SMALLINT));
+CALL insertCategory('Nos Sorties', CAST(2 AS SMALLINT));
 
 
 --Procédure permettant de créer une activité
@@ -450,6 +453,8 @@ CREATE OR REPLACE PROCEDURE insertActivity(
     activityHourEnd TIME,
     activityDescription TEXT,
     activityPicture VARCHAR(255),
+    activityArchived BOOLEAN,
+    activityMaturity INTEGER,
     idCategory INTEGER
 )
 LANGUAGE plpgsql
@@ -466,6 +471,8 @@ BEGIN
         hour_end,
         description,
         picture,
+        archived,
+        maturity,
         id_category
     )
     VALUES (
@@ -477,16 +484,18 @@ BEGIN
         activityHourEnd,
         activityDescription,
         activityPicture,
+        activityArchived,
+        activityMaturity,
         idCategory
     );
 END;
 $$;
 
 --Appel de la procédure insertActivity pour insertion d'une activité rattachée à sa catégorie
-CALL insertActivity('Cours de français (FLE)', 'Tous les Mardis/jeudis/Vendredis', NULL, NULL, NULL, NULL, '','', 1);
-CALL insertActivity('TGP Spectacle Participatif', '"les hommes improbables"', '2023/05/13', NULL, '16:00', NULL, '', '', 2);
-CALL insertActivity('Les Etats_Unis', '', '2023/06/02', NULL, '9:30', NULL, '', '', 3);
-CALL insertActivity('CCAS Tournoi de Rugby', '"Gentleman Challenge"', '2023/05/14', NULL, '9:30', NULL, '', '', 4);
+CALL insertActivity('Cours de français (FLE)', 'Tous les Mardis/jeudis/Vendredis', NULL, NULL, NULL, NULL, '','', false, 1, 1);
+CALL insertActivity('TGP Spectacle Participatif', '"les hommes improbables"', '2023/05/13', NULL, '16:00', NULL, '', '', false, 1, 2);
+CALL insertActivity('Les Etats_Unis', '', '2023/06/02', NULL, '9:30', NULL, '', '', false, 1, 3);
+CALL insertActivity('CCAS Tournoi de Rugby', '"Gentleman Challenge"', '2023/05/14', NULL, '9:30', NULL, '', '', false, 1, 4);
 
 --Procédure permettant d'insérer une image pour une activité
 CREATE OR REPLACE PROCEDURE insertPictureActivity(activityId INTEGER, activityPicture VARCHAR(255))

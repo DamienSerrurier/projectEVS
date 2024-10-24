@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS activity (
     hour_end TIME,
     description TEXT,
     picture VARCHAR(255),
-    archived BOOLEAN NOT NULL,
+    archived BOOLEAN NOT NULL DEFAULT false,
     maturity SMALLINT NOT NULL,
     id_category INTEGER NOT NULL,
     FOREIGN KEY(id_category) REFERENCES category(id)

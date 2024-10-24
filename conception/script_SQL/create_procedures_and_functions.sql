@@ -453,7 +453,6 @@ CREATE OR REPLACE PROCEDURE insertActivity(
     activityHourEnd TIME,
     activityDescription TEXT,
     activityPicture VARCHAR(255),
-    activityArchived BOOLEAN,
     activityMaturity INTEGER,
     idCategory INTEGER
 )
@@ -471,7 +470,6 @@ BEGIN
         hour_end,
         description,
         picture,
-        archived,
         maturity,
         id_category
     )
@@ -484,7 +482,6 @@ BEGIN
         activityHourEnd,
         activityDescription,
         activityPicture,
-        activityArchived,
         activityMaturity,
         idCategory
     );
@@ -492,10 +489,10 @@ END;
 $$;
 
 --Appel de la procédure insertActivity pour insertion d'une activité rattachée à sa catégorie
-CALL insertActivity('Cours de français (FLE)', 'Tous les Mardis/jeudis/Vendredis', NULL, NULL, NULL, NULL, '','', false, 1, 1);
-CALL insertActivity('TGP Spectacle Participatif', '"les hommes improbables"', '2023/05/13', NULL, '16:00', NULL, '', '', false, 1, 2);
-CALL insertActivity('Les Etats_Unis', '', '2023/06/02', NULL, '9:30', NULL, '', '', false, 1, 3);
-CALL insertActivity('CCAS Tournoi de Rugby', '"Gentleman Challenge"', '2023/05/14', NULL, '9:30', NULL, '', '', false, 1, 4);
+CALL insertActivity('Cours de français (FLE)', 'Tous les Mardis/jeudis/Vendredis', NULL, NULL, NULL, NULL, '','', 1, 1);
+CALL insertActivity('TGP Spectacle Participatif', '"les hommes improbables"', '2023/05/13', NULL, '16:00', NULL, '', '', 1, 2);
+CALL insertActivity('Les Etats_Unis', '', '2023/06/02', NULL, '9:30', NULL, '', '', 1, 3);
+CALL insertActivity('CCAS Tournoi de Rugby', '"Gentleman Challenge"', '2023/05/14', NULL, '9:30', NULL, '', '', 1, 4);
 
 --Procédure permettant d'insérer une image pour une activité
 CREATE OR REPLACE PROCEDURE insertPictureActivity(activityId INTEGER, activityPicture VARCHAR(255))

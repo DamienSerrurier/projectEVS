@@ -6,6 +6,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
  . 'utility' . DIRECTORY_SEPARATOR . 'exceptions' . DIRECTORY_SEPARATOR . 'ExceptionPerso.php';
 
 use DateTime;
+use Exception;
 use ProjectEvs\ExceptionPerso;
 
 class Activity implements RegexTester {
@@ -19,6 +20,8 @@ class Activity implements RegexTester {
     private string $endHour;
     private string $description;
     private string $picture;
+    private bool $archived;
+    private int $maturity;
     private Category $category;
 
     //Getters et Setters
@@ -304,6 +307,55 @@ class Activity implements RegexTester {
         }
         else {
             throw new ExceptionPerso("Votre fichier n'a pu être envoyé, veuillez réessayer");
+        }
+    }
+
+    /** Méthode permettant de récupérer un mode d'archivage de l'activité
+     * @return bool Le mode d'archivage
+     */
+    public function getArchived() {
+        return $this->archived;
+    }
+
+    /** Méthode permettant de vérifier et de définir un mode d'archivage de l'activité
+     * @param bool Le mode d'archivage
+     * @throws ExceptionPerso Si le mode d'archivage est non valide
+     */
+    public function setArchived(bool $archived) {
+
+        if (filter_var($archived, FILTER_VALIDATE_BOOL)) {
+            $this->archived = $archived;
+        }
+        else {
+            throw new ExceptionPerso("Arrêter de jouer avec mon input tipe radio");
+        }
+        
+    }
+
+    /** Méthode permettant de récupérer l'identifiant de la maturité
+     * @return int L'identifiant de la maturité
+     */
+    public function getMaturity() {
+        return $this->maturity;
+    }
+
+    /** Méthode permettant de vérifier et definir un choix de maturité
+     * @param int L'identifiant de la maturité
+     * @throws ExceptionPerso Si la maturité n'est pas renseigné ou non valide
+     */
+    public function setMaturity(int $maturity) {
+
+        if (!empty($maturity)) {
+
+            if (filter_var($maturity, FILTER_VALIDATE_INT)) {
+                $this->maturity = $maturity;
+            }
+            else {
+                throw new ExceptionPerso("Arrêtez de jouer avec mes input tipe checkbox");
+            }
+        }
+        else {
+            throw new ExceptionPerso("Veuillez faire un choix à qui sera destiner l'activité");
         }
     }
 

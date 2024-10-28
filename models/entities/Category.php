@@ -13,7 +13,6 @@ class Category implements RegexTester {
     //Propriétés
     private int $id;
     private string $name;
-    private int $event;
 
     //Constructeur
 
@@ -72,33 +71,6 @@ class Category implements RegexTester {
             }
         } else {
             throw new ExceptionPerso("Veuillez renseigner ce champ");
-        }
-    }
-
-    /** Méthode qui permet de retourner un identifiant lié à un événement
-     * @return int L'événement associé à une catégorie
-     */
-    public function getEvent() {
-        return $this->event;
-    }
-
-    /** Permet de vérifier et de définir l'identifiant correspondant à un événement 
-     * @param int L'identifiant de l'événement
-     * @throws ExceptionPerso Si l'événement n'est pas renseigné ou non valide
-     */
-    public function setEvent(int $event) {
-
-        if (!empty($event)) {
-
-            if (filter_var($event, FILTER_VALIDATE_INT)) {
-                $this->event = $event;
-            }
-            else {
-                throw new ExceptionPerso("Arrêtez de jouer avec mes input tipe checkbox");
-            }
-        }
-        else {
-            throw new ExceptionPerso("Veuillez faire un choix d'événement");
         }
     }
 

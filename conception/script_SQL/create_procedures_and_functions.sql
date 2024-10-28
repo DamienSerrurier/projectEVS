@@ -425,22 +425,21 @@ CALL insertLogoStructure(1, 'assets/img/logo/');
 
 --Procédure permettant de créer une catégorie d'activité et de la ranger dans un thème
 CREATE OR REPLACE PROCEDURE insertCategory(
-    categoryName VARCHAR(100),
-    categoryEvent INTEGER
+    categoryName VARCHAR(100)
     )
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    INSERT INTO category (name, event)
-    VALUES (categoryName, categoryEvent);
+    INSERT INTO category (name)
+    VALUES (categoryName);
 END;
 $$;
 
 --Appel de la procédure insertCategory pour insertion d'une catégorie d'activité
-CALL insertCategory('Notre Programme hebdomadaire', CAST(1 AS SMALLINT));
-CALL insertCategory('Atelier Cuisine du Monde', CAST(2 AS SMALLINT));
-CALL insertCategory('Les festivités', CAST(1 AS SMALLINT));
-CALL insertCategory('Nos Sorties', CAST(2 AS SMALLINT));
+CALL insertCategory('Notre Programme hebdomadaire');
+CALL insertCategory('Atelier Cuisine du Monde');
+CALL insertCategory('Les festivités');
+CALL insertCategory('Nos Sorties');
 
 
 --Procédure permettant de créer une activité
@@ -454,6 +453,7 @@ CREATE OR REPLACE PROCEDURE insertActivity(
     activityDescription TEXT,
     activityPicture VARCHAR(255),
     activityMaturity INTEGER,
+    activityEvent INTEGER,
     idCategory INTEGER
 )
 LANGUAGE plpgsql
@@ -471,6 +471,7 @@ BEGIN
         description,
         picture,
         maturity,
+        event,
         id_category
     )
     VALUES (
@@ -483,16 +484,17 @@ BEGIN
         activityDescription,
         activityPicture,
         activityMaturity,
+        activityEvent,
         idCategory
     );
 END;
 $$;
 
 --Appel de la procédure insertActivity pour insertion d'une activité rattachée à sa catégorie
-CALL insertActivity('Cours de français (FLE)', 'Tous les Mardis/jeudis/Vendredis', NULL, NULL, NULL, NULL, '','', 1, 1);
-CALL insertActivity('TGP Spectacle Participatif', '"les hommes improbables"', '2023/05/13', NULL, '16:00', NULL, '', '', 1, 2);
-CALL insertActivity('Les Etats_Unis', '', '2023/06/02', NULL, '9:30', NULL, '', '', 1, 3);
-CALL insertActivity('CCAS Tournoi de Rugby', '"Gentleman Challenge"', '2023/05/14', NULL, '9:30', NULL, '', '', 1, 4);
+CALL insertActivity('Cours de français (FLE)', 'Tous les Mardis/jeudis/Vendredis', NULL, NULL, NULL, NULL, '','', 1, CAST(1 AS SMALLINT), 1);
+CALL insertActivity('TGP Spectacle Participatif', '"les hommes improbables"', '2023/05/13', NULL, '16:00', NULL, '', '', 1, CAST(2 AS SMALLINT), 2);
+CALL insertActivity('Les Etats_Unis', '', '2023/06/02', NULL, '9:30', NULL, '', '', 1, CAST(2 AS SMALLINT), 3);
+CALL insertActivity('CCAS Tournoi de Rugby', '"Gentleman Challenge"', '2023/05/14', NULL, '9:30', NULL, '', '', 1, CAST(2 AS SMALLINT), 4);
 
 --Procédure permettant d'insérer une image pour une activité
 CREATE OR REPLACE PROCEDURE insertPictureActivity(activityId INTEGER, activityPicture VARCHAR(255))

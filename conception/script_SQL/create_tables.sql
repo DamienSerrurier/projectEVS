@@ -43,8 +43,7 @@ CREATE TABLE IF NOT EXISTS _date (
 
 CREATE TABLE IF NOT EXISTS category (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE,
-    event SMALLINT NOT NULL
+    name VARCHAR(100) NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS address_complement (
@@ -122,6 +121,7 @@ CREATE TABLE IF NOT EXISTS activity (
     picture VARCHAR(255),
     archived BOOLEAN NOT NULL DEFAULT false,
     maturity SMALLINT NOT NULL,
+    event SMALLINT NOT NULL,
     id_category INTEGER NOT NULL,
     FOREIGN KEY(id_category) REFERENCES category(id)
 );

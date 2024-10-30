@@ -424,22 +424,34 @@ $$;
 CALL insertLogoStructure(1, 'assets/img/logo/');
 
 --Procédure permettant de créer une catégorie d'activité et de la ranger dans un thème
-CREATE OR REPLACE PROCEDURE insertCategory(
+CREATE OR REPLACE PROCEDURE insertUpdateCategory(
+    categoryId INTEGER,
     categoryName VARCHAR(100)
     )
 LANGUAGE plpgsql
 AS $$
+DECLARE
+idCategory INTEGER;
 BEGIN
-    INSERT INTO category (name)
-    VALUES (categoryName);
+    SELECT id INTO idCategory 
+    FROM category
+    WHERE id = categoryId ;
+
+    IF categoryId IS NOT NULL THEN
+        UPDATE category SET name = categoryName
+        WHERE id = categoryId;
+    ELSE
+        INSERT INTO category (name)
+        VALUES (categoryName);
+    END IF;
 END;
 $$;
 
 --Appel de la procédure insertCategory pour insertion d'une catégorie d'activité
-CALL insertCategory('Notre Programme hebdomadaire');
-CALL insertCategory('Atelier Cuisine du Monde');
-CALL insertCategory('Les festivités');
-CALL insertCategory('Nos Sorties');
+CALL insertUpdateCategory(1, 'Notre Programme hebdomadaire');
+CALL insertUpdateCategory(2, 'Atelier Cuisine du Monde');
+CALL insertUpdateCategory(3, 'Les festivités');
+CALL insertUpdateCategory(4, 'Nos Sorties');
 
 
 --Procédure permettant de créer une activité
@@ -569,8 +581,8 @@ BEGIN
     WHERE yyyy_mm_dd = CURRENT_DATE INTO reservationDate;
     
     IF reservationDate IS NULL THEN
-    INSERT INTO _date (yyyy_mm_dd)
-    VALUES (CURRENT_DATE);
+        INSERT INTO _date (yyyy_mm_dd)
+        VALUES (CURRENT_DATE);
     END IF;
 
     INSERT INTO reservation (

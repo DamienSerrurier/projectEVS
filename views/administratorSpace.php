@@ -47,7 +47,26 @@
 
         <div class="col-xl-9" id="category">
             <form action="administratorSpace?categoryMenu=<?= $categoryMenu ?>" method="post" id="form">
+                <?php
+                if (isset($_SESSION['success'])) :
+                ?>
+                    <p class="text-success"><?= $_SESSION['success'] ?></p>
+                <?php
+                    unset($_SESSION['success']);
+                endif;
+                ?>
+
+                 <?php
+                if (isset($_SESSION['warning'])) :
+                ?>
+                    <p class="text-warning"><?= $_SESSION['warning'] ?></p>
+                <?php
+                    unset($_SESSION['warning']);
+                endif;
+                ?>
+
                 <input class="btn btn-danger text-uppercase" type="submit" name="delete" value="Suppression">
+                
                 <?php
                 switch ($categoryMenu):
                     case 1:
@@ -144,22 +163,24 @@
                     ?>
                         <h3 class="text-center">Gestion des catégories activités</h3>
 
-                        <div class="container p-4">
-                            <label class="form-label-lg fs-6" for="categorySelect">Choix de la catégorie d'activités pour
-                                modification</label>
-                            <select class="form-select form-select-lg my-2 fs-6" name="category" id="categorySelect">
-                                <option value="">Choix catégorie</option>
-                                <?php
-                                foreach ($categories as $value) :
-                                ?>
-                                <option value="<?= $value->getId() ?>"><?= $value->getName() ?></option>
-                                <?php
-                                endforeach;
-                                ?>
-                            </select>
-                            <label class="form-label-lg fs-6" for="categoryName">Nom de la catégorie</label>
-                            <input class="form-control form-control-lg my-2" aria-label="Une catégorie" type="text" name="categoryName" id="categoryName" value="<?= isset($categoryClass) && !empty($categoryClass->getName()) ? htmlspecialchars($categoryClass->getName()) : '' ?>">
-                            <p class="text-danger m-0" id="errorMessageCategory"><?= isset($errorCategoryName) && !empty($errorCategoryName) ? htmlspecialchars($errorCategoryName) : "" ?></p>
+                        <div class="container p-4 row">
+                            <div class="col-xl-6">
+                                <label class="form-label-lg fs-6" for="categorySelect">Choix de la catégorie d'activités pour
+                                    modification</label>
+                                <select class="form-select form-select-lg my-2 fs-6" name="category" id="categorySelect">
+                                    <option value="">Choix catégorie</option>
+                                    <?php
+                                    foreach ($categories as $value) :
+                                    ?>
+                                        <option value="<?= $value->getId() ?>"><?= $value->getName() ?></option>
+                                    <?php
+                                    endforeach;
+                                    ?>
+                                </select>
+                                <label class="form-label-lg fs-6" for="categoryName">Nom de la catégorie</label>
+                                <input class="form-control form-control-lg my-2" aria-label="Une catégorie" type="text" name="categoryName" id="categoryName" value="<?= isset($categoryClass) && !empty($categoryClass->getName()) ? htmlspecialchars($categoryClass->getName()) : '' ?>">
+                                <p class="text-danger m-0" id="errorMessageCategory"><?= isset($errorCategoryName) && !empty($errorCategoryName) ? htmlspecialchars($errorCategoryName) : "" ?></p>
+                            </div>
                         </div>
                     <?php
                         break;
@@ -230,6 +251,16 @@
 
                                         <label class="form-label-lg fs-6" for="endHour">Heure de fin</label>
                                         <input class="form-control form-control-lg my-2" type="time" name="" id="endHour">
+                                    </div>
+                                    <div class="col-xl-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="permanentActivities" id="permanentActivities" value="1">
+                                            <label class="form-check-label" for="permanentActivities">Activités permanentes</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="oneOffActivities" id="oneOffActivities" value="2">
+                                            <label class="form-check-label" for="oneOffActivities">Activités ponctuelles</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

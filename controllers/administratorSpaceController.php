@@ -44,9 +44,10 @@ if (isset($_POST['token'])) {
                 case 3:
                     var_dump('coucou 3');
                     $activityCategoryName = htmlspecialchars($_POST['categoryName']);
+                    $id;
+                    $category = new Category();
 
                     try {
-                        $category = new Category();
                         $category->setName($activityCategoryName);
                         $resultCategoryName = $category->getName();
                     }
@@ -55,10 +56,16 @@ if (isset($_POST['token'])) {
                     }
 
                     if (empty($errorCategoryName)) {
-                        AdministratorSpaceManager::insertCategoryName($resultCategoryName);
-                        header('Location: administratorSpace?categoryMenu=' . $categoryMenu);
+                        try {
+                            AdministratorSpaceManager::insertCategoryName($id, $resultCategoryName);
+                            $_SESSION['success'] = "La catégorie a bien été crée";
+                            session_write_close();
+                            header('Location: administratorSpace?categoryMenu=' . $categoryMenu);
+                        }
+                        catch (ExceptionPersoDAO $e) {
+                            $_SESSION['warning'] = $e->getMessage();
+                        }
                     }
-
                     break;
 
                 case 4:
@@ -79,6 +86,67 @@ if (isset($_POST['token'])) {
                 default:
                     var_dump('coucou 7');
 
+                    break;
+            }
+        }
+
+        if (isset($_POST['update'])) {
+
+            switch ($categoryMenu) {
+
+                case 1:
+                    break;
+                
+                case 2:
+                    break;
+
+                case 3:
+                    $activityCategoryName = htmlspecialchars($_POST['categoryName']);
+                    $categoryId = htmlspecialchars($_POST['category']);
+                    $arrayInfoMessages = [];
+                    $arrayParametters = [];
+                    $category = new Category();
+
+                    try {
+                        $category->setId((int) $categoryId);
+                        $arrayParametters['id'] = $category->getId();
+                    }
+                    catch (ExceptionPerso $e) {
+                        $arrayInfoMessages['id'] = $e->getMessage();
+                    }
+
+                    try {
+                        $category->setName($activityCategoryName);
+                        $arrayParametters['name'] = $category->getName();
+                    }
+                    catch (ExceptionPerso $e) {
+                        $arrayInfoMessages['name'] = $e->getMessage();
+                    }
+
+                    if (empty($arrayInfoMessages)) {
+
+                        try {
+                            AdministratorSpaceManager::updateCategoryName($arrayParametters);
+                            $_SESSION['success'] = "La catégorie a bien été modifiée";
+                            session_write_close();
+                            header('Location: administratorSpace?categoryMenu=' . $categoryMenu);
+                        }
+                        catch (ExceptionPersoDAO $e) {
+                            $_SESSION['warning'] = $e->getMessage();
+                        }
+                    }
+                    break;
+
+                case 4:
+                    break;
+
+                case 5:
+                    break;
+
+                case 6:
+                    break;
+
+                default:
                     break;
             }
         }

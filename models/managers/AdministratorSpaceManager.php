@@ -4,13 +4,14 @@ require_once 'models/managers/connection.php';
 
 class AdministratorSpaceManager {
 
-    public static function insertCategoryName(string $categoryName) {
+    public static function insertCategoryName($id, string $categoryName) {
 
         try {
             $pdo = baseConnection();
-            $query = "CALL insertCategory(:categoryName);";
+            $query = "CALL insertUpdateCategory(:id, :categoryName);";
             $stmt = $pdo->prepare($query);
             $stmt->bindValue(':categoryName', $categoryName, PDO::PARAM_STR);
+            $stmt->bindValue(':id', $id, PDO::PARAM_NULL);
             return $stmt->execute();
         }
         catch (PDOException $e) {
@@ -43,19 +44,42 @@ class AdministratorSpaceManager {
     }
 
     public static function getOneCategory(int $idCategory) {
-        $pdo = baseConnection();
-        $query = "SELECT * FROM displayOneCategory(:id);";
-        $stmt = $pdo->prepare($query);
-        $stmt->bindValue(':id', $idCategory, PDO::PARAM_INT);
-        $stmt->execute();
-        $stmt->setFetchMode(PDO::FETCH_CLASS, 'ProjectEvs\Category');
-        $result = $stmt->fetch();
 
-        if (!empty($result)) {
-            return $result;
+        try {
+            $pdo = baseConnection();
+            $query = "SELECT * FROM displayOneCategory(:id);";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindValue(':id', $idCategory, PDO::PARAM_INT);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'ProjectEvs\Category');
+            $result = $stmt->fetch();
+    
+            if (!empty($result)) {
+                return $result;
+            }
+            else {
+                return false;
+            }
         }
-        else {
-            return false;
+        catch (PDOException $e) {
+            Loggy::warning("Un problème serveur est survenu" . $e->getMessage());
+            throw new ExceptionPersoDAO("Un problème serveur est survenu" . $e->getMessage());
+        }
+    }
+
+    public static function updateCategoryName(array $arrayParametters) {
+        
+        try {
+            $pdo = baseConnection();
+            $query = "CALL insertUpdateCategory(:id, :name);";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindValue(':name', $arrayParametters['name'], PDO::PARAM_STR);
+            $stmt->bindValue(':id', $arrayParametters['id'], PDO::PARAM_INT);
+            return $stmt->execute();
+        }
+        catch (PDOException $e) {
+            Loggy::warning("Un problème serveur est survenu" . $e->getMessage());
+            throw new ExceptionPersoDAO("Un problème serveur est survenu" . $e->getMessage());
         }
     }
 }

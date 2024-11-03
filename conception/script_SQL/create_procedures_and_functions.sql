@@ -453,6 +453,15 @@ CALL insertUpdateCategory(2, 'Atelier Cuisine du Monde');
 CALL insertUpdateCategory(3, 'Les festivités');
 CALL insertUpdateCategory(4, 'Nos Sorties');
 
+--Procédure permettant de supprimer une catégorie
+CREATE OR REPLACE PROCEDURE deleteOneCategory(categoryId INTEGER)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    DELETE FROM category
+    WHERE id = categoryId;
+END;
+$$;
 
 --Procédure permettant de créer une activité
 CREATE OR REPLACE PROCEDURE insertActivity(

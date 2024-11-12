@@ -43,7 +43,7 @@ if (isset($_POST['token'])) {
 
                 case 3:
                     var_dump('coucou 3');
-                    $activityCategoryName = htmlspecialchars($_POST['categoryName']);
+                    $activityCategoryName = isset($_POST['categoryName']) ? htmlspecialchars($_POST['categoryName']) : '';
                     $id;
                     $category = new Category();
 
@@ -55,6 +55,7 @@ if (isset($_POST['token'])) {
                         $errorCategoryName = $e->getMessage();
                     }
 
+                    var_dump($activityCategoryName);
                     if (empty($errorCategoryName)) {
                         try {
                             AdministratorSpaceManager::insertCategoryName($id, $resultCategoryName);
@@ -101,8 +102,8 @@ if (isset($_POST['token'])) {
                     break;
 
                 case 3:
-                    $activityCategoryName = htmlspecialchars($_POST['categoryName']);
-                    $categoryId = htmlspecialchars($_POST['category']);
+                    $activityCategoryName = isset($_POST['categoryName']) ? htmlspecialchars($_POST['categoryName']) : '';
+                    $categoryId = isset($_POST['category']) ? htmlspecialchars($_POST['category']) : '';
                     $arrayInfoMessages = [];
                     $arrayParametters = [];
                     $category = new Category();
@@ -149,6 +150,60 @@ if (isset($_POST['token'])) {
                 default:
                     break;
             }
+        }
+
+        if (isset($_POST['delete'])) {
+
+            switch ($categoryMenu) {
+
+                case 1:
+                    break;
+                
+                case 2:
+                    break;
+
+                case 3:
+                    $categoryId = isset($_POST['category']) ? htmlspecialchars($_POST['category']) : '';
+                    $category = new Category();
+                    $categoryIdVerified;
+                    $errorCategoryId;
+
+                    try {
+                        $category->setId((int) $categoryId);
+                        $categoryIdVerified = $category->getid();
+                    }
+                    catch (ExceptionPersoDAO $e) {
+                        $errorCategoryId = $e->getMessage();
+                    }
+
+                    if (empty($errorCategoryId)) {
+
+                        try {
+                            AdministratorSpaceManager::deleteCategory($categoryIdVerified);
+                            $_SESSION['success'] = "La catégorie a bien été supprimée";
+                            session_write_close();
+                            header("Location: administratorSpace?categoryMenu=" . $categoryMenu);
+                        }
+                        catch (ExceptionPersoDAO $e) {
+                            $_SESSION['warning'] = $e->getMessage();
+                        }
+                    }
+
+                    break;
+
+                case 4:
+                    break;
+
+                case 5:
+                    break;
+
+                case 6:
+                    break;
+
+                default:
+                    break;
+            }
+
         }
     }
 }

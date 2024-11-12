@@ -82,4 +82,19 @@ class AdministratorSpaceManager {
             throw new ExceptionPersoDAO("Un problème serveur est survenu" . $e->getMessage());
         }
     }
+
+    public static function deleteCategory(int $id) {
+
+        try {
+            $pdo = baseConnection();
+            $query = "CALL deleteOneCategory(:id);";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            return $stmt->execute();
+        }
+        catch (PDOException $e) {
+            Loggy::warning("Un problème serveur est survenu" . $e->getMessage());
+            throw new ExceptionPersoDAO("n problème serveur est survenu" . $e->getMessage());
+        }
+    }
 }

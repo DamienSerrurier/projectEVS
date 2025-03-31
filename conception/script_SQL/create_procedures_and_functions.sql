@@ -437,7 +437,7 @@ BEGIN
     FROM category
     WHERE id = categoryId ;
 
-    IF categoryId IS NOT NULL THEN
+    IF idCategory IS NOT NULL THEN
         UPDATE category SET name = categoryName
         WHERE id = categoryId;
     ELSE
@@ -735,31 +735,31 @@ RETURNS INTEGER
 LANGUAGE plpgsql
 AS $$
 DECLARE
-idPerson INTEGER;
-memberDataId INTEGER;
+idMemberData INTEGER;
+idPair INTEGER;
 BEGIN
-    SELECT id_person INTO idPerson
+    SELECT id_member_data INTO idMemberData
     FROM _member
     WHERE id_person = personId;
 
-    IF idPerson IS NULL THEN
+    IF idMemberData IS NULL THEN
         INSERT INTO member_data (email, profession, family_situation, caf_number)
         VALUES (
             memberDataEmail,
             memberDataProfession,
             memberDataFamilySituation,
             memberDataCafNumber
-        ) RETURNING id INTO memberDataId;
+        ) RETURNING id INTO idMemberData;
           
     ELSE
         UPDATE member_data SET email = memberDataEmail,
                                profession = memberDataProfession,
                                family_situation = memberDataFamilySituation,
                                caf_number = memberDataCafNumber
-        WHERE id = idPerson RETURNING id INTO memberDataId;
+        WHERE id = idMemberData RETURNING id INTO idMemberData;
     END IF;
 
-    RETURN memberDataId;
+    RETURN idMemberData;
 END;
 $$;
 
@@ -789,9 +789,16 @@ AS $$
 DECLARE
 idAddress INTEGER;
 idMemberData INTEGER;
+memberDataId INTEGER;
 idPerson INTEGER;
 idMember INTEGER;
 BEGIN
+    IF memberIdPair IS NOT NULL THEN 
+        SELECT id_person INTO personid
+        FROM _member
+        WHERE id_pair = memberIdPair;
+    END IF;
+
     idAddress := insertAddress(
         personId,
         addressStreetNumber,
@@ -801,14 +808,6 @@ BEGIN
         cityName
     );
 
-    idMemberData := insertUpdateMemberData(
-        personId,
-        memberDataEmail,
-        memberDataProfession,
-        memberDataFamilySituation,
-        memberDataCafNumber
-    );
-
     idPerson := insertUpdatePerson(
         personId,
         personLastname,
@@ -816,6 +815,14 @@ BEGIN
         personPhone,
         idCivility,
         idAddress
+    );
+
+    idMemberData := insertUpdateMemberData(
+        personId,
+        memberDataEmail,
+        memberDataProfession,
+        memberDataFamilySituation,
+        memberDataCafNumber
     );
 
     idMember := insertUpdateMember(

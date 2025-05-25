@@ -1,4 +1,5 @@
 <?php
+ob_start();
 
 //Dépendance
 require_once 'utility/exceptions/ExceptionPerso.php';
@@ -21,9 +22,21 @@ use ProjectEvs\Supervisor;
 
 //Fonction d'initialisation d'une session et d'un token
 sessionStartWithGenerateToken('token');
+sessionStartWithGenerateToken('token1');
 
 //Fonction d'initialisation de la connexion à la base de données permettant aussi d'éffectuer des commits et rollbBacks
 $pdo = baseConnection();
+
+if (isset($_GET['checkboxMemberParam'])) {
+
+    if (filter_var($_GET['checkboxMemberParam'], FILTER_VALIDATE_BOOLEAN)) {
+        $_SESSION['checkMember'] = (bool) htmlspecialchars($_GET['checkboxMemberParam']);
+    }
+    else {
+        $_SESSION['error'] = "On ne joue pas avec les paramètres";
+        exit;
+    }
+}
 
 try {
     $resultCivility = UserSpaceManager::getAllCivility();
@@ -31,16 +44,19 @@ try {
     $_SESSION['warning'] = $e->getMessage();
 }
 
-if (isset($_GET['responsible']) && $_GET['responsible'] >= 0) {
-    $responsible = htmlspecialchars($_GET['responsible']);
+if (isset($_GET['numberResponsible']) && $_GET['numberResponsible'] >= 0) {
+    $responsible = htmlspecialchars($_GET['numberResponsible']);
     
     if (filter_var($responsible, FILTER_VALIDATE_INT)) {
-        $_SESSION['responsible'] = $responsible;
+        $_SESSION['responsible'] = (int) $responsible;
+    }
+    else {
+        $_SESSION['error'] = "On ne joue pas avec les paramètres";
+        exit;
     }
 }
 
 if (isset($_SESSION['user']['id'])) {
-
     $id = isset($_SESSION['user']['id']) ? htmlspecialchars($_SESSION['user']['id']) : '';
     $person = new Person();
     $person->setId($id);
@@ -124,7 +140,7 @@ if (isset($_POST['token'])) {
             try {
                 
                 if (empty($infoMessages)) {
-                    var_dump($arrayParametters);
+
                     if (UserSpaceManager::updateUser($arrayParametters)) {
                         $_SESSION['success'] = "Votre profile utilisateur a bien été modifié";
                         session_write_close();
@@ -156,30 +172,30 @@ if (isset($_POST['token'])) {
     }
 }
 
-sessionStartWithGenerateToken('token1');
+if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_POST['createMember'])) {
 
-if (isset($_POST['token1'])) {
+    if (isset($_POST['token1'])) {
 
-    if ($_POST['token1'] != $_SESSION['token1']) {
-        die("Jeton CSRF invalide");
-
-    } else {
-
-        if (isset($_POST['createMember'])) {
-            
+        if ($_POST['token1'] != $_SESSION['token1']) {
+            die("Jeton CSRF invalide");
+            exit;
+    
+        } else {
+    
             if (isset($_SESSION['responsible']) && $_SESSION['responsible'] > 0) {
-                $maxNumberResponsible = (int) $_SESSION['responsible'];
+                $currentNumberResponsible = $_SESSION['responsible'];
                 $idMemberPair;
                 
                 $id = isset($_SESSION['user']['id']) && !empty($_SESSION['user']['id']) ? htmlspecialchars($_SESSION['user']['id']) : null;
                 
-                for ($i = 1; $i <= $maxNumberResponsible; $i++) {
+                for ($i = 1; $i <= $currentNumberResponsible; $i++) {
                     $members[$i] = new Member();
                     $civilities[$i] = new Civility();
                     $addresses[$i] = new Address();
                     $supervisors[$i] = new Supervisor();
                     $arrayInfoMessages[$i] = [];
                     $arrayParametters[$i] = [];
+                    $allErrors[$i] = [];
                     
                     $memberCivility = isset($_POST['memberCivility' . $i]) && !empty($_POST['memberCivility' . $i]) ? htmlspecialchars(trim($_POST['memberCivility' . $i])) : '';
                     $memberLastname = isset($_POST['memberLastname' . $i]) && !empty($_POST['memberLastname' . $i]) ? htmlspecialchars(trim($_POST['memberLastname' . $i])) : '';
@@ -397,11 +413,13 @@ if (isset($_POST['token1'])) {
                     //     $infoMessages['childSchoolCity'.$i] = $e->getMessage();
                     // }
 
-                    var_dump($maxNumberResponsible);
-                    var_dump($arrayParametters[$i]);
+                    // var_dump($maxNumberResponsible);
+                    // var_dump($arrayParametters[$i]);
+                    // var_dump($arrayInfoMessages[$i]);
+                    // var_dump($arrayInfoMessages[$i]);
+
                     
                     try {
-
                         if (empty($arrayInfoMessages[$i])) {
                             $pdo->beginTransaction();
 
@@ -409,7 +427,7 @@ if (isset($_POST['token1'])) {
 
                                 try {
                                     $idMemberPair = UserSpaceManager::insertMember($arrayParametters[$i], $i);
-                                    $pdo->commit();
+                                    error_log("ID généré : " . $idMemberPair, 3, 'loggy.log');
                                 }
                                 catch (ExceptionPersoDAO $e) {
                                     $_SESSION['warning'] = $e->getMessage();
@@ -419,12 +437,14 @@ if (isset($_POST['token1'])) {
                             else {
 
                                 try {
-                                    $members[$i]->setId($idMemberPair);
-                                    $arrayParametters[$i]['id'] = null;
-                                    $members[$i]->setMemberPair($members[$i]);
-                                    $arrayParametters[$i]['memberIdPair'] = $members[$i]->getMemberPair();
-                                    UserSpaceManager::insertMember($arrayParametters[$i], $i);
-                                    $pdo->commit();
+
+                                    if ($idMemberPair) {
+                                        $members[$i]->setId($idMemberPair);
+                                        $arrayParametters[$i]['id'] = null;
+                                        $members[$i]->setMemberPair($members[$i]);
+                                        $arrayParametters[$i]['memberIdPair'] = $members[$i]->getMemberPair();
+                                        UserSpaceManager::insertMember($arrayParametters[$i], $i);
+                                    }
                                 }
                                 catch (ExceptionPersoDAO $e) {
                                     $_SESSION['warning'] = $e->getMessage();
@@ -432,17 +452,47 @@ if (isset($_POST['token1'])) {
                                 }
                             }
 
-                            $_SESSION['success'] = "Votre demande à devenir un membre de l'association a bien été effectuée";
-                            session_write_close();
-                            header('Location: userSpace?idMember=' . $arrayParametters['id']);
+                            if ($pdo->commit()) {
+                                unset($_SESSION['responsible'], $_SESSION['checkMember']);
+                                $_SESSION['success'] = "Votre demande à devenir un membre de l'association a bien été effectuée";
+                                $jsCookie = isset($_COOKIE['jsEnabled']) || isset($_POST['jsEnabled']);
+
+                                if (isset($jsCookie)) {
+                                    header('Content-Type: application/json');
+                                    echo json_encode(['status' => 'success', 'message' => $_SESSION['success']]);
+                                } 
+
+                                error_log("Message success : " . $_SESSION['success'], 3, 'loggy.log');
+                                session_write_close();
+                                error_log("Redirection exécutée", 3, 'loggy.log');
+                                exit;
+                                ob_end_flush();
+                            }
+                            
+                        }
+                        else {
+
+                            if (isset($_COOKIE['jsEnabled'])) {
+                                $allErrors[$i] = $arrayInfoMessages[$i];
+
+                                if ($i == $currentNumberResponsible) {
+                                    header('Content-Type: application/json');
+                                    echo json_encode(['status' => 'error', 'messages' => $allErrors]);
+                                    exit;
+                                }
+                            }
+                            
                         }
                     } catch (ExceptionPersoDAO $e) {
                         $_SESSION['warning'] = $e->getMessage();
+                        session_write_close();
                     }
                 }
             }  
         }
     }
 }
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 require_once 'views/userSpace.php';

@@ -27,33 +27,63 @@ sessionStartWithGenerateToken('token1');
 //Fonction d'initialisation de la connexion à la base de données permettant aussi d'éffectuer des commits et rollbBacks
 $pdo = baseConnection();
 
-if (isset($_GET['checkboxMemberParam'])) {
+function filterRequest(mixed $value, ?int $filter, string $message, string $target) : string {
+    
+    if (is_string($value) || filter_var($value, $filter)) {
 
-    if (filter_var($_GET['checkboxMemberParam'], FILTER_VALIDATE_BOOLEAN)) {
-        $_SESSION['checkMember'] = (bool) htmlspecialchars($_GET['checkboxMemberParam']);
+        if ($target === 'checkMember') {
+            $_SESSION[$target] = $value;
+            return $_SESSION[$target];
+        }
+        else {
+            $_SESSION[$target] = htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+            return $_SESSION[$target];
+        }
     }
     else {
-        $_SESSION['error'] = "On ne joue pas avec les paramètres";
-        exit;
+        $_SESSION['error'] = "On ne joue pas avec " . $message;
+        return $_SESSION['error'];
     }
+}
+
+if (isset($_POST['step1'])) {
+
+    if (isset($_COOKIE['jsEnabled'] )) {
+        unset($_COOKIE['jsEnabled']);
+        setcookie('jsEnabled', '', -1, '/');
+    }
+    
+    if (isset($_POST['member']) && $_POST['member'] === 'checkMember') {
+        filterRequest($_POST['member'], null, 'la POST', 'checkMember');
+    }
+    else {
+        $_SESSION['warning'] = "Veuillez cocher la case pour adhérer à l'association.";
+    }
+    
+}
+else if (isset($_POST['step2'])) {
+
+    if (isset($_POST['responsible']) && $_POST['responsible'] > 0) {
+        filterRequest((int) $_POST['responsible'], FILTER_VALIDATE_INT, 'la POST', 'responsible');
+    }
+    else {
+        $_SESSION['warning'] = "Veuillez faire un choix du nombre de responsable.";
+    }
+
+}
+
+if (isset($_GET['checkboxMemberParam'])) {
+    filterRequest($_GET['checkboxMemberParam'], null, 'les paramètres', 'checkMember');
+}
+
+if (isset($_GET['numberResponsible']) && $_GET['numberResponsible'] >= 0) {
+    filterRequest($_GET['numberResponsible'], FILTER_VALIDATE_INT, 'les paramètres', 'responsible');
 }
 
 try {
     $resultCivility = UserSpaceManager::getAllCivility();
 } catch (ExceptionPersoDAO $e) {
     $_SESSION['warning'] = $e->getMessage();
-}
-
-if (isset($_GET['numberResponsible']) && $_GET['numberResponsible'] >= 0) {
-    $responsible = htmlspecialchars($_GET['numberResponsible']);
-    
-    if (filter_var($responsible, FILTER_VALIDATE_INT)) {
-        $_SESSION['responsible'] = (int) $responsible;
-    }
-    else {
-        $_SESSION['error'] = "On ne joue pas avec les paramètres";
-        exit;
-    }
 }
 
 if (isset($_SESSION['user']['id'])) {
@@ -182,7 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_POST['createMember'])) {
     
         } else {
     
-            if (isset($_SESSION['responsible']) && $_SESSION['responsible'] > 0) {
+            if (isset($_SESSION['responsible']) && $_SESSION['responsible'] > 0 && !isset($_POST['step2'])) {
                 $currentNumberResponsible = $_SESSION['responsible'];
                 $idMemberPair;
                 
@@ -420,6 +450,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_POST['createMember'])) {
 
                     
                     try {
+                        $jsCookie = isset($_COOKIE['jsEnabled']) || isset($_POST['jsEnabled']);
+
                         if (empty($arrayInfoMessages[$i])) {
                             $pdo->beginTransaction();
 
@@ -453,15 +485,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_POST['createMember'])) {
                             }
 
                             if ($pdo->commit()) {
-                                unset($_SESSION['responsible'], $_SESSION['checkMember']);
                                 $_SESSION['success'] = "Votre demande à devenir un membre de l'association a bien été effectuée";
-                                $jsCookie = isset($_COOKIE['jsEnabled']) || isset($_POST['jsEnabled']);
-
-                                if (isset($jsCookie)) {
+                                unset($_SESSION['responsible'], $_SESSION['checkMember']);
+                                
+                                if (isset($jsCookie) && $jsCookie != false) {
                                     header('Content-Type: application/json');
                                     echo json_encode(['status' => 'success', 'message' => $_SESSION['success']]);
                                 } 
-
+                                else {
+                                    header('Location: userSpace');
+                                }
+                                
                                 error_log("Message success : " . $_SESSION['success'], 3, 'loggy.log');
                                 session_write_close();
                                 error_log("Redirection exécutée", 3, 'loggy.log');
@@ -472,7 +506,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_POST['createMember'])) {
                         }
                         else {
 
-                            if (isset($_COOKIE['jsEnabled'])) {
+                            if (isset($jsCookie) && $jsCookie != false) {
+
                                 $allErrors[$i] = $arrayInfoMessages[$i];
 
                                 if ($i == $currentNumberResponsible) {
@@ -481,8 +516,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_POST['createMember'])) {
                                     exit;
                                 }
                             }
-                            
                         }
+
                     } catch (ExceptionPersoDAO $e) {
                         $_SESSION['warning'] = $e->getMessage();
                         session_write_close();

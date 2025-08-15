@@ -19,6 +19,7 @@
             <h2 class="text-center">Espace utilisateur</h2>
         </div>
 
+
         <div id="message">
             <?php
             if (isset($_SESSION['success'])) :
@@ -40,17 +41,31 @@
         </div>
 
         <div class="container p-4">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="member" id="member" value="checkMember" <?= isset($_SESSION['checkMember']) && $_SESSION['checkMember'] == true ? $_SESSION['checkMember'] = 'checked' : '' ?>>
-                <label class="form-label-lg fs-6" for="member">J'adhère à l'association EVS Maison Prévert</label>
-            </div>
+            <form action="userSpace" method="post" id="form">
+                <noscript>
+                    <p>JavaScript est désactivé ou inopérant, néanmoins le formulaire peut être utilisé à l'aide de boutons de progression des différentes étapes.</p>
+                </noscript>
 
-            <div id="memberForm">
-                <p class="text-info" id="info"></p>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="member" id="member" value="checkMember" <?= isset($_SESSION['checkMember']) ? $_SESSION['checkMember'] = 'checked' : '' ?>>
+                    <label class="form-label-lg fs-6" for="member">J'adhère à l'association EVS Maison Prévert</label>
+                </div>
+
                 <?php
-                if (isset($_SESSION['checkMember'])) :
+                if (!isset($_SESSION['checkMember'])) :
                 ?>
-                    <form action="userSpace" method="post" id="form">
+                    <noscript>
+                        <input class="btn btn-secondary text-uppercase" type="submit" name="step1" value="Etape 1">
+                    </noscript>
+                <?php
+                endif;
+                ?>
+
+                <div id="memberForm">
+                    <p class="text-info" id="info"></p>
+                    <?php
+                    if (isset($_SESSION['checkMember'])) :
+                    ?>
                         <div class="row justify-content-between">
                             <div class="col-sm-10 col-md-4 col-xl-3">
                                 <label class="form-label-lg fs-6" for="responsibleSelect">Nombre de responsable</label>
@@ -82,6 +97,16 @@
                             </div>
                         </div>
 
+                        <?php
+                        if (!isset($_SESSION['responsible'])) :
+                        ?>
+                            <noscript>
+                                <input class="btn btn-secondary text-uppercase" type="submit" name="step2" value="Etape 2">
+                            </noscript>
+                        <?php
+                        endif;
+                        ?>
+
                         <div id="memberResponsible">
                             <?php
                             if (isset($_SESSION['responsible']) && $_SESSION['responsible'] > 0) :
@@ -91,11 +116,11 @@
                                     <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['id']) && !empty($arrayInfoMessages[$i]['id']) ? htmlspecialchars($arrayInfoMessages[$i]['id']) : '' ?></p>
                                     <fieldset class="box rounded p-4 mt-5" form="">
                                         <legend class="col-form-label-lg">Informations personnelles</legend>
-                                        <p class="text-danger m-0 error-message" id="error-memberCivility<?= $i ?>"><?= isset($arrayInfoMessages[$i]['memberCivility' . $i]) && !empty($arrayInfoMessages[$i]['memberCivility' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['memberCivility' . $i]) : '' ?></p>
+                                        <p class="text-danger m-0 error-message" id="error-memberCivility<?= $i ?>"><?= isset($arrayInfoMessages[$i]['memberCivility' . $i]) ? htmlspecialchars($arrayInfoMessages[$i]['memberCivility' . $i]) : '' ?></p>
 
                                         <?php
                                         if (!empty($resultCivility)) :
-                                            
+
                                             foreach ($resultCivility as $value) :
                                                 $checked = '';
                                                 if (isset($arrayParametters[$i]['memberCivility' . $i]) && $arrayParametters[$i]['memberCivility' . $i] == $value->getId()) :
@@ -382,11 +407,15 @@
 
                         <input type="hidden" id="token1" name="token1" value="<?= $_SESSION['token1'] ?>">
                         <input class="btn btn-success text-uppercase" type="submit" name="createMember" id="createMember" value="Envoyer">
-                    </form>
-                <?php
-                endif;
-                ?>
-            </div>
+                    <?php
+                    endif;
+                    ?>
+                </div>
+            </form>
+
+
+
+
         </div>
     </section>
 

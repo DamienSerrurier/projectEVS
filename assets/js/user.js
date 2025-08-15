@@ -51,13 +51,11 @@ const asyncChoiceValue = async function (url, choice) {
 };
 
 const inputName = (idInput) => {
-    
     const element = document.getElementById(idInput);
 
     if (!element) {
         console.warn(`L'élément avec l'ID "${idInput}" n'existe pas.`);
     }
-
     return element;
 };
 
@@ -74,8 +72,8 @@ const changeColor = function (number, event) {
     let id = target.id;
     // console.log(id);
     let value = target.value;
-
     // console.log('changeColor ok');
+    
     /**Fonction permettant d'attribuer un code couleur à un champ en fonction d'une bonne ou mauvaise information
      * @param {*} regex 
      * @param {*} memberData 
@@ -91,12 +89,10 @@ const changeColor = function (number, event) {
 
     if (id.startsWith('memberLastname' + number)) {
         const memberLastname = inputName(`memberLastname${number}`);
-
         colorCodeRegex(regexText, memberLastname);
 
     } else if (id.startsWith('memberFirstname' + number)) {
         const memberFirstname = inputName(`memberFirstname${number}`);
-        
         colorCodeRegex(regexText, memberFirstname);
 
     } else if (id.startsWith('memberMail' + number)) {
@@ -107,6 +103,7 @@ const changeColor = function (number, event) {
         } else {
             colorCodeRegex(regexMail, memberMail);
         }
+
     } else if (id.startsWith('memberPhone' + number)) {
         const memberPhone = inputName(`memberPhone${number}`);
 
@@ -115,9 +112,9 @@ const changeColor = function (number, event) {
         } else {
             colorCodeRegex(regexPhone, memberPhone);  
         }
+
     } else if (id.startsWith('memberBirthdate' + number)) {
         const memberBirthdate = inputName(`memberBirthdate${number}`);
-
         let dateToday = Date.now();
         let birthdate = new Date(value).getTime();
 
@@ -126,9 +123,9 @@ const changeColor = function (number, event) {
         } else {
             memberBirthdate.style.border = '2px solid red';
         }
+
     } else if (id.startsWith('memberBirthPlace' + number)) {
         const memberBirthPlace = inputName(`memberBirthPlace${number}`);
-
         colorCodeRegex(regexText, memberBirthPlace);
 
     } else if (id.startsWith('memberStreetNumber' + number)) {
@@ -137,30 +134,28 @@ const changeColor = function (number, event) {
         if (value === '') {
             memberStreetNumber.style.border = '2px solid green';
         } else {
+
             if (value !== 0) {
                 colorCodeRegex(regexNumber, memberStreetNumber);
             } else {
                 memberStreetNumber.style.border = '2px solid red';
             }
         }
+
     } else if (id.startsWith('memberStreetName' + number)) {
         const memberStreetName = inputName(`memberStreetName${number}`);
-
         colorCodeRegex(regexText, memberStreetName);
         
     } else if (id.startsWith('memberStreetComplement' + number)) {
         const memberStreetComplement = inputName(`memberStreetComplement${number}`);
-
         colorCodeRegex(regexComplementAddress, memberStreetComplement);
 
     } else if (id.startsWith('memberZipCode' + number)) {
         const memberZipCode = inputName(`memberZipCode${number}`);
-
         colorCodeRegex(regexZipeCodeAddress, memberZipCode);
 
     } else if (id.startsWith('memberCity' + number)) {
         const memberCity = inputName(`memberCity${number}`);
-
         colorCodeRegex(regexText, memberCity);
 
     } else if (id.startsWith('profession' + number)) {
@@ -171,6 +166,7 @@ const changeColor = function (number, event) {
         } else {
             colorCodeRegex(regexText, profession);     
         }
+
     } else if (id.startsWith('familySituation' + number)) {
         const familySituation = inputName(`familySituation${number}`);
 
@@ -179,9 +175,9 @@ const changeColor = function (number, event) {
         } else {
             colorCodeRegex(regexText, familySituation);  
         }
+
     } else if (id.startsWith('cafNumber' + number)) {
         const cafNumber = inputName(`cafNumber${number}`);
-
         colorCodeRegex(regexCaf, cafNumber);
     }
 }
@@ -202,26 +198,21 @@ const inputsBlur = function(number) {
 
 const handleSubmit = function (formValid, url, value) {
     // console.log('callback');
-
-   
     const submitButton = formValid.querySelector('input[name="createMember"]');
-    
     let isFormValid = false;
 
     return async (event) => {
         event.preventDefault();
-
         isFormValid = formValid.checkValidity();
-        
         // console.log(event.target);
         // console.log('retour de fonction annonyme');
-        
         // console.log(formValid);
+
         try {
             let formData = new FormData(formValid);
             formData.append(submitButton.name, submitButton.value);
             // console.log(formData);
-            
+
             const response = await fetch(`${url}${value}`, {
                 method: 'POST',
                 body: formData
@@ -230,7 +221,6 @@ const handleSubmit = function (formValid, url, value) {
             if (response.ok) {
                 const text = await response.text();
                 // console.log(text);
-            
                 const myHeader = new Headers(response.headers);
                 const headerJson = myHeader.get('Content-Type');
                 // console.log(headerJson);
@@ -239,13 +229,11 @@ const handleSubmit = function (formValid, url, value) {
                     
                     if (headerJson == 'application/json') {
                         // console.log(myHeader);
-
                         const result = JSON.parse(text);
                         // console.log(result);
                     
                         if (result.status === 'error') {
                             isFormValid = false;
-                            
                             const pErrors = document.querySelectorAll('.error-message');
     
                             pErrors.forEach(element => {
@@ -258,7 +246,6 @@ const handleSubmit = function (formValid, url, value) {
                                     
                                     for (const [key, value] of Object.entries(result.messages[i])) {
                                         const elementError = document.getElementById('error-' + key);
-    
                                         // console.log("La clef est " + key + ' et la valeur est ' + value);
                                         
                                         if (elementError) {
@@ -283,8 +270,7 @@ const handleSubmit = function (formValid, url, value) {
                 }
                 catch (e) {
                     console.warn("La réposonse n'est pas en JSON " + text);
-                    isFormValid = true;
-                    
+                    isFormValid = true; 
                 }
             }
             else {
@@ -329,7 +315,6 @@ const resetInput = function () {
 
 const choiceNumberMember = async function (event) {
     const divMemberResponsible = document.getElementById('memberResponsible');
-
     let numberChoice = event.value
 
     if (divMemberResponsible) {
@@ -351,33 +336,28 @@ const choiceNumberMember = async function (event) {
                 const urlSelectButtonNumber = `${urlCheckboxMember}${checkboxMember.checked}&numberResponsible=`;
                 const form = document.forms['form'];
                 // console.log(form);
-                
                 form.appendChild(hiddeninput);
-                const callbackHandleSubmit = handleSubmit(form, urlSelectButtonNumber, numberChoice);
                 // console.log(callbackHandleSubmit);
-
+                
                 try {
                     const page = await asyncChoiceValue(urlSelectButtonNumber, numberChoice);
-    
+                    
                     if (page) {
                         // console.log(page);
                         // console.log(event.value);
                         const pageDivMemberResponsible = page.getElementById('memberResponsible');
                         // console.log(pageDivMemberResponsible);
                         pInfo.textContent = "";
-
+                        
                         if (pageDivMemberResponsible) {
                             divMemberResponsible.innerHTML = pageDivMemberResponsible.innerHTML;
+                            const callbackHandleSubmit = handleSubmit(form, urlSelectButtonNumber, numberChoice);
                             inputsBlur(numberChoice);
                             resetInput();
-    
                             form.addEventListener('submit', callbackHandleSubmit);
-    
                             event.addEventListener('change', ()=> { form.removeEventListener('submit', callbackHandleSubmit)});
                         }
                     }
-                    
-
                 }
                 catch (error) {
                     console.error("Erreur :", error)
@@ -410,7 +390,6 @@ const checkbox = async function (event) {
     if (checkboxMember.checked) {
         // console.log('coché');
         divMemberForm.style.display = 'block';
-
         const page = await asyncChoiceValue(urlCheckboxMember, checkboxMember.checked);
 
         try {
@@ -447,7 +426,6 @@ const start = function (event) {
         checkboxMember.addEventListener('change', checkbox);
         // console.log(checkbox);
     }
-    
 }
 
 document.addEventListener('DOMContentLoaded', start);

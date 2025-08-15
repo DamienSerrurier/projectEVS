@@ -124,8 +124,6 @@
                                             foreach ($resultCivility as $value) :
                                                 $checked = '';
                                                 if (isset($arrayParametters[$i]['memberCivility' . $i]) && $arrayParametters[$i]['memberCivility' . $i] == $value->getId()) :
-                                                    var_dump($arrayParametters[$i]['memberCivility' . $i]);
-                                                    var_dump($value->getId());
                                                     $checked = 'checked';
                                                 endif
                                         ?>
@@ -251,171 +249,169 @@
                                             </div>
                                         </div>
                                     </fieldset>
-                            <?php
+                                <?php
                                 endfor;
+                                ?>
+
+                                <div class="row">
+                                    <div class="col-sm-10 col-md-4 col-xl-3">
+                                        <label class="form-label-lg fs-6" for="minorSelect">Nombre de mineurs</label>
+                                        <select class="form-select form-select-lg my-2 fs-6" name="minor" id="minorSelect">
+                                            <option value="">mineur</option>
+                                            <option value="minor1">1 mineur</option>
+                                            <option value="minor2">2 mineurs</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <fieldset class="box rounded p-4 mt-3 mb-5">
+                                    <div class="row">
+                                        <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                                            <label class="form-label-lg fs-6" for="childLastname">Nom</label>
+                                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom d'enfant" type="text" name="childLastname" id="childLastname">
+                                            <p class="text-danger m-0"><?= isset($infoMessages['childLastname']) && !empty($infoMessages['childLastname']) ? htmlspecialchars($infoMessages['childLastname']) : '' ?></p>
+                                        </div>
+                                        <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                                            <label class="form-label-lg fs-6" for="childFirstname">Prénom</label>
+                                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un prénom d'enfant" type="text" name="childFirstname" id="childFirstname">
+                                            <p class="text-danger m-0"><?= isset($infoMessages['childFirstname']) && !empty($infoMessages['childFirstname']) ? htmlspecialchars($infoMessages['childFirstname']) : '' ?></p>
+                                        </div>
+                                        <div class="col-sm-10 col-md-4 col-xl-4 mt-3">
+                                            <label class="form-label-lg fs-6" for="childBirthdate">Date de naissance</label>
+                                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez la date de naissance d'un enfant" type="date" name="childBirthdate" id="childBirthdate">
+                                            <p class="text-danger m-0"><?= isset($infoMessages['childBirthdate']) && !empty($infoMessages['childBirthdate']) ? htmlspecialchars($infoMessages['childBirthdate']) : '' ?></p>
+                                        </div>
+                                        <div class="col-sm-10 col-md-4 col-xl-4 mt-3">
+                                            <label class="form-label-lg fs-6" for="childBirthPlace">Lieu de naissance</label>
+                                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un lieu de naissance d'un enfant" type="text" name="childBirthPlace" id="childBirthPlace">
+                                            <p class="text-danger m-0"><?= isset($infoMessages['childBirthPlace']) && !empty($infoMessages['childBirthPlace']) ? htmlspecialchars($infoMessages['childBirthPlace']) : '' ?></p>
+                                        </div>
+                                        <div class="col-sm-10 col-md-4 col-xl-4 mt-3">
+                                            <label class="form-label-lg fs-6" for="childPhone">Téléphone</label>
+                                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un numéro de téléphone d'un enfant" type="tel" name="childPhone" id="childPhone">
+                                            <p class="text-danger m-0"><?= isset($infoMessages['childPhone']) && !empty($infoMessages['childPhone']) ? htmlspecialchars($infoMessages['childPhone']) : '' ?></p>
+                                        </div>
+                                        <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                                            <label class="form-label-lg fs-6" for="childSchool">Etablissement scolaire</label>
+                                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom d'école de l'enfant" type="text" name="childSchool" id="childSchool">
+                                            <p class="text-danger m-0"><?= isset($infoMessages['childSchool']) && !empty($infoMessages['childSchool']) ? htmlspecialchars($infoMessages['childSchool']) : '' ?></p>
+                                        </div>
+                                        <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
+                                            <label class="form-label-lg fs-6" for="childSchoolCity">Ville de l'établissement scolaire</label>
+                                            <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom d'école de l'enfant" type="text" name="childSchoolCity" id="childSchoolCity">
+                                            <p class="text-danger m-0"><?= isset($infoMessages['childSchoolCity']) && !empty($infoMessages['childSchoolCity']) ? htmlspecialchars($infoMessages['childSchoolCity']) : '' ?></p>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <p>
+                                    Je cotise en conséquence à cet Espace de Vie Sociale Maison Prévert Francas et m’inscris aux
+                                    activités
+                                    proposées.
+                                </p>
+                                <p>
+                                    J’ai été informé que la cotisation à l’Espace de Vie Sociale Maison Prévert Francas me permet :
+                                </p>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="check1" id="check1">
+                                    <label class="form-label-lg fs-6" for="check1">
+                                        de m’inscrire et de participer aux diverses animations proposées par la structure selon
+                                        les conditions prévues pour chacune d’entre elles,
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="check2" id="check2">
+                                    <label class="form-label-lg fs-6" for="check2">
+                                        d’être couvert dans le cadre de l’inscription et de la pratique de ces animations, par le
+                                        contrat
+                                        d’assurances souscrit par la structure auprès de la M.A.E., dans la limite des garanties prévues
+                                        et
+                                        qui
+                                        ne me dispensent nullement d’être parallèlement assuré par une Mutuelle Scolaire/Etudiante ou en
+                                        Responsabilité Civile Individuelle/Familiale,
+                                    </label>
+                                </div>
+
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" name="check3" id="check3">
+                                    <label class="form-label-lg fs-6" for="check3">
+                                        de participer en tant que membre du collectif des usagers de l’EVS.
+                                    </label>
+                                </div>
+
+                                <p>Enfin,</p>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="check4" id="check4">
+                                    <label class="form-label-lg fs-6" for="check4">
+                                        je certifie être apte à la pratique des animations auxquelles je choisis de m’inscrire (un
+                                        certicat
+                                        médical d’aptitude sera demandé à chaque membre pour les activités à caractère sportif),
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="check5" id="check5">
+                                    <label class="form-label-lg fs-6" for="check5">
+                                        je décharge les organisateurs de toute responsabilité en cas d’accident survenu avant mon
+                                        arrivée
+                                        aux
+                                        activités pour lesquelles je suis inscrit ou après mon départ de ces activités,
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="check6" id="check6">
+                                    <label class="form-label-lg fs-6" for="check6">
+                                        j’autorise les organisateurs à prendre toute mesure nécessaire en cas d’urgence médicale,
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="check7" id="check7">
+                                    <label class="form-label-lg fs-6" for="check7">
+                                        j’autorise l’Espace De Vie Sociale Maison Prévert Francas à consulter mon quotient familial,
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="check8" id="check8">
+                                    <label class="form-label-lg fs-6" for="check8">
+                                        j’autorise l’EVS à reproduire et à diffuser nos photographies réalisées dans le cadre de ses
+                                        actions
+                                        sans porter atteinte à notre réputation ou à notre vie privée.
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="check9" id="check9">
+                                    <label class="form-label-lg fs-6" for="check9">
+                                        Vous validez l’exactitude des informations saisies dans ce formulaire.
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="check10" id="check10">
+                                    <label class="form-label-lg fs-6" for="check10">
+                                        Je décare avoir pris connaissance des modalités de fonctionnement de l’Espace De Vie Sociale
+                                        Maison
+                                        Prévert Francas et activités organisées.
+                                    </label>
+                                </div>
+
+                                <input type="hidden" id="token1" name="token1" value="<?= $_SESSION['token1'] ?>">
+                                <input class="btn btn-success text-uppercase" type="submit" name="createMember" id="createMember" value="Envoyer">
+                            <?php
                             endif;
                             ?>
                         </div>
-
-                        <div class="row">
-                            <div class="col-sm-10 col-md-4 col-xl-3">
-                                <label class="form-label-lg fs-6" for="minorSelect">Nombre de mineurs</label>
-                                <select class="form-select form-select-lg my-2 fs-6" name="minor" id="minorSelect">
-                                    <option value="">mineur</option>
-                                    <option value="minor1">1 mineur</option>
-                                    <option value="minor2">2 mineurs</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <fieldset class="box rounded p-4 mt-3 mb-5">
-                            <div class="row">
-                                <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
-                                    <label class="form-label-lg fs-6" for="childLastname">Nom</label>
-                                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom d'enfant" type="text" name="childLastname" id="childLastname">
-                                    <p class="text-danger m-0"><?= isset($infoMessages['childLastname']) && !empty($infoMessages['childLastname']) ? htmlspecialchars($infoMessages['childLastname']) : '' ?></p>
-                                </div>
-                                <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
-                                    <label class="form-label-lg fs-6" for="childFirstname">Prénom</label>
-                                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un prénom d'enfant" type="text" name="childFirstname" id="childFirstname">
-                                    <p class="text-danger m-0"><?= isset($infoMessages['childFirstname']) && !empty($infoMessages['childFirstname']) ? htmlspecialchars($infoMessages['childFirstname']) : '' ?></p>
-                                </div>
-                                <div class="col-sm-10 col-md-4 col-xl-4 mt-3">
-                                    <label class="form-label-lg fs-6" for="childBirthdate">Date de naissance</label>
-                                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez la date de naissance d'un enfant" type="date" name="childBirthdate" id="childBirthdate">
-                                    <p class="text-danger m-0"><?= isset($infoMessages['childBirthdate']) && !empty($infoMessages['childBirthdate']) ? htmlspecialchars($infoMessages['childBirthdate']) : '' ?></p>
-                                </div>
-                                <div class="col-sm-10 col-md-4 col-xl-4 mt-3">
-                                    <label class="form-label-lg fs-6" for="childBirthPlace">Lieu de naissance</label>
-                                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un lieu de naissance d'un enfant" type="text" name="childBirthPlace" id="childBirthPlace">
-                                    <p class="text-danger m-0"><?= isset($infoMessages['childBirthPlace']) && !empty($infoMessages['childBirthPlace']) ? htmlspecialchars($infoMessages['childBirthPlace']) : '' ?></p>
-                                </div>
-                                <div class="col-sm-10 col-md-4 col-xl-4 mt-3">
-                                    <label class="form-label-lg fs-6" for="childPhone">Téléphone</label>
-                                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un numéro de téléphone d'un enfant" type="tel" name="childPhone" id="childPhone">
-                                    <p class="text-danger m-0"><?= isset($infoMessages['childPhone']) && !empty($infoMessages['childPhone']) ? htmlspecialchars($infoMessages['childPhone']) : '' ?></p>
-                                </div>
-                                <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
-                                    <label class="form-label-lg fs-6" for="childSchool">Etablissement scolaire</label>
-                                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom d'école de l'enfant" type="text" name="childSchool" id="childSchool">
-                                    <p class="text-danger m-0"><?= isset($infoMessages['childSchool']) && !empty($infoMessages['childSchool']) ? htmlspecialchars($infoMessages['childSchool']) : '' ?></p>
-                                </div>
-                                <div class="col-sm-10 col-md-4 col-xl-6 mt-3">
-                                    <label class="form-label-lg fs-6" for="childSchoolCity">Ville de l'établissement scolaire</label>
-                                    <input class="form-control form-control-lg my-2" placeholder="" aria-label="Renseignez un nom d'école de l'enfant" type="text" name="childSchoolCity" id="childSchoolCity">
-                                    <p class="text-danger m-0"><?= isset($infoMessages['childSchoolCity']) && !empty($infoMessages['childSchoolCity']) ? htmlspecialchars($infoMessages['childSchoolCity']) : '' ?></p>
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <p>
-                            Je cotise en conséquence à cet Espace de Vie Sociale Maison Prévert Francas et m’inscris aux
-                            activités
-                            proposées.
-                        </p>
-                        <p>
-                            J’ai été informé que la cotisation à l’Espace de Vie Sociale Maison Prévert Francas me permet :
-                        </p>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="check1" id="check1">
-                            <label class="form-label-lg fs-6" for="check1">
-                                de m’inscrire et de participer aux diverses animations proposées par la structure selon
-                                les conditions prévues pour chacune d’entre elles,
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="check2" id="check2">
-                            <label class="form-label-lg fs-6" for="check2">
-                                d’être couvert dans le cadre de l’inscription et de la pratique de ces animations, par le
-                                contrat
-                                d’assurances souscrit par la structure auprès de la M.A.E., dans la limite des garanties prévues
-                                et
-                                qui
-                                ne me dispensent nullement d’être parallèlement assuré par une Mutuelle Scolaire/Etudiante ou en
-                                Responsabilité Civile Individuelle/Familiale,
-                            </label>
-                        </div>
-
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="check3" id="check3">
-                            <label class="form-label-lg fs-6" for="check3">
-                                de participer en tant que membre du collectif des usagers de l’EVS.
-                            </label>
-                        </div>
-
-                        <p>Enfin,</p>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="check4" id="check4">
-                            <label class="form-label-lg fs-6" for="check4">
-                                je certifie être apte à la pratique des animations auxquelles je choisis de m’inscrire (un
-                                certicat
-                                médical d’aptitude sera demandé à chaque membre pour les activités à caractère sportif),
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="check5" id="check5">
-                            <label class="form-label-lg fs-6" for="check5">
-                                je décharge les organisateurs de toute responsabilité en cas d’accident survenu avant mon
-                                arrivée
-                                aux
-                                activités pour lesquelles je suis inscrit ou après mon départ de ces activités,
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="check6" id="check6">
-                            <label class="form-label-lg fs-6" for="check6">
-                                j’autorise les organisateurs à prendre toute mesure nécessaire en cas d’urgence médicale,
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="check7" id="check7">
-                            <label class="form-label-lg fs-6" for="check7">
-                                j’autorise l’Espace De Vie Sociale Maison Prévert Francas à consulter mon quotient familial,
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="check8" id="check8">
-                            <label class="form-label-lg fs-6" for="check8">
-                                j’autorise l’EVS à reproduire et à diffuser nos photographies réalisées dans le cadre de ses
-                                actions
-                                sans porter atteinte à notre réputation ou à notre vie privée.
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="check9" id="check9">
-                            <label class="form-label-lg fs-6" for="check9">
-                                Vous validez l’exactitude des informations saisies dans ce formulaire.
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="check10" id="check10">
-                            <label class="form-label-lg fs-6" for="check10">
-                                Je décare avoir pris connaissance des modalités de fonctionnement de l’Espace De Vie Sociale
-                                Maison
-                                Prévert Francas et activités organisées.
-                            </label>
-                        </div>
-
-                        <input type="hidden" id="token1" name="token1" value="<?= $_SESSION['token1'] ?>">
-                        <input class="btn btn-success text-uppercase" type="submit" name="createMember" id="createMember" value="Envoyer">
                     <?php
                     endif;
                     ?>
                 </div>
             </form>
-
-
-
-
         </div>
     </section>
 

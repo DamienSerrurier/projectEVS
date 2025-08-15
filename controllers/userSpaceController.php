@@ -59,7 +59,6 @@ if (isset($_POST['step1'])) {
     else {
         $_SESSION['warning'] = "Veuillez cocher la case pour adhérer à l'association.";
     }
-    
 }
 else if (isset($_POST['step2'])) {
 
@@ -69,7 +68,10 @@ else if (isset($_POST['step2'])) {
     else {
         $_SESSION['warning'] = "Veuillez faire un choix du nombre de responsable.";
     }
+}
 
+if (isset($_POST['reset'])) {
+    unset($_SESSION['responsible']);
 }
 
 if (isset($_GET['checkboxMemberParam'])) {
@@ -163,6 +165,7 @@ if (isset($_POST['token'])) {
                 catch (ExceptionPerso $e) {
                     $infoMessages['passw'] = $e->getMessage();
                 }
+
             } else {
                 $infoMessages['confPassw'] = "Le mot de passe et de confirmation doivent être indentique";
             }
@@ -177,6 +180,7 @@ if (isset($_POST['token'])) {
                         header('Location: userSpace?idUser=' . $cleanId);
                     }
                 }
+
             } catch (ExceptionPersoDAO $e) {
                 $_SESSION['warning'] = $e->getMessage();
             }
@@ -189,12 +193,14 @@ if (isset($_POST['token'])) {
             $cleanId = $person->getid();
 
             try {
+
                 if (UserSpaceManager::deleteUser($cleanId)) {
                     session_unset();
                     session_destroy();
                     session_regenerate_id(true);
                     header('Location: home');
                 }
+
             } catch (ExceptionPersoDAO $e) {
                 $_SESSION['warning'] = $e->getMessage();
             }
@@ -215,7 +221,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_POST['createMember'])) {
             if (isset($_SESSION['responsible']) && $_SESSION['responsible'] > 0 && !isset($_POST['step2'])) {
                 $currentNumberResponsible = $_SESSION['responsible'];
                 $idMemberPair;
-                
                 $id = isset($_SESSION['user']['id']) && !empty($_SESSION['user']['id']) ? htmlspecialchars($_SESSION['user']['id']) : null;
                 
                 for ($i = 1; $i <= $currentNumberResponsible; $i++) {
@@ -502,12 +507,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_POST['createMember'])) {
                                 exit;
                                 ob_end_flush();
                             }
-                            
                         }
                         else {
 
                             if (isset($jsCookie) && $jsCookie != false) {
-
                                 $allErrors[$i] = $arrayInfoMessages[$i];
 
                                 if ($i == $currentNumberResponsible) {

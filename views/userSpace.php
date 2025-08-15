@@ -110,7 +110,13 @@
                         <div id="memberResponsible">
                             <?php
                             if (isset($_SESSION['responsible']) && $_SESSION['responsible'] > 0) :
+                            ?>
 
+                            <noscript>
+                                <input class="btn btn-danger text-uppercase" type="submit" name="reset" value="Réinitialiser">
+                            </noscript>
+
+                            <?php
                                 for ($i = 1; $i <= $_SESSION['responsible']; $i++) :
                             ?>
                                     <p class="text-danger m-0"><?= isset($arrayInfoMessages[$i]['id']) && !empty($arrayInfoMessages[$i]['id']) ? htmlspecialchars($arrayInfoMessages[$i]['id']) : '' ?></p>
